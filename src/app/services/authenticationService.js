@@ -1,1 +1,1 @@
-var bcrypt = require('../../../lib/bcrypt_thunk'); // version that supports yields
+var bcrypt = require('.././bcrypt_thunk'); // version that supports yields

@@ -3,7 +3,7 @@ var fs = require('fs');
 var koa = require('koa');
 var mongoose = require('mongoose');
 var passport = require('koa-passport');
-var config = require('./config/config');
+var config = require('./src/config/config');
 var fs = require('fs');
 var Hosts = require('hosts-parser').Hosts;
 var hosts = new Hosts(fs.readFileSync('/etc/hosts', 'utf8'));
@@ -47,9 +47,9 @@ fs.readdirSync(models_path).forEach(function (file) {
 
 var app = module.exports = koa();
 
-require('./config/passport')(passport, config);
+require('./src/config/passport')(passport, config);
 
-require('./config/koa')(app, config, passport);
+require('./src/config/koa')(app, config, passport);
 
 // Routes
 require('./src/app/routes/firstRoutes.js')(app, passport);

@@ -52,6 +52,7 @@
     "babelify": "^5.0.4",
     "browserify": "8.1.x",
     "browserify-shim": "^3.8.2",
+    "del": "^1.2.0",
     "envify": "3.2.x",
     "git-rev": "0.2.x",
     "gulp": "3.8.x",
