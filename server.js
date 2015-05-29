@@ -8,17 +8,15 @@ var fs = require('fs');
 var Hosts = require('hosts-parser').Hosts;
 var hosts = new Hosts(fs.readFileSync('/etc/hosts', 'utf8'));
 
-var mongo = hosts.filter(function(i){ return i.hostname === 'mongo' });
-var eventstore = hosts.filter(function(i){ return i.hostname === 'eventstore' });
-var cdn = hosts.filter(function(i){ return i.hostname === 'cdn' });
+var mongo = hosts._origin.filter(function(i){ return i.hostname === 'mfbuildfiles_mongo_1' });
+var eventstore = hosts._origin.filter(function(i){ return i.hostname === 'mfbuildfiles_eventstore_1' });
+console.log(mongo[0].ip);
+console.log(eventstore[0].ip);
 if(mongo.length>0){
   config.mongo.url =config.mongo.url.replace('localhost',mongo[0].ip);
 }
 if(eventstore.length>0){
   config.eventstore.ip = eventstore[0].ip;
-}
-if(cdn.length>0){
-  config.cdn.ip = cdn[0].ip;
 }
 
 /**

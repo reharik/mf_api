@@ -29,7 +29,12 @@ gulp.task("copy-js", function () {
       .pipe(gulp.dest(paths.out.public));
 });
 
-gulp.task("install", ["copy-js"]);
+gulp.task("copy-dockerfile", function () {
+  return gulp.src(paths.in.dockerfile)
+      .pipe(gulp.dest(paths.out.root));
+});
+
+gulp.task("install", ["copy-js", "copy-dockerfile"]);
 
 gulp.task("nodemon", function () {
   if(!nodemon_instance)

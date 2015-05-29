@@ -10,14 +10,15 @@ RUN apt-get -qq update && \
     apt-get -y install python build-essential nodejs
 
 
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install && mkdir -p /usr/src/app && cp -a /tmp/node_modules /api
+ADD src/package.json /tmp/package.json
+RUN cd /tmp && npm install && mkdir -p /api/node_modules && mkdir -p /usr/src/app && cp -a /tmp/node_modules /api/
 
-COPY /home/rharik/Development/MethodFitness/MF_BuildFiles/Api /
 WORKDIR /api
+COPY src /api
 
 # Expose the node.js port to the Docker host.
 EXPOSE 3000
 
 #CMD [ "npm run start" ]
+CMD /bin/bash
 

@@ -6,11 +6,12 @@ module.exports = {
       "in": {
           js: [root + "/src/**/*.js",
               root + "/server.js",
-              root + "/package.json",
-              root + "/Dockerfile"]
+              root + "/package.json"],
+          dockerfile: [root + "/Dockerfile"]
       },
       out: {
-          public: root + "/../MF_BuildFiles/Api/"
+          root: root + "/../MF_BuildFiles/Api",
+          public: root + "/../MF_BuildFiles/Api/src"
       }
   }
 };
