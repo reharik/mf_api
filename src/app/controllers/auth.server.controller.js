@@ -1,5 +1,10 @@
-var passport = require("koa-passport"),
-    User = require("mongoose").model("User");
+var passport = require("koa-passport");
+var User = require("../modules/readModels/user");
+var ges = require('../modules/ges/gesConnection.js');
+var config = require('../../config/config');
+
+var db = require('monk')(config.mongo.url);
+var users = db.get('users', {strict: true});
 
 exports.signIn = function *() {
   var ctx = this;
@@ -49,15 +54,25 @@ exports.createUser = function *() {
   try {
     var user = new User(body);
 
-
-    var existingClient = User.findOne({ 'email': user.email }).exec();
+    var existingClient = yield users.findOne({ 'email': user.emailAddress });
     if(existingClient){
         this.status = 400;
-        this.body ='User with email: '+user.email+' already exists.';
+        this.body ='User with email: '+user.emailAddress+' already exists.';
         return;
     }
+    var _event = {
+      contact: {  firstName: user.firstName,
+        lastName: user.lastName,
+        emailAddress: user.emailAddress,
+        phone: user.phone,
+        secondaryPhone: user.secondaryPhone
+      },
+      source: user.source,
+      sourceNotes: user.sourceNotes,
+      startDate: user.startDate
+    };
+    this.body = yield ges(_event,"HireNewTrainer");
 
-    user = yield user.save();
     yield this.login(user);
   } catch (err) {
     this.throw(err);

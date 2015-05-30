@@ -21,7 +21,7 @@ var DEBUG = process.env.NODE_ENV === "development";
  */
 
 gulp.task("clean", function(){
-  del(paths.out.public, {force:true});
+  del(paths.out.root, {force:true});
 });
 
 gulp.task("copy-js", function () {
@@ -29,12 +29,12 @@ gulp.task("copy-js", function () {
       .pipe(gulp.dest(paths.out.public));
 });
 
-gulp.task("copy-dockerfile", function () {
-  return gulp.src(paths.in.dockerfile)
+gulp.task("copy-rootfiles", function () {
+  return gulp.src(paths.in.rootfiles)
       .pipe(gulp.dest(paths.out.root));
 });
 
-gulp.task("install", ["copy-js", "copy-dockerfile"]);
+gulp.task("install", ["copy-js", "copy-rootfiles"]);
 
 gulp.task("nodemon", function () {
   if(!nodemon_instance)

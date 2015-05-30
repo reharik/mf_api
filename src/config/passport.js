@@ -1,15 +1,15 @@
 var LocalStrategy = require('passport-local').Strategy;
 var authenticator = require('../lib/authenticator');
-var User = require('mongoose').model('User');
+var config = require('./config');
+var db = require('monk')(config.mongo.url);
+var users = db.get('users', {strict: true});
 
 var serialize = function (user, done) {
   done(null, user._id);
 };
 
 var deserialize = function (id, done) {
-  User.findOne({
-    _id: id
-  }, '-salt -password', function(err, user) {
+  users.findOne({_id: id}, '-salt -password', function(err, user) {
     done(err, user);
   });
 };

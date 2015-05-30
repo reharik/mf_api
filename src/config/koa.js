@@ -19,14 +19,14 @@ module.exports = function (app, config, passport) {
   app.use(koaStatic(config.app.root + "/public"));
 
   app.use(session({
-    key: "methodfitness.sid",
+    key: "methodfitness.sid"
   }));
   app.use(bodyParser());
   app.use(passport.initialize());
   app.use(passport.session());
 
   app.use(function *(next) {
-    this.render = views(config.app.root + "/src/app/views", {
+    this.render = views(config.app.root + "/app/views", {
       map: { html: "swig" },
       cache : config.app.env === "development" ?  "memory" : false
     });

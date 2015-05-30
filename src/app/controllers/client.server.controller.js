@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
     Client = mongoose.model('Client'),
 	  _ = require('lodash'),
-    ges = require('../services/ges/gesConnection.js'),
+    ges = require('./ges/gesConnection.js'),
     uuid = require('node-uuid'),
     parse = require('co-body'),
     that = this;

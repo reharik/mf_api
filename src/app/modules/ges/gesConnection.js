@@ -3,10 +3,10 @@
  */
 
 var co = require('co');
-var Promise = require('blueBird');
+var Promise = require('bluebird');
 var ges = require('ges-client');
 var uuid = require('node-uuid');
-var gesEvent = require('../GES/eventData.js');
+var gesEvent = require('./eventData.js');
 var config = require('../../../config/config');
 
 // this is not working it's returning an object and fucking everything up.
