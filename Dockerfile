@@ -14,7 +14,7 @@ ADD src/package.json /tmp/package.json
 RUN cd /tmp && npm install && mkdir -p /api/node_modules && mkdir -p /usr/src/app && cp -a /tmp/node_modules /api/
 
 WORKDIR /api
-COPY src /api
+COPY / /api
 
 # Expose the node.js port to the Docker host.
 EXPOSE 3000

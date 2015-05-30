@@ -1,7 +1,8 @@
 'use strict';
 var fs = require('fs');
 var koa = require('koa');
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
+var mongoskin = require('mongoskin');
 var passport = require('koa-passport');
 var config = require('./src/config/config');
 var fs = require('fs');
@@ -10,8 +11,6 @@ var hosts = new Hosts(fs.readFileSync('/etc/hosts', 'utf8'));
 
 var mongo = hosts._origin.filter(function(i){ return i.hostname === 'mfbuildfiles_mongo_1' });
 var eventstore = hosts._origin.filter(function(i){ return i.hostname === 'mfbuildfiles_eventstore_1' });
-console.log(mongo[0].ip);
-console.log(eventstore[0].ip);
 if(mongo.length>0){
   config.mongo.url =config.mongo.url.replace('localhost',mongo[0].ip);
 }
@@ -19,13 +18,11 @@ if(eventstore.length>0){
   config.eventstore.ip = eventstore[0].ip;
 }
 
-/**
- * Connect to database
- */
-mongoose.connect(config.mongo.url);
-mongoose.connection.on('error', function (err) {
-  console.log(err);
-});
+var db = mongoskin.db(config.mongo.url);
+//mongoose.connect(config.mongo.url);
+//mongoose.connection.on('error', function (err) {
+//  console.log(err);
+//});
 
 /**
  * Load the models

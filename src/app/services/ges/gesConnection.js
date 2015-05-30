@@ -7,7 +7,7 @@ var Promise = require('blueBird');
 var ges = require('ges-client');
 var uuid = require('node-uuid');
 var gesEvent = require('../GES/eventData.js');
-var config = require('../../../../../config/config');
+var config = require('../../../config/config');
 
 // this is not working it's returning an object and fucking everything up.
 Promise.promisifyAll(ges);
