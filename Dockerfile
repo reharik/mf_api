@@ -21,6 +21,6 @@ ENV PATH=$PATH:/usr/local/bin
 # Expose the node.js port to the Docker host.
 EXPOSE 3000
 
-CMD [ "npm run start" ]
+CMD npm run start
 #CMD /bin/bash
 
