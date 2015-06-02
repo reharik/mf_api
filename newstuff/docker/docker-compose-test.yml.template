@@ -1,0 +1,20 @@
+api:
+  image: xolocalvendors/reviews-api:{version}
+  command: -d
+  environment:
+    - NODE_ENV=dockertest
+  links:
+    - pgbox
+    - esbox
+
+pgbox:
+  image: xolocalvendors/pgbox:latest
+  environment:
+    - POSTGRES_PASSWORD=password
+  ports:
+    - "5432:5432"
+
+esbox:
+  image: xolocalvendors/esbox:latest
+  ports:
+    - "9200:9200"
