@@ -1,26 +1,27 @@
-FROM ubuntu
+FROM mf/nodebox
 
 # Maintainer
 MAINTAINER Raif Harik <reharik@gmail.com>
 
-# Install your application's dependencies
-RUN apt-get -qq update && \
-    apt-get -y install curl && \
-    curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash - && \
-    apt-get -y install python build-essential nodejs
-
-
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install && npm install -g babel  && mkdir -p /api/node_modules && mkdir -p /usr/src/app && cp -a /tmp/node_modules /api/
-
-WORKDIR /api
-COPY / /api
-
-ENV PATH=$PATH:/usr/local/bin
-
 # Expose the node.js port to the Docker host.
 EXPOSE 3000
 
-CMD npm run start
-#CMD /bin/bash
+# Entrypoint to docker shell
+ENTRYPOINT ["docker-shell"]
+
+# Startup commands
+CMD ["-r"]
+
+# set WORKDIR
+WORKDIR /opt/app/current
+
+# Add shell script for starting container
+ADD ./docker-shell.sh /usr/bin/docker-shell
+RUN chmod +x /usr/bin/docker-shell
+
+ADD /src/package.json /tmp/package.json
+RUN cd /tmp && npm install && npm install -g babel  && cp -a /tmp/node_modules /opt/app/current/node_modules
+
+COPY /src /opt/app/current
+
 

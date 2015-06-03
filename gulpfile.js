@@ -7,7 +7,7 @@ var gulp = require("gulp");
 var nodemon = require("gulp-nodemon");
 var del = require("del");
 // Config
-var packagejson =  require("./package");
+var packagejson =  require("./src/package");
 var config = require("./src/config/gulp");
 var paths = config.paths;
 
@@ -24,17 +24,17 @@ gulp.task("clean", function(){
   del(paths.out.root, {force:true});
 });
 
-gulp.task("copy-js", function () {
-  return gulp.src(paths.in.js)
-      .pipe(gulp.dest(paths.out.public));
+gulp.task("copy-files", ["clean"], function () {
+  return gulp.src(paths.in.srcfiles)
+      .pipe(gulp.dest(paths.out.src));
 });
 
-gulp.task("copy-rootfiles", function () {
-  return gulp.src(paths.in.rootfiles)
+gulp.task("copy-dockerfiles", ["clean","copy-files"],function () {
+  return gulp.src(paths.in.dockerfiles)
       .pipe(gulp.dest(paths.out.root));
 });
 
-gulp.task("install", ["copy-js", "copy-rootfiles"]);
+gulp.task("install", ["copy-files", "copy-dockerfiles"]);
 
 gulp.task("nodemon", function () {
   if(!nodemon_instance)

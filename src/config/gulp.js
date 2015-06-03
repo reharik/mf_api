@@ -4,14 +4,12 @@ var root = require("path").normalize(__dirname + "/../..");
 module.exports = {
   paths: {
       "in": {
-          js: [root + "/**/*.js"],
-          rootfiles: [root + "/Dockerfile",
-              root + "/server.js",
-              root + "/package.json"]
+          srcfiles: [root + "/src/**/*.js", root + "/src/package.json"],
+          dockerfiles:[root + "/docker-shell.sh",root + "/Dockerfile", root + "/Makefile",]
       },
       out: {
-          root: root + "/../MF_BuildFiles/Api/",
-          public: root + "/../MF_BuildFiles/Api/"
+          root: root + "/../MF_BuildFiles/Api",
+          src: root + "/../MF_BuildFiles/Api/src",
       }
   }
 };

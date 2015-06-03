@@ -2,13 +2,13 @@
 
 module.exports = {
   mongo: {
-    url: 'mongodb://localhost/methodfitness-dev'
+    url: 'mongodb://mongo/methodfitness-dev'
   },
   eventstore:{
-    ip:'127.0.0.1'
+    ip:eventstore
   },
   cdn:{
-    ip:'127.0.0.1'
+    ip:cdn
   },
   app: {
     title: 'MethodFitness_JS - Development Environment'
