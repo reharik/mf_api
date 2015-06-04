@@ -6,6 +6,8 @@ MAINTAINER Raif Harik <reharik@gmail.com>
 # Expose the node.js port to the Docker host.
 EXPOSE 3000
 
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
 # Entrypoint to docker shell
 ENTRYPOINT ["docker-shell"]
 
@@ -20,7 +22,7 @@ ADD ./docker-shell.sh /usr/bin/docker-shell
 RUN chmod +x /usr/bin/docker-shell
 
 ADD /src/package.json /tmp/package.json
-RUN cd /tmp && npm install && npm install -g babel  && cp -a /tmp/node_modules /opt/app/current/node_modules
+RUN /bin/bash -c "cd /tmp && npm install && npm install -g babel  && cp -a /tmp/node_modules /opt/app/current/node_modules"
 
 COPY /src /opt/app/current
 

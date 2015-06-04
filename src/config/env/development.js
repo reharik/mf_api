@@ -5,10 +5,10 @@ module.exports = {
     url: 'mongodb://mongo/methodfitness-dev'
   },
   eventstore:{
-    ip:eventstore
+    ip:'eventstore'
   },
   cdn:{
-    ip:cdn
+    ip:'cdn'
   },
   app: {
     title: 'MethodFitness_JS - Development Environment'
