@@ -4,7 +4,7 @@ var root = require("path").normalize(__dirname + "/../..");
 module.exports = {
   paths: {
       "in": {
-          srcfiles: [root + "/src/**/*.js", root + "/src/package.json"],
+          srcfiles: [root + "/src/**/*.js", root + "/src/package.json", root + "/src/**/*.html"],
           dockerfiles:[root + "/docker-shell.sh",root + "/Dockerfile", root + "/Makefile"]
       },
       out: {
