@@ -26,4 +26,3 @@ RUN /bin/bash -c "cd /tmp && npm install && npm install -g babel  && cp -a /tmp/
 
 COPY /src /opt/app/current
 
-
