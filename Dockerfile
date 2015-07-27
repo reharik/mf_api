@@ -21,7 +21,7 @@ WORKDIR /opt/app/current
 ADD ./docker-shell.sh /usr/bin/docker-shell
 RUN chmod +x /usr/bin/docker-shell
 
-ADD /src/package.json /tmp/package.json
+ADD /package.json /tmp/package.json
 RUN /bin/bash -c "cd /tmp && npm install && npm install -g babel  && cp -a /tmp/node_modules /opt/app/current/node_modules"
 
 COPY /src /opt/app/current

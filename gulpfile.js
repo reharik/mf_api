@@ -7,7 +7,6 @@ var gulp = require("gulp");
 var nodemon = require("gulp-nodemon");
 var del = require("del");
 // Config
-var packagejson =  require("./src/package");
 var config = require("./src/config/gulp");
 var paths = config.paths;
 
