@@ -1,56 +1,54 @@
 
 
-var co = require('co');
-var readModelRepository = require('../readModelRepository');
-var bcrypt = require('./bcrypt_thunk');
-var passport = require("koa-passport");
 
-var createPassword = function(_password) {
-    return co(function*() {
-        try {
-            var salt = yield bcrypt.genSalt();
-            var hash = yield bcrypt.hash(_password, salt);
-            return hash;
+module.exports = function(co, readModelRepository, bcryp_thunkt, koapassport) {
+    var createPassword = function (_password) {
+        return co(function*() {
+            try {
+                var salt = yield bcryp_thunk.genSalt();
+                var hash = yield bcryp_thunk.hash(_password, salt);
+                return hash;
+            }
+            catch (err) {
+                throw err;
+            }
+        });
+    };
+
+    var comparePassword = function *(candidatePassword, realPassword) {
+        return yield bcryp_thunk.compare(candidatePassword, realPassword);
+    };
+
+    var matchUser = function *(username, password, done) {
+        var user = yield readModelRepository.query('user', {'username': username.toLowerCase()});
+        if (!user) {
+            throw new Error('User not found');
         }
-        catch (err) {
-            throw err;
+
+        if (yield comparePassword(password, user.password)) {
+            return user;
         }
-    });
-};
 
-var comparePassword = function *(candidatePassword, realPassword) {
-    return yield bcrypt.compare(candidatePassword, realPassword);
-};
+        throw new Error('Password does not match');
+    };
 
-var matchUser = function *(username, password, done) {
-    var user = yield readModelRepository.query('user', { 'username': username.toLowerCase() });
-    if (!user){
-        throw new Error('User not found');
-    }
+    var authenticate = function () {
+        koapassport.authenticate("local", function*(err, trainer, info) {
+            if (err) {
+                throw err;
+            }
+            if (trainer === false) {
+                return {status: 401};
+            } else {
+                return {trainer: trainer};
+            }
+        })
+    };
 
-    if (yield comparePassword(password, user.password)) {
-        return user;
-    }
-
-    throw new Error('Password does not match');
-};
-
-var authenticate = function() {
-    passport.authenticate("local", function*(err, trainer, info) {
-        if (err) {
-            throw err;
-        }
-        if (trainer === false) {
-            return {status:401};
-        } else {
-            return {trainer:trainer};
-        }
-    })
-};
-
-module.exports = {
-    createPassword:createPassword,
-    comparePassword:comparePassword,
-    matchUser:matchUser,
-    authenticate:authenticate
-};
+    return {
+        createPassword: createPassword,
+        comparePassword: comparePassword,
+        matchUser: matchUser,
+        authenticate: authenticate
+    };
+}

@@ -3,7 +3,6 @@
  */
 
 module.exports = function(gesclient, config, logger) {
-
     return {
         openConnection: function(){
             var connection;

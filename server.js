@@ -1,12 +1,15 @@
 /**
  * Created by reharik on 7/25/15.
  */
-var koa = require('koa');
-var config = require('config');
-var passportConfig = require('./src/appConfig/passport');
-var koaConfig = require('./src/appConfig/koa');
-var routes = require('./app/routes/firstRoutes.js');
-var containerIPs = require('./src/appConfig/containerIPs');
+
+var container = require('./bootstrap');
+
+var koa = container.getInstanceOf('koa');
+var config = container.getInstanceOf('config');
+var passportConfig = container.getInstanceOf('passportConfig');
+var koaConfig = container.getInstanceOf('koaConfig');
+var firstRoutes = container.getInstanceOf('firstRoutes');
+var containerIPs = container.getInstanceOf('containerIPs');
 
 console.log("approot" + __dirname);
 console.log("appTitle" + config.app.title);
@@ -15,7 +18,7 @@ var app = module.exports = koa();
 containerIPs();
 passportConfig(passport);
 koaConfig(app, passportConfig);
-routes(app, passportConfig);
+firstRoutes(app, passportConfig);
 
 if (!module.parent) {
     app.listen(config.app.port);
