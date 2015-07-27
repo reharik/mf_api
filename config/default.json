@@ -1,0 +1,15 @@
+
+
+{
+  "app":{
+    "title":"Method Fitness",
+    "port":3000,
+    "env":"Dev"
+  },
+  "eventstore":{
+    "ip":"172.0.0.1"
+  },
+  "postgres":{
+    "connectionString":"postgres://postgres:password@172.17.0.5/MethodFitness"
+  }
+}
