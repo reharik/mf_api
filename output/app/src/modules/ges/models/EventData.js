@@ -1,0 +1,23 @@
+/**
+ * Created by parallels on 7/27/15.
+ */
+
+"use strict";
+
+module.exports = function (uuid) {
+    return function EventData(eventTypeName, data, metadata) {
+        metadata = metadata || {};
+        data = JSON.stringify(data || {});
+        metadata = metadata || {};
+        metadata.eventTypeName = eventTypeName;
+        metadata = JSON.stringify(metadata);
+
+        return {
+            EventId: uuid.v4(),
+            Type: eventTypeName,
+            IsJson: true,
+            Data: data,
+            Metadata: metadata
+        };
+    };
+};

@@ -2,6 +2,8 @@
  * Created by reharik on 7/25/15.
  */
 
+'use strict';
+
 var container = require('./bootstrap');
 
 var koa = container.getInstanceOf('koa');
@@ -11,7 +13,6 @@ var passportConfig = container.getInstanceOf('passportConfig');
 var koaConfig = container.getInstanceOf('koaConfig');
 var routes = container.getInstanceOf('routes');
 var containerIPs = container.getInstanceOf('containerIPs');
-
 
 console.log("approot" + __dirname);
 console.log("appTitle" + config.app.title);
@@ -23,7 +24,7 @@ koaConfig(app, koapassport);
 routes(app, koapassport);
 
 if (!module.parent) {
-    app.listen(config.app.port);
-    console.log('Server started, listening on port: ' + config.app.port);
+  app.listen(config.app.port);
+  console.log('Server started, listening on port: ' + config.app.port);
 }
 console.log('Environment: ' + config.app.env);

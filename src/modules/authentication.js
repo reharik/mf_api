@@ -1,7 +1,7 @@
 
 
 
-module.exports = function(co, readModelRepository, bcryp_thunkt, koapassport) {
+module.exports = function(co, readModelRepository, bcrypt_thunk, koapassport) {
     var createPassword = function (_password) {
         return co(function*() {
             try {

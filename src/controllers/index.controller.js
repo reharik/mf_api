@@ -8,8 +8,9 @@ module.exports = function(config) {
             this.body = yield this.render("basic", {
                 version: "1",
                 commit: "1",
-                cdn: config.cdn.ip
+                cdn: config.cdn.ip,
+                sitename: config.title
             });
-        };
+        }
     };
 };

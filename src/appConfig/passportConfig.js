@@ -5,11 +5,11 @@
 
 module.exports = function(authentication,
                           co,
-                          LocalStrategy,
+                          passportlocal,
                           readModelRepository,
                           config) {
 
-    var localStrategy = LocalStrategy.Strategy;
+    var localStrategy = passportlocal.Strategy;
     var serialize = function (user, done) {
         done(null, user.id);
     };

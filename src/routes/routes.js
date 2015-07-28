@@ -2,9 +2,8 @@
  * Created by reharik on 7/26/15.
  */
 
-var router = require("koa-router");
 
-module.exports = function(router, index_controller, auth_controller) {
+module.exports = function(koarouter, index_controller, auth_controller) {
 
     var secured = function *(next) {
         if (this.isAuthenticated()) {
@@ -21,7 +20,7 @@ module.exports = function(router, index_controller, auth_controller) {
 //var trainerListController = require("../controllers/trainerList.server.controller");
 //    var indexController = require("../controllers/index.controller");
 //    var authController = require("../controllers/auth.controller");
-
+        var router = koarouter();
         router.get("/", function *() {
             yield index_controller.index.apply(this);
         });

@@ -2,11 +2,13 @@
  * Created by reharik on 7/26/15.
  */
 
-module.exports = function(hostsparser, config, fs) {
+'use strict';
+
+module.exports = function (hostsparser, config, fs) {
     return function () {
         var hosts = new hostsparser.Hosts(fs.readFileSync('/etc/hosts', 'utf8'));
         var frontend = hosts._origin.filter(function (i) {
-            return i.hostname === 'frontend'
+            return i.hostname === 'frontend';
         });
 
         if (frontend.length > 0) {
@@ -15,7 +17,7 @@ module.exports = function(hostsparser, config, fs) {
         }
 
         var eventstore = hosts._origin.filter(function (i) {
-            return i.hostname === 'eventstore'
+            return i.hostname === 'eventstore';
         });
 
         if (eventstore.length > 0) {
