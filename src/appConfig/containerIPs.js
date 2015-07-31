@@ -14,14 +14,13 @@ module.exports = function(hostsparser, config, fs) {
             console.log("frontend IP: " + frontend[0].ip);
         }
 
-        var eventstore = hosts._origin.filter(function (i) {
-            return i.hostname === 'eventstore'
-        });
-
-        if (eventstore.length > 0) {
-            config.eventstore.ip = eventstore[0].ip;
-            console.log("eventstore IP: " + eventstore[0].ip);
-        }
-        console.log(config);
+        //var eventstore = hosts._origin.filter(function (i) {
+        //    return i.hostname === 'eventstore'
+        //});
+        //
+        //if (eventstore.length > 0) {
+        //    config.eventstore.ip = eventstore[0].ip;
+        //    console.log("eventstore IP: " + eventstore[0].ip);
+        //}
     };
 };

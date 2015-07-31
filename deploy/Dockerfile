@@ -7,10 +7,15 @@ MAINTAINER Raif Harik <reharik@gmail.com>
 EXPOSE 3000
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+ADD /app/package.json /tmp/package.json
+RUN /bin/bash -c "cd /tmp && npm install && npm install -g babel"
+RUN /bin/bash -c "cd /tmp && cp -a /tmp/node_modules /opt/app/current/node_modules"
+
 
 # Entrypoint to docker shell
 ENTRYPOINT ["docker-shell"]
 
+#this is the flag that tells the docker-shell what mode to execute
 # Startup commands
 CMD ["-r"]
 
@@ -20,9 +25,6 @@ WORKDIR /opt/app/current
 # Add shell script for starting container
 ADD ./docker-shell.sh /usr/bin/docker-shell
 RUN chmod +x /usr/bin/docker-shell
-
-ADD /app/package.json /tmp/package.json
-RUN /bin/bash -c "cd /tmp && npm install && npm install -g babel  && cp -a /tmp/node_modules /opt/app/current/node_modules"
 
 COPY /app /opt/app/current
 

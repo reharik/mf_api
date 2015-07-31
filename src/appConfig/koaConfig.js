@@ -29,8 +29,8 @@ module.exports = function(koagenericsession,
         }));
 
         app.use(koabodyparser());
-        app.use(passport.initialize());
-        app.use(passport.session());
+        //app.use(passport.initialize());
+        //app.use(passport.session());
 
         app.use(function * (next){
             this.render = coviews(config.app.root + "/src/views", {

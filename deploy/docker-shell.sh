@@ -33,7 +33,7 @@ if [ $MODE == $RUN_MODE ]; then
 	npm run start
 elif [ $MODE == $TEST_MODE ]; then
 	echo RUNINNG TEST
-	npm test
+	npm run intTest
 elif [ $MODE == $DOCKERTEST_MODE ]; then
 	echo RUNNING DOCKER TEST
 	sleep $SLEEP_DURATION

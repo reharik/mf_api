@@ -8,7 +8,7 @@ module.exports = function(config) {
             this.body = yield this.render("basic", {
                 version: "1",
                 commit: "1",
-                cdn: config.cdn.ip,
+                frontend: config.frontend.ip,
                 sitename: config.title
             });
         }

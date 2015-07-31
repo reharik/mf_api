@@ -8,15 +8,11 @@
     "keys": ["methodFitness"],
     "root":"./"
   },
-
   "postgres":{
     "connectionString":"postgres://postgres:password@172.17.0.5/MethodFitness"
   },
-  "frontend":{},
-  "eventstore":{
-    "ip":"172.0.0.1"
-  },
-  "postgres":{},
+  "eventstore":{"host":"eventstore"},
+  "frontend":{}       ,
   "deploy":{
     "output":{
       "app":"output/app",

@@ -4,10 +4,11 @@
   "private": true,
   "main": "server.js",
   "scripts": {
-    "start": "babel-node --harmony server.js",
+    "start": "babel-node --harmony server.js --stage 0",
     "localstart": "babel-node --harmony server.js --stage 0",
     "watch": "nodemon --harmony --debug -V -w src/app/controllers -w src/app/models -w src/app/routes -w config -w config/env -w lib ",
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js"
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js",
+    "intTest": "mocha --opts --harmony integrationTests/mocha.opts integrationTests"
   },
   "license": "MIT",
   "engines": {
@@ -42,11 +43,15 @@
     "uuid": "^2.0.1"
   },
   "devDependencies": {
+    "babel": "^5.5.6",
+    "babel-runtime": "^5.5.6",
     "babelify": "^5.0.4",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
+    "gulp-contrib-clean": "0.0.2",
     "gulp-nodemon": "^2.0.3",
+    "gulp-rename": "^1.2.2",
     "mocha": "2.1.x",
     "must": "0.13.0-beta2"
   }

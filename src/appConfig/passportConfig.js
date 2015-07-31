@@ -33,7 +33,7 @@ module.exports = function(authentication,
     };
 
     return function (passport) {
-        passport.serializeUser(serialize);
+                passport.serializeUser(serialize);
         passport.deserializeUser(deserialize);
         passport.use(new localStrategy(authLocalUser));
     };
