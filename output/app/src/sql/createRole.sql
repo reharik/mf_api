@@ -1,7 +1,0 @@
--- Role: localservices
-
-DROP ROLE IF EXISTS amahl;
-
-CREATE ROLE amahl LOGIN PASSWORD '!q2w3e4r5t6y7'
-  NOSUPERUSER INHERIT CREATEDB CREATEROLE NOREPLICATION;
---GRANT rds_superuser TO localservices;
