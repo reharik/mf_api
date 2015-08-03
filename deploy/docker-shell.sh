@@ -30,7 +30,6 @@ echo NODE_ENV=$NODE_ENV
 #execution based on argument
 if [ $MODE == $RUN_MODE ]; then
 	echo RUNNING API
-	ls node_modules
 	npm run start
 elif [ $MODE == $TEST_MODE ]; then
 	echo RUNINNG TEST
