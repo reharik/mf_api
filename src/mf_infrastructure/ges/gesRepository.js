@@ -137,8 +137,6 @@ module.exports = function(invariant,
                     (aggregate.isAggregateBase && aggregate.isAggregateBase()),
                     "aggregateType must inherit from AggregateBase"
                 );
-
-                if(!aggregate._id){ aggregate._id = uuid.v1(); }
                 // standard data for metadata portion of persisted event
                 metadata = {
                     // handy tracking id

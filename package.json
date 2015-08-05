@@ -41,7 +41,8 @@
     "pg-bluebird": "^1.0.8",
     "rx": "^2.5.3",
     "swig": "1.4.x",
-    "uuid": "^2.0.1"
+    "uuid": "^2.0.1",
+    "yowl": "^1.0.29"
   },
   "devDependencies": {
     "babel": "^5.5.6",

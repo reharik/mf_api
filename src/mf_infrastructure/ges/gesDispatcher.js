@@ -90,7 +90,7 @@ module.exports = function(invariant,
             handlers
                 .filter(h=> {
                     logger.info('calling event handler :' + h.eventHandlerName + ' with eventTypeName: ' + vent.eventTypeName);
-                    logger.trace(h.eventHandlerName = ' handles these events: '+ h.handlesEvents);
+                    logger.trace(h.eventHandlerName + ' handles these events: '+ h.handlesEvents);
                     return h.handlesEvents.find(he=>he == vent.eventTypeName)
                 })
                 .forEach(m=> {

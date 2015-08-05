@@ -13,11 +13,14 @@ var passportConfig = container.getInstanceOf('passportConfig');
 var koaConfig = container.getInstanceOf('koaConfig');
 var routes = container.getInstanceOf('routes');
 var applicationBootstrap = container.getInstanceOf('applicationBootstrap');
+var logger = container.getInstanceOf('logger');
 
 
 console.log("approot" + __dirname);
 console.log("appTitle" + config.app.title);
 
+logger.info('logging from logger');
+console.log(logger);
 
 var app = module.exports = koa();
 passportConfig(koapassport);

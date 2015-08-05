@@ -21,7 +21,7 @@ gulp.task("copy-source",["clean"], function () {
         .pipe(gulp.dest(config.get("deploy.output.app")+"/src"));
 });
 gulp.task("copy-root",["clean"], function () {
-    return gulp.src(["package.json", "server.js", "bootstrap.js"])
+    return gulp.src(["package.json", "server.js", "bootstrap.js", ".npmrc"],{dot:true})
         .pipe(gulp.dest(config.get("deploy.output.app")));
 });
 
@@ -36,26 +36,37 @@ gulp.task("copy-deploy",["clean"], function () {
 });
 
 gulp.task("copy-to-buildDir",["copy-source","copy-root","copy-config","copy-deploy"], function () {
-    return gulp.src(config.get("deploy.output.deploy")+"/**")
+    return gulp.src(config.get("deploy.output.deploy")+"/**",{dot:true})
         .pipe(gulp.dest(config.get("deploy.buildDirectory")));
 });
 
 ////////////////////////////////////////////////////
 
-gulp.task('clean-mf_core', function (cb) {
-    del(['src/modules/ges/**/*'], cb);
+gulp.task('clean-mf_inf', function (cb) {
+    del(['src/mf_infrastructure'], cb);
 });
 
-gulp.task('copy-mf_core',['clean-mf_core'], function () {
-    gulp.src(['../MF_Core/compiled/src/**/*'], { "base" : "../MF_Core/compiled/src" }).pipe(gulp.dest('src/mf_core'));
+gulp.task('copy-mf_inf',['clean-mf_inf'], function () {
+    gulp.src(['../MF_Infrastructure/output/src/**/*'], { "base" : "../MF_Infrastructure/output/src" }).pipe(gulp.dest('src/mf_infrastructure'));
 });
 
 ////////////////////////////////////////////////////
 
-gulp.task('pull-mf_core', ["clean-mf_core","copy-mf_core"]);
+gulp.task('clean-mf_messagebinders', function (cb) {
+    del(['src/mf_messagebinders'], cb);
+});
 
-gulp.task("deploy",['pull-mf_core', "copy-to-buildDir"]);
+gulp.task('copy-mf_messagebinders',['clean-mf_messagebinders'], function () {
+    gulp.src(['../MF_MessageBinders/output/src/**/*'], { "base" : "../MF_MessageBinders/output/src" }).pipe(gulp.dest('src/mf_messagebinders'));
+});
+
+/////////////////////////////////////////////////
 
 
+gulp.task('pull-mf_inf', ["clean-mf_inf","copy-mf_inf"]);
+
+gulp.task('pull-mf_messagebinders', ["clean-mf_messagebinders","copy-mf_messagebinders"]);
+
+gulp.task("deploy",['pull-mf_inf','pull-mf_messagebinders', "copy-to-buildDir"]);
 
 
