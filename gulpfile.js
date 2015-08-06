@@ -46,8 +46,8 @@ gulp.task('clean-mf_inf', function (cb) {
     del(['src/mf_infrastructure'], cb);
 });
 
-gulp.task('copy-mf_inf',['clean-mf_inf'], function () {
-    gulp.src(['../MF_Infrastructure/output/src/**/*'], { "base" : "../MF_Infrastructure/output/src" }).pipe(gulp.dest('src/mf_infrastructure'));
+gulp.task('copy-mf_inf', function () {
+    return gulp.src(['../MF_Infrastructure/output/src/**/*'], { "base" : "../MF_Infrastructure/output/src" }).pipe(gulp.dest('src/mf_infrastructure'));
 });
 
 ////////////////////////////////////////////////////
@@ -56,8 +56,8 @@ gulp.task('clean-mf_messagebinders', function (cb) {
     del(['src/mf_messagebinders'], cb);
 });
 
-gulp.task('copy-mf_messagebinders',['clean-mf_messagebinders'], function () {
-    gulp.src(['../MF_MessageBinders/output/src/**/*'], { "base" : "../MF_MessageBinders/output/src" }).pipe(gulp.dest('src/mf_messagebinders'));
+gulp.task('copy-mf_messagebinders', function () {
+    return gulp.src(['../MF_MessageBinders/output/src/**/*'], { "base" : "../MF_MessageBinders/output/src" }).pipe(gulp.dest('src/mf_messagebinders'));
 });
 
 /////////////////////////////////////////////////
@@ -67,6 +67,6 @@ gulp.task('pull-mf_inf', ["clean-mf_inf","copy-mf_inf"]);
 
 gulp.task('pull-mf_messagebinders', ["clean-mf_messagebinders","copy-mf_messagebinders"]);
 
-gulp.task("deploy",['pull-mf_inf','pull-mf_messagebinders', "copy-to-buildDir"]);
+gulp.task("deploy",['copy-mf_inf','copy-mf_messagebinders', "copy-to-buildDir"]);
 
 
