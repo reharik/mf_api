@@ -18,8 +18,6 @@ module.exports = function(NotificationEvent,
 
         async handleEvent(gesEvent) {
             logger.debug('checking event for idempotence');
-            console.log('this.eventHandlerName');
-            console.log(this.eventHandlerName);
             var idempotency = await readModelRepository.checkIdempotency(gesEvent.originalPosition, this.eventHandlerName);
             if (!idempotency.isIdempotent) {
                 logger.debug('event is not idempotent');

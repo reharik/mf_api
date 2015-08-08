@@ -18,7 +18,6 @@ module.exports = function(pgbluebird,config,logger, path, fs) {
             var checkForDBScript = fs.readFileSync(path.join(_path, 'checkIfDBExists.sql'));
             var res = await cnn.client.query(checkForDBScript.toString('utf8'));
             logger.debug('checking if db exists');
-            console.log(res);
             if(res.rowCount>0){
                 cnn.done();
                 return;
@@ -44,7 +43,7 @@ module.exports = function(pgbluebird,config,logger, path, fs) {
             await cnn.client.query(buildSchemaScript.toString('utf8'));
 
         } catch (err) {
-            console.log(err)
+            logger.error(err);
         } finally {
             logger.debug('finished with process');
             cnn.done();

@@ -14,13 +14,11 @@ module.exports = function(pgbluebird, Promise, config, uuid, logger, JSON){
                 return row.document;
             } catch (error) {
                 logger.error('error received during query for table: ' + table + ' Id: ' + id + " : " + error.message);
-                console.log(error);
+                logger.error(error);
             }
         },
 
         async save(table, document, id){
-            console.log("document");
-            console.log(document);
             var pgb = new pgbluebird();
             var result;
             try {
@@ -36,7 +34,7 @@ module.exports = function(pgbluebird, Promise, config, uuid, logger, JSON){
                 return 'success';
             } catch (error) {
                 logger.error('error received saving to table: ' + table + ". msg: " + error.message);
-                console.log(error);
+                logger.error(error);
             }
         },
 
@@ -57,7 +55,7 @@ module.exports = function(pgbluebird, Promise, config, uuid, logger, JSON){
                 return {isIdempotent: isIdempotent, isNewStream: isNewStream};
             } catch (error) {
                 logger.error('error received during last process position call for eventHandler ' + eventHandlerName + ': ' + error.message);
-                console.log(error);
+                logger.error(error);
             }
         },
 
@@ -87,7 +85,7 @@ module.exports = function(pgbluebird, Promise, config, uuid, logger, JSON){
                 return result;
             } catch (error) {
                 logger.error('error received during record event processed call for eventHandler ' + eventHandlerName + ': ' + error.message);
-                console.log(error);
+                logger.error(error);
             }
         }
     }

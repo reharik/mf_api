@@ -3,10 +3,17 @@
  */
 
 
-module.exports = function(buildPostgresDatabase, createMetadataPromise, appendToStreamPromise, EventData, logger){
+module.exports = function(buildPostgresDatabase,
+                          createMetadataPromise,
+                          appendToStreamPromise,
+                          EventData,
+                          logger,
+                          config,
+                          pgbluebird,
+                          fs){
     return {
         bootstrap: async function applicationBootstrap() {
-
+            var pgb = new pgbluebird();
             var cnn = await pgb.connect(config.get('postgres.connectionString') + config.get('postgres.postgres'));
 
             logger.debug('creating connection to master db');
@@ -16,6 +23,7 @@ module.exports = function(buildPostgresDatabase, createMetadataPromise, appendTo
             logger.debug('checking if db exists');
             if (res.rowCount > 0) {
                 cnn.done();
+                logger.debug('database already exists');
                 return;
             }
             var metaResult = await createMetadataPromise();

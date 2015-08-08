@@ -16,11 +16,8 @@ var applicationBootstrap = container.getInstanceOf('applicationBootstrap');
 var logger = container.getInstanceOf('logger');
 
 
-console.log("approot" + __dirname);
-console.log("appTitle" + config.app.title);
-
-logger.info('logging from logger');
-console.log(logger);
+logger.info("approot" + __dirname);
+logger.info("appTitle" + config.app.title);
 
 var app = module.exports = koa();
 passportConfig(koapassport);
@@ -29,9 +26,10 @@ routes(app, koapassport);
 
 if (!module.parent) {
     app.listen(config.app.port);
-    console.log('Server started, listening on port: ' + config.app.port);
+    logger.info('Server started, listening on port: ' + config.app.port);
 }
-console.log('Environment: ' + config.app.env);
+logger.info('Environment: ' + config.app.env);
 setTimeout(function(){
+    console.log("application bootstrap");
     applicationBootstrap.bootstrap();
 }, 2000);

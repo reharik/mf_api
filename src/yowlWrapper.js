@@ -2,7 +2,7 @@
  * Created by parallels on 8/4/15.
  */
 
-module.exports = function(yowl,config){
+module.exports = function(yowl,config,moment){
     return function(){
         var _yowl = new yowl({
             system : {
@@ -12,7 +12,8 @@ module.exports = function(yowl,config){
         });
         _yowl.addConsoleSink({
             level : "silly",
-            colorize : true
+            colorize : true,
+            formatter: function(x){ return '[' + x.meta.level + '] message: ' + x.meta.message + ' | ' + moment().format('h:mm:ss a');}
         }).info("added Console Sink")
             .addDailyRotateFileSink({
                 level : "info",
