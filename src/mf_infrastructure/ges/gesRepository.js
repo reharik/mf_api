@@ -8,7 +8,6 @@
 
 
 module.exports = function(invariant,
-                          AggregateRootBase,
                           _,
                           EventData,
                           GesEvent,
@@ -23,31 +22,12 @@ module.exports = function(invariant,
         logger.debug('gesRepository options passed in ' + _options);
 
         var options = {
-            eventTypeNameHeader: 'eventTypeName',
-            aggregateTypeHeader: 'aggregateTypeName',
-            commitIdHeader: 'commitId',
-            writePageSize: 2,
-            readPageSize: 1
+            readPageSize: 1,
+            streamType:'event'
         };
         _.assign(options, _options || {});
         logger.debug('gesRepository options after merge ' + options);
 
-        invariant(
-            options.eventTypeNameHeader,
-            "repository requires an eventTypeNameHeader name"
-        );
-        invariant(
-            options.aggregateTypeHeader,
-            "repository requires an aggregateTypeHeader name"
-        );
-        invariant(
-            options.commitIdHeader,
-            "repository requires an commitIdHeader name"
-        );
-        invariant(
-            options.writePageSize > 0,
-            "repository requires a write size greater than 0"
-        );
         invariant(
             options.readPageSize,
             "repository requires a read size greater than 0"
@@ -109,11 +89,11 @@ module.exports = function(invariant,
                     logger.trace('new sliceStart calculated: ' + sliceStart);
 
                     logger.debug('about to loop through and apply events to aggreagate');
-                    currentSlice.Events.forEach(e=> aggregate.applyEvent(GesEvent.gesEventFromStream(e,'eventTypeName')));
+                    currentSlice.Events.forEach(e=> aggregate.applyEvent(GesEvent.gesEventFromStream(e,'eventName')));
                     logger.info('events applied to aggregate');
                 } while (version >= currentSlice.NextEventNumber && !currentSlice.IsEndOfStream);
             } catch (error) {
-                logger.error('error retrieving aggreage: ' + error);
+                logger.error('error retrieving aggregate: ' + error);
                 throw(error);
             }
 
@@ -122,8 +102,7 @@ module.exports = function(invariant,
         }
 
 
-        function save(aggregate, commitId, _metadata) {
-            logger.debug('gesRepo calling save with params:' + aggregate + ', ' + commitId + ', ' + _metadata);
+        function save(aggregate, _metadata) {
             var streamName;
             var newEvents;
             var metadata;
@@ -142,13 +121,17 @@ module.exports = function(invariant,
                     // handy tracking id
                     commitIdHeader: commitId || uuid.v1(),
                     // type of aggregate being persisted
-                    aggregateTypeHeader: aggregate.constructor.name
+                    aggregateTypeHeader: aggregate.constructor.name,
+                    // stream type
+                    streamType: this.options.streamType
                 };
                 logger.debug('default metadata:' + metadata);
 
                 // add extra data to metadata portion of persisted event
                 _.assign(metadata, _metadata);
                 logger.debug('merged metadata: ' + metadata);
+
+                logger.debug('gesRepo calling save with params:' + aggregate + ', ' + metadata.commitIdHeader+ ', ' + _metadata);
 
                 streamName = streamNameStrategy(aggregate.constructor.name, aggregate._id);
                 logger.debug('gesRepo calling save with params:' + aggregate + ', ' + commitId + ', ' + _metadata);
@@ -161,7 +144,7 @@ module.exports = function(invariant,
                 logger.trace('calculating expected version :' + expectedVersion);
 
                 logger.debug('creating EventData for each event');
-                events = newEvents.map(x=> new EventData(x.eventTypeName, x.data, metadata));
+                events = newEvents.map(x=> new EventData(x.eventName, x.data, metadata));
                 logger.trace('EventData created for each event');
 
                 appendData = {

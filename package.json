@@ -22,7 +22,7 @@
     "co-body": "^1.0.0",
     "co-views": "0.3.x",
     "config": "^1.14.0",
-    "dagon": "0.0.5",
+    "dagon": "0.0.8",
     "ges-client": "^0.9.1",
     "hosts-parser": "^0.3.1",
     "invariant": "^2.1.0",

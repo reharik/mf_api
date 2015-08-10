@@ -3,10 +3,10 @@
  */
 
 module.exports = function(GesEvent) {
-    return class NotificationEvent extends GesEvent {
-        constructor(_notificationType, _message, _initialEvent) {
-            super('notificationEvent', {
-                notificationType: _notificationType,
+    return class Notification extends GesEvent {
+        constructor(_result, _message, _initialEvent) {
+            super('notification', {
+                result: _result,
                 message: _message,
                 initialEvent: _initialEvent
             });

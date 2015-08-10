@@ -34,7 +34,7 @@ module.exports = function(buildPostgresDatabase,
             logger.debug(dbResult);
 
             var appendData = {expectedVersion: -2};
-            appendData.events = [new EventData('bootstrapApplication', {data: 'bootstrap please'}, {commandTypeName: 'bootstrapApplication'})];
+            appendData.events = [new EventData('bootstrapApplication', {data: 'bootstrap please'}, {eventName: 'bootstrapApplication', streamType:'command' })];
             var response = await appendToStreamPromise('commands', appendData);
             logger.info('bootstrapApplication sent');
             logger.info('response');

@@ -17,7 +17,8 @@ module.exports = function(invariant,
 
             this.options = {
                 stream: '$all',
-                targetType: 'eventTypeName'
+                // e.g. event, command, notification
+                targetType: 'event'
             };
             _.assign(this.options, _options);
             logger.debug('gesDispatcher base options after merge ' + this.options);
@@ -62,20 +63,20 @@ module.exports = function(invariant,
                 return false;
             }
             logger.trace('event has data');
-            logger.trace('filtering event for targetType');
+            logger.trace('filtering event for streamType');
 
             var metadata = bufferToJson(payload.OriginalEvent.Metadata);
-            if (!metadata || !metadata[this.options.targetType]) {
+            if (!metadata || !metadata.streamType || metadata.streamType != this.options.targetType) {
                 return false;
             }
 
-            logger.trace('event has proper targetType');
+            logger.trace('event is of proper targetType');
             return true;
         }
 
         createGesEvent(payload) {
             logger.debug('event passed through filter');
-            var vent =  new GesEvent(bufferToJson(payload.OriginalEvent.Metadata)[this.options.targetType],
+            var vent =  new GesEvent(bufferToJson(payload.OriginalEvent.Metadata).eventName,
                 payload.OriginalEvent.Data,
                 payload.OriginalEvent.Metadata,
                 payload.OriginalPosition
@@ -89,14 +90,14 @@ module.exports = function(invariant,
 
             handlers
                 .filter(h=> {
-                    logger.info('calling event handler :' + h.eventHandlerName + ' with eventTypeName: ' + vent.eventTypeName);
+                    logger.info('checking event handler :' + h.eventHandlerName + ' for eventTypeName: ' + vent.eventName);
                     logger.trace(h.eventHandlerName + ' handles these events: '+ h.handlesEvents);
                     return h.handlesEvents.find(he=>he == vent.eventTypeName)
                 })
                 .forEach(m=> {
-                    logger.debug('event handler does handle event type: ' + vent.eventTypeName);
+                    logger.debug('event handler does handle event type: ' + vent.eventName);
                     m.handleEvent(vent);
-                    logger.debug('event handler finished handleing event');
+                    logger.debug('event handler finished handling event');
                 });
 
             logger.info('event processed by dispatcher');

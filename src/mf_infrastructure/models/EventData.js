@@ -3,16 +3,16 @@
  */
 
 module.exports = function(uuid) {
-    return function EventData(eventTypeName, data, metadata) {
+    return function EventData(eventName, data, metadata) {
         metadata = metadata || {};
         data = JSON.stringify(data || {});
         metadata = metadata||{};
-        metadata.eventTypeName = eventTypeName;
+        metadata.eventName = eventName;
         metadata = JSON.stringify(metadata);
 
         return {
             EventId: uuid.v4(),
-            Type: eventTypeName,
+            Type: eventName,
             IsJson: true,
             Data: data,
             Metadata: metadata

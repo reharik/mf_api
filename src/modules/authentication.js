@@ -51,4 +51,4 @@ module.exports = function(co, readModelRepository, bcrypt_thunk, koapassport) {
         matchUser: matchUser,
         authenticate: authenticate
     };
-}
+};

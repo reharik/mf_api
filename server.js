@@ -4,7 +4,6 @@
 
 process.env['ALLOW_CONFIG_MUTATIONS']=true;
 var container = require('./bootstrap');
-
 var containerIPs = container.getInstanceOf('containerIPs')();
 var koa = container.getInstanceOf('koa');
 var config = container.getInstanceOf('config');
