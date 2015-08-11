@@ -48,13 +48,13 @@ module.exports = function(invariant,
         }
 
         filterEvents(payload) {
-            logger.info('event received by dispatcher');
-            logger.trace('filtering event for system events ($)');
+            //logger.info('event received by dispatcher');
+            //logger.trace('filtering event for system events ($)');
             if (!payload.Event || !payload.Event.EventType || payload.Event.EventType.startsWith('$')) {
                 return false;
             }
             //logger.trace('event passed filter for system events ($)');
-            logger.trace('filtering event for empty metadata');
+            //logger.trace('filtering event for empty metadata');
             if (_.isEmpty(payload.OriginalEvent.Metadata)) {
                 logger.trace('metadata is empty');
                 return false;
@@ -96,10 +96,7 @@ module.exports = function(invariant,
                 .filter(h=> {
                     logger.info('checking event handler :' + h.eventHandlerName + ' for eventTypeName: ' + vent.eventName);
                     logger.trace(h.eventHandlerName + ' handles these events: '+ h.handlesEvents);
-                    var includes = h.handlesEvents.forEach(he=>{logger.info("handler event name: "+he);logger.info(he == vent.eventTypeName); return he == vent.eventTypeName});
-                    logger.info('includes');
-                    logger.info(includes);
-                    return includes
+                    return h.handlesEvents.includes(vent.eventName);
                 })
                 .forEach(m=> {
                     logger.debug('event handler does handle event type: ' + vent.eventName);

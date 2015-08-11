@@ -15,7 +15,7 @@ module.exports = function(invariant,
                           readStreamEventsForwardPromise,
                           streamNameStrategy,
                           logger,
-                          uuid) {
+                          uuid, JSON ) {
 
     return function (_options) {
         logger.trace('constructing gesRepository');
@@ -116,14 +116,17 @@ module.exports = function(invariant,
                     (aggregate.isAggregateBase && aggregate.isAggregateBase()),
                     "aggregateType must inherit from AggregateBase"
                 );
+                logger.debug('repo options');
+                logger.debug(JSON.stringify(options));
+
                 // standard data for metadata portion of persisted event
                 metadata = {
                     // handy tracking id
-                    commitIdHeader: commitId || uuid.v1(),
+                    commitIdHeader: uuid.v1(),
                     // type of aggregate being persisted
                     aggregateTypeHeader: aggregate.constructor.name,
                     // stream type
-                    streamType: this.options.streamType
+                    streamType: options.streamType
                 };
                 logger.debug('default metadata:' + metadata);
 
@@ -134,7 +137,7 @@ module.exports = function(invariant,
                 logger.debug('gesRepo calling save with params:' + aggregate + ', ' + metadata.commitIdHeader+ ', ' + _metadata);
 
                 streamName = streamNameStrategy(aggregate.constructor.name, aggregate._id);
-                logger.debug('gesRepo calling save with params:' + aggregate + ', ' + commitId + ', ' + _metadata);
+                logger.debug('gesRepo calling save with params:' + aggregate + ', ' + metadata.commitIdHeader+ ', ' + _metadata);
                 logger.trace('retrieving uncommited events');
                 newEvents = aggregate.getUncommittedEvents();
 
