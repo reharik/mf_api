@@ -9,7 +9,8 @@ module.exports = function(invariant,
                           gesclient,
                           gesConnection,
                           logger,
-                          bufferToJson) {
+                          bufferToJson,
+                          JSON) {
     return class gesDispatcher {
         constructor(_options) {
             logger.trace('constructing gesDispatcher base version');
@@ -18,10 +19,10 @@ module.exports = function(invariant,
             this.options = {
                 stream: '$all',
                 // e.g. event, command, notification
-                targetType: 'event'
+                targetStreamType: 'event'
             };
             _.assign(this.options, _options);
-            logger.debug('gesDispatcher base options after merge ' + this.options);
+            logger.debug('gesDispatcher base options after merge ' + JSON.stringify(this.options, null, 4));
             invariant(
                 this.options.handlers,
                 "Dispatcher requires at least one handler"
@@ -55,22 +56,25 @@ module.exports = function(invariant,
             //logger.trace('event passed filter for system events ($)');
             logger.trace('filtering event for empty metadata');
             if (_.isEmpty(payload.OriginalEvent.Metadata)) {
+                logger.trace('metadata is empty');
                 return false;
             }
             logger.trace('event has metadata');
             logger.trace('filtering event for empty data');
             if (_.isEmpty(payload.OriginalEvent.Data)) {
+                logger.trace('data is empty');
                 return false;
             }
             logger.trace('event has data');
             logger.trace('filtering event for streamType');
 
             var metadata = bufferToJson(payload.OriginalEvent.Metadata);
-            if (!metadata || !metadata.streamType || metadata.streamType != this.options.targetType) {
+            if (!metadata || !metadata.streamType || metadata.streamType != this.options.targetStreamType) {
+                logger.trace('event is not of proper stream type. Expected' + this.options.targetStreamType + ' but was '+ metadata.streamType );
                 return false;
             }
 
-            logger.trace('event is of proper targetType');
+            logger.trace('event is of proper targetStreamType');
             return true;
         }
 
@@ -81,7 +85,7 @@ module.exports = function(invariant,
                 payload.OriginalEvent.Metadata,
                 payload.OriginalPosition
             );
-            logger.info('event transfered into gesEvent: ' + JSON.stringify(vent));
+            logger.info('event transfered into gesEvent: ' + JSON.stringify(vent,null,4));
             return vent;
         }
 
@@ -92,7 +96,10 @@ module.exports = function(invariant,
                 .filter(h=> {
                     logger.info('checking event handler :' + h.eventHandlerName + ' for eventTypeName: ' + vent.eventName);
                     logger.trace(h.eventHandlerName + ' handles these events: '+ h.handlesEvents);
-                    return h.handlesEvents.find(he=>he == vent.eventTypeName)
+                    var includes = h.handlesEvents.forEach(he=>{logger.info("handler event name: "+he);logger.info(he == vent.eventTypeName); return he == vent.eventTypeName});
+                    logger.info('includes');
+                    logger.info(includes);
+                    return includes
                 })
                 .forEach(m=> {
                     logger.debug('event handler does handle event type: ' + vent.eventName);
