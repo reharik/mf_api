@@ -22,7 +22,7 @@
     "co-body": "^1.0.0",
     "co-views": "0.3.x",
     "config": "^1.14.0",
-    "dagon": "0.0.8",
+    "dagon": "0.0.9",
     "ges-client": "^0.9.1",
     "hosts-parser": "^0.3.1",
     "invariant": "^2.1.0",
@@ -49,10 +49,8 @@
   "devDependencies": {
     "babel": "^5.5.6",
     "babel-runtime": "^5.5.6",
-    "babelify": "^5.0.4",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
-    "gulp-babel": "^5.1.0",
     "mocha": "2.1.x",
     "must": "0.13.0-beta2"
   }
