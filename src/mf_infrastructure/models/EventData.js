@@ -2,7 +2,7 @@
  * Created by rharik on 6/12/15.
  */
 
-module.exports = function(uuid) {
+module.exports = function(uuid, JSON) {
     return function EventData(eventName, data, metadata) {
         metadata = metadata || {};
         data = JSON.stringify(data || {});

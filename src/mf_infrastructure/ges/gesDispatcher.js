@@ -47,8 +47,8 @@ module.exports = function(invariant,
         }
 
         filterEvents(payload) {
-            //logger.info('event received by dispatcher');
-            //logger.trace('filtering event for system events ($)');
+            logger.info('event received by dispatcher');
+            logger.trace('filtering event for system events ($)');
             if (!payload.Event || !payload.Event.EventType || payload.Event.EventType.startsWith('$')) {
                 return false;
             }

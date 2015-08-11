@@ -37,7 +37,7 @@ gulp.task("copy-deploy",["clean"], function () {
 
 gulp.task("copy-to-buildDir",["copy-source","copy-root","copy-config","copy-deploy"], function () {
     return gulp.src(config.get("deploy.output.deploy")+"/**",{dot:true})
-        .pipe(gulp.dest(config.get("deploy.buildDirectory")));
+        .pipe(gulp.dest(config.get("deploy.buildDirectory")));ahad
 });
 
 ////////////////////////////////////////////////////
