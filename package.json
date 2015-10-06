@@ -1,8 +1,8 @@
 {
-  "name": "MethodFitness_Api",
+  "name": "api",
   "version": "0.0.0",
   "private": true,
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "babel-node --harmony server.js --stage 0",
     "localstart": "babel-node --harmony server.js --stage 0",
@@ -22,8 +22,11 @@
     "co-body": "^1.0.0",
     "co-views": "0.3.x",
     "config": "^1.14.0",
-    "dagon": "0.0.9",
-    "ges-client": "^0.9.1",
+    "corelogger": "git+https://github.com/reharik/core_logger.git#master",
+    "dagon": "git+https://github.com/reharik/dagon.git",
+    "eventstore": "git+https://github.com/reharik/core_eventstore.git",
+    "readstorerepository": "git+https://github.com/reharik/core_readStoreRepository.git",
+    "extend": "^3.0.0",
     "hosts-parser": "^0.3.1",
     "invariant": "^2.1.0",
     "koa": "^0.21.0",
@@ -40,11 +43,9 @@
     "moment": "^2.10.6",
     "passport-local": "1.0.x",
     "path": "^0.11.14",
-    "pg-bluebird": "^1.0.8",
     "rx": "^2.5.3",
     "swig": "1.4.x",
-    "uuid": "^2.0.1",
-    "yowl": "^1.0.29"
+    "uuid": "^2.0.1"
   },
   "devDependencies": {
     "babel": "^5.5.6",

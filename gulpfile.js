@@ -21,7 +21,7 @@ gulp.task("copy-source",["clean"], function () {
         .pipe(gulp.dest(config.get("deploy.output.app")+"/src"));
 });
 gulp.task("copy-root",["clean"], function () {
-    return gulp.src(["package.json", "server.js", "bootstrap.js", ".npmrc"],{dot:true})
+    return gulp.src(["package.json", "index.js", "registry.js", ".npmrc"],{dot:true})
         .pipe(gulp.dest(config.get("deploy.output.app")));
 });
 

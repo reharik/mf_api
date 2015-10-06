@@ -1,0 +1,12 @@
+api:
+  build: .
+  volumes:
+    - .:/home/app/current
+  command:  npm run intTest #top -b
+  external_links:
+    - mfdata_postgres_1:postgres
+    - mfdata_eventstore_1:eventstore
+  environment:
+    DEBUG: true
+    NODE_ENV: development
+    APPLICATION_NAME: Api
