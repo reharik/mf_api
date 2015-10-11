@@ -1,6 +1,7 @@
 /**
  * Created by reharik on 10/5/15.
  */
+console.log('here2');
 
 module.exports = function(containerIPs,
                           koa,
@@ -20,6 +21,7 @@ module.exports = function(containerIPs,
         routes(app, koapassport);
 
         if (!module.parent) {
+
             app.listen(config.app.port);
             logger.info('Server started, listening on port: ' + config.app.port);
         }

@@ -12,11 +12,11 @@ module.exports = function(_options) {
         //    application:'api'
         //}
     };
+    console.log('here');
     extend(options, config.get('configs') || {}, _options || {});
     var container = require('./registry')(options);
     var api = container.getInstanceOf('server');
-
     api();
-};
+}();
 
 
