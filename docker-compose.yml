@@ -1,8 +1,8 @@
 api:
   build: .
   volumes:
-    - .:/home/app/current
-  command:  npm run intTest #top -b
+    - ./app:/home/opt/app/current
+  command:  npm start #top -b
   external_links:
     - mfdata_postgres_1:postgres
     - mfdata_eventstore_1:eventstore

@@ -8,9 +8,9 @@ var config = require('config');
 
 module.exports = function(_options) {
     var options = {
-        //dagon:{
-        //    application:'api'
-        //}
+        dagon:{
+            application:'api'
+        }
     };
     console.log('here');
     extend(options, config.get('configs') || {}, _options || {});
