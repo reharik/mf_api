@@ -1,12 +1,26 @@
 api:
   build: .
   volumes:
-    - ./app:/home/opt/app/current
+    - ./app:/home/current/app
   command:  npm start #top -b
   external_links:
-    - mfdata_postgres_1:postgres
-    - mfdata_eventstore_1:eventstore
+      - cdn:frontend
+  links:
+    - eventstore
+    - postgres
   environment:
     DEBUG: true
     NODE_ENV: development
     APPLICATION_NAME: Api
+postgres:
+  image: postgres
+  environment:
+    - LANG=en_US.UTF-8
+    - POSTGRES_PASSWORD=password
+  ports:
+    - 5432:5432
+eventstore:
+  image: adbrowne/eventstore
+  ports:
+    - 2113:2113
+    - 1113:1113

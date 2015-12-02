@@ -9,6 +9,7 @@ module.exports = function(hostsparser, config, logger, fs) {
             return i.hostname === 'frontend'
         });
 
+        console.log(config);
         if (frontend.length > 0) {
             config.frontend.ip = frontend[0].ip;
             logger.info("frontend IP: " + frontend[0].ip);
@@ -26,7 +27,7 @@ module.exports = function(hostsparser, config, logger, fs) {
             return i.hostname === 'postgres'
         });
 
-        if (eventstore.length > 0) {
+        if (postgres.length > 0) {
             logger.info("postgres IP: " + postgres[0].ip);
         }
     };

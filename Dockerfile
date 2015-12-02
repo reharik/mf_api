@@ -9,8 +9,8 @@ RUN mkdir -p $PLUGIN_HOME
 ADD ./package.json ./package.json
 ADD ./config ./config
 
-RUN npm install
+RUN npm install --silent
 
-WORKDIR $PLUGIN_HOME
+WORKDIR $PLUGIN_HOME/app
 
 ADD ./app $PLUGIN_HOME/app
