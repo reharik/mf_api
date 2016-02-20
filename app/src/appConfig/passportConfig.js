@@ -6,7 +6,7 @@
 module.exports = function(authentication,
                           co,
                           passportlocal,
-                          readModelRepository,
+                          readstorerepository,
                           config) {
 
     var localStrategy = passportlocal.Strategy;
@@ -15,7 +15,7 @@ module.exports = function(authentication,
     };
 
     var deserialize = function (_id, done) {
-        readModelRepository.query("user", {id: _id}).then(x=> {
+        readstorerepository.query("user", {id: _id}).then(x=> {
             done(null, x);
         }).catch(x=> {
             done(x, null);

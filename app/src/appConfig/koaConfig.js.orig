@@ -33,7 +33,11 @@ module.exports = function(koagenericsession,
         //app.use(passport.session());
 
         app.use(function * (next){
+<<<<<<< HEAD
+            this.render = coviews(config.app.root + "app/src/views", {
+=======
             this.render = coviews(config.app.root + "/app/src/views", {
+>>>>>>> ac4cfa407782aef2f5a191fe0cc4d6a3726366b0
                 map: {html: "swig"},
                 cache: config.app.env === "development" ? "memory" : false
             });

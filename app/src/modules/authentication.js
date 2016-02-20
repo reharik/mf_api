@@ -2,7 +2,7 @@
 
 "use strict";
 
-module.exports = function(co, readModelRepository, bcrypt_thunk, koapassport) {
+module.exports = function(co, bcrypt_thunk, koapassport) {
     var createPassword = function (_password) {
         return co(function*() {
             try {

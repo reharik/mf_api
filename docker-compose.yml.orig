@@ -2,7 +2,11 @@ api:
   build: .
   volumes:
     - ./app:/home/current/app
+<<<<<<< HEAD
+  command: npm start #top -b
+=======
   command:  npm start #top -b
+>>>>>>> ac4cfa407782aef2f5a191fe0cc4d6a3726366b0
   external_links:
       - cdn:frontend
   links:

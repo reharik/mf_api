@@ -20,7 +20,11 @@ module.exports = function(containerIPs,
         passportConfig(koapassport);
         koaConfig(app, koapassport);
         routes(app, koapassport);
+<<<<<<< HEAD
 
+=======
+        containerIPs();
+>>>>>>> ac4cfa407782aef2f5a191fe0cc4d6a3726366b0
         //if (!module.parent) {
 
             app.listen(config.app.port);
