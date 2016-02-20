@@ -1,7 +1,7 @@
 /**
  * Created by reharik on 7/25/15.
  */
-
+"use strict";
 
 module.exports = function(authentication,
                           co,

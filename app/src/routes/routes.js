@@ -2,6 +2,7 @@
  * Created by reharik on 7/26/15.
  */
 
+"use strict";
 
 module.exports = function(koarouter, index_controller, auth_controller) {
 

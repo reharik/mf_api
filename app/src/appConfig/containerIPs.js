@@ -1,6 +1,7 @@
 /**
  * Created by reharik on 7/26/15.
  */
+"use strict";
 
 module.exports = function(hostsparser, config, logger, fs) {
     return function () {

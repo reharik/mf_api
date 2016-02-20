@@ -1,8 +1,8 @@
 api:
   build: .
   volumes:
-    - ./app:/home/opt/app/current
-  command:  npm start #top -b
+    - ./app:/home/current/app
+  command: npm start #top -b
   external_links:
     - mfdata_postgres_1:postgres
     - mfdata_eventstore_1:eventstore

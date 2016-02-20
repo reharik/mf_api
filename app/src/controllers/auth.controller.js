@@ -1,17 +1,18 @@
 /**
  * Created by reharik on 7/26/15.
  */
+"use strict";
 
-module.exports = function(loginTrainerCommand, commandPoster, authentication){
+module.exports = function(messagebinders, authentication){
 
     var  signIn = function *() {
         console.log("arrived at login");
-        yield auth = authentication.authenticate();
+        var auth = yield authentication.authenticate();
         if (auth.status === 401) {
             this.status = 401;
         } else {
-            var cmd = loginTrainerCommand(auth.trainer.id, auth.trainer.credentials.userName);
-            yield commandPoster(cmd, 'loginTrainer');
+            var cmd = messagebinders.commands.loginTrainerCommand(auth.trainer.id, auth.trainer.credentials.userName);
+            yield messagebinders.commandPoster(cmd, 'loginTrainer');
             this.body = { trainer: auth.trainer };
         }
     };

@@ -1,5 +1,6 @@
 
 
+"use strict";
 
 module.exports = function(co, readModelRepository, bcrypt_thunk, koapassport) {
     var createPassword = function (_password) {
