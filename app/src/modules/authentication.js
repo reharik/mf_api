@@ -2,7 +2,7 @@
 
 "use strict";
 
-module.exports = function(co, bcrypt_thunk, koapassport) {
+module.exports = function(co, bcrypt_thunk, koapassport, readstorerepository) {
     var createPassword = function (_password) {
         return co(function*() {
             try {
@@ -21,7 +21,7 @@ module.exports = function(co, bcrypt_thunk, koapassport) {
     };
 
     var matchUser = function *(username, password, done) {
-        var user = yield readModelRepository.query('user', {'username': username.toLowerCase()});
+        var user = yield readstorerepository.query('user', {'username': username.toLowerCase()});
         if (!user) {
             throw new Error('User not found');
         }

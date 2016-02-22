@@ -1,8 +1,10 @@
-workflows:
+api:
   image: api
   volumes:
     - ./../app:/home/current/app
   command: npm start #top -b #
+ # external_links:
+  #  - cdn:frontend
   links:
     - postgres
     - eventstore

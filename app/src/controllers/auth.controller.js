@@ -11,7 +11,7 @@ module.exports = function(messagebinders, authentication){
         if (auth.status === 401) {
             this.status = 401;
         } else {
-            var cmd = messagebinders.commands.loginTrainerCommand(auth.trainer.id, auth.trainer.credentials.userName);
+            var cmd = messagebinders.commands.loginTrainerCommand(auth.id, auth.userName);
             yield messagebinders.commandPoster(cmd, 'loginTrainer');
             this.body = { trainer: auth.trainer };
         }

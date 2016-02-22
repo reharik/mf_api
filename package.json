@@ -4,7 +4,7 @@
   "private": true,
   "main": "app/index.js",
   "scripts": {
-    "start": "app/index.js",
+    "start": "node app/index.js",
     "localstart": "babel-node --harmony server.js --stage 0",
     "watch": "nodemon --harmony --debug -V -w src/app/controllers -w src/app/models -w src/app/routes -w config -w config/env -w lib ",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js",
