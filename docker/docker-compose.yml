@@ -1,25 +1,24 @@
-api:
-  image: api
-  volumes:
-    - ./../app:/home/current/app
-  command: npm start #top -b #
- # external_links:
-  #  - cdn:frontend
-  links:
-    - postgres
-    - eventstore
-  environment:
-    DEBUG: true
-    NODE_ENV: development
-    APPLICATION_NAME: api
-postgres:
-  image: postgres
-  environment:
-    - LANG=en_US.UTF-8
-    - POSTGRES_PASSWORD=password
-    - POSTGRES_USER=methodfitness
-  ports:
-    - 5432:5432
-eventstore:
-  image: adbrowne/eventstore
-  command: ./run-node.sh --ext-http-prefixes=http://*:2113/ --ext-ip=0.0.0.0 --db /data/db --log /data/logs --stats-period-sec=300 --run-projections=all
+version: "2"
+services:
+  api:
+    image: api
+    volumes:
+      - ./../app:/home/current/app
+    command: npm start #top -b #
+    environment:
+      DEBUG: "true"
+      NODE_ENV: development
+      APPLICATION_NAME: api
+  postgres:
+    image: postgres
+    environment:
+      - LANG=en_US.UTF-8
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=methodfitness
+    ports:
+      - 5432:5432
+  eventstore:
+    image: eventstore/eventstore
+    ports:
+      - 2113:2113
+      - 1113:1113
