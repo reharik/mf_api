@@ -3,11 +3,11 @@
  */
 "use strict";
 
-module.exports = function(bcrypt) {
+module.exports = function(bcryptjs) {
 
     var genSalt = function (rounds, ignore) {
         return new Promise(function (resolve, reject) {
-            bcrypt.genSalt(rounds, ignore, function (err, salt) {
+            bcryptjs.genSalt(rounds, ignore, function (err, salt) {
                 if (err) return reject(err);
                 return resolve(salt);
             });
@@ -16,7 +16,7 @@ module.exports = function(bcrypt) {
 
     var hash = function (data, salt) {
         return new Promise(function (resolve, reject) {
-            bcrypt.hash(data, salt, function (err, hash) {
+            bcryptjs.hash(data, salt, function (err, hash) {
                 if (err) return reject(err);
                 return resolve(hash);
             });
@@ -25,7 +25,7 @@ module.exports = function(bcrypt) {
 
     var compare = function (data, hash) {
         return new Promise(function (resolve, reject) {
-            bcrypt.compare(data, hash, function (err, matched) {
+            bcryptjs.compare(data, hash, function (err, matched) {
                 if (err) return reject(err);
                 return resolve(matched);
             });
@@ -37,9 +37,9 @@ module.exports = function(bcrypt) {
         hash:hash,
         compare:compare,
         // These do not need to be promisified
-        genSaltSync: bcrypt.genSaltSync,
-        hashSync: bcrypt.hashSync,
-        compareSync: bcrypt.compareSync,
-        getRounds: bcrypt.getRounds
+        genSaltSync: bcryptjs.genSaltSync,
+        hashSync: bcryptjs.hashSync,
+        compareSync: bcryptjs.compareSync,
+        getRounds: bcryptjs.getRounds
     }
 }

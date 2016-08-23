@@ -15,6 +15,9 @@ module.exports = function(_options) {
     };
     extend(options, config.get('configs') || {}, _options || {});
     var container = require('./registry')(options);
+    console.log('==========container=========');
+    console.log(container);
+    console.log('==========END container=========');
     var api = container.getInstanceOf('server');
     api();
 }();

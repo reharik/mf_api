@@ -14,17 +14,15 @@ module.exports = function(_options) {
         result = container(x=>
                 x.pathToRoot(path.join(__dirname, '/../'))
                     .requireDirectoryRecursively('./app/src')
-                    .requiredModuleRegistires(['eventstore', 'messagebinders', 'readstorerepository'])
+                    .requiredModuleRegistires(['ges-eventsourcing'])
                     .for('corelogger').renameTo('logger')
                     .for('ramda').renameTo('R')
                     .for('ramdafantasy').renameTo('_fantasy')
                     .for('bluebird').renameTo('Promise')
-                    .for('eventstore').replaceWith('eventstorePlugin')
-                    .for('readstorerepository').replaceWith('rsRepositoryPlugin')
-                    .for('messagebinder').replaceWith('messageBinderPlugin')
+                    .for('applicationFunctions').renameTo('appfuncs')
                     .complete(),
                 x=>x.instantiate('eventstore').asFunc().withParameters(options.children || {})
-                .instantiate('readstorerepository').asFunc().withParameters(options.children || {})
+                .instantiate('rsRepository').asFunc().withParameters(options.children || {})
                 .instantiate('gesConnection').asFunc().withParameters(options.children || {})
                 .instantiate('logger').asFunc().withParameters(options.logger || {})
                 .complete());
