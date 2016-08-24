@@ -4,7 +4,7 @@
 
 "use strict";
 
-module.exports = function(koarouter, index_controller, auth_controller) {
+module.exports = function(koarouter, index_controller, trainerListController, auth_controller) {
 
     var secured = function *(next) {
         if (this.isAuthenticated()) {
@@ -28,8 +28,10 @@ module.exports = function(koarouter, index_controller, auth_controller) {
 
         router.get("/auth", auth_controller.checkAuth);
         router.post("/auth", auth_controller.signIn);
-
         router.all("/signout", auth_controller.signOut);
+
+        router.get("/trainers", trainerListController.trainers);
+        // router.post("/trainer/create", trainerController.create);
 
         app.use(router.routes());
         app.use(router.allowedMethods());

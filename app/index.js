@@ -13,11 +13,8 @@ module.exports = function(_options) {
             application:'api'
         }
     };
-    extend(options, config.get('configs') || {}, _options || {});
+    extend(true, options, config.get('configs') || {}, _options || {});
     var container = require('./registry')(options);
-    console.log('==========container=========');
-    console.log(container);
-    console.log('==========END container=========');
     var api = container.getInstanceOf('server');
     api();
 }();

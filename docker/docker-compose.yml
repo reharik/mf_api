@@ -9,6 +9,9 @@ services:
       DEBUG: "true"
       NODE_ENV: development
       APPLICATION_NAME: api
+    ports:
+      - 3000:3000
+
   postgres:
     image: postgres
     environment:
