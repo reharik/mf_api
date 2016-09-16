@@ -3,21 +3,67 @@
  */
 "use strict";
 
-module.exports = function(messagebinders, authentication){
+module.exports = function(messagebinders, authentication, koapassport){
 
-    var  signIn = function *() {
+    var  signIn = async function (ctx, next) {
         console.log("arrived at login");
-        var auth = yield authentication.authenticate();
-        if (auth.status === 401) {
-            this.status = 401;
-        } else {
-            var cmd = messagebinders.commands.loginTrainerCommand(auth.id, auth.userName);
-            yield messagebinders.commandPoster(cmd, 'loginTrainer');
-            this.body = { trainer: auth.trainer };
-        }
+
+
+        const x= koapassport.authenticate('local', function(user, info, status) {
+           console.log('=========="authCallback=========');
+           console.log("authCallback");
+           console.log('==========END "authCallback=========');
+            if (!user) {
+                ctx.status = 401;
+                ctx.body = { success: false }
+            } else {
+                ctx.body = {success: true};
+                var cmd = messagebinders.commands.loginTrainerCommand(user.id, user.userName);
+                messagebinders.commandPoster(cmd, 'loginTrainer');
+                return ctx.login(user);
+            }
+        });
+
+console.log('==========x=========');
+console.log(x.toString());
+console.log('==========END x=========');
+const y = x((ctx, next));
+console.log('==========y=========');
+console.log(y);
+console.log('==========END y=========');
+        y.then(z=> {
+              console.log('==========z=========');
+              console.log(z);
+              console.log('==========END z=========');
+              return z;
+          }
+        );
+        // return koapassport.authenticate("local", function(err, user, info, status) {
+        //     console.log('==========user --- in authenticate=========');
+        //     console.log(user);
+        //     console.log('==========END user=========');
+        //     if (!user) {
+        //         ctx.status = 401
+        //         return ctx.body = {success: false}
+        //     }
+        //     ctx.body = {success: true}
+        //     var cmd = messagebinders.commands.loginTrainerCommand(user.id, user.userName);
+        //     console.log('=========="here2"=========');
+        //     console.log("here2");
+        //     console.log('==========END "here2"=========');
+        //     messagebinders.commandPoster(cmd, 'loginTrainer');
+        //     console.log('=========="here"=========');
+        //     console.log("here");
+        //     console.log('==========END "here"=========');
+        //     return ctx.login(user)
+        // })(ctx, next)
+
+
+       // var x = await authentication.authenticate(ctx, next);
+
     };
 
-    var  checkAuth = function *() {
+    var  checkAuth = async function () {
         if (this.passport.user) {
             this.body = {user: this.passport.user};
             this.status = 200;
@@ -26,7 +72,7 @@ module.exports = function(messagebinders, authentication){
         }
     };
 
-    var  signOut = function *() {
+    var  signOut = async function () {
         this.logout();
         this.session = null;
         this.status = 204;

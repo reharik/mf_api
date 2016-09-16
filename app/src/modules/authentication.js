@@ -1,55 +1,43 @@
-
-
 "use strict";
 
-module.exports = function(co, bcrypt_thunk, koapassport, rsRepository) {
+module.exports = function(bcryptjs, koapassport, rsRepository, messagebinders) {
     var createPassword = function (_password) {
-        return co(function*() {
-            try {
-                var salt = yield bcryp_thunk.genSalt();
-                var hash = yield bcryp_thunk.hash(_password, salt);
-                return hash;
-            }
-            catch (err) {
-                throw err;
-            }
-        });
-    };
-
-    var comparePassword = function *(candidatePassword, realPassword) {
-        return yield bcryp_thunk.compare(candidatePassword, realPassword);
-    };
-
-    var matchUser = function *(username, password, done) {
-        var user = yield rsRepository.query('user', {'username': username.toLowerCase()});
-        if (!user) {
-            throw new Error('User not found');
+        try {
+            var salt = bcryptjs.genSaltSync(10);
+            var hash = bcryptjs.hashSync(_password, salt);
+            return hash;
         }
+        catch (err) {
+            throw err;
+        }
+    };
 
-        if (yield comparePassword(password, user.password)) {
+    var comparePassword = function (candidatePassword, realPassword) {
+        return bcryptjs.compareSync(candidatePassword, realPassword);
+    };
+
+    var matchUser = async function (username, password, done) {
+        var users = await rsRepository.query('select * from "user" where "document" ->> \'userName\' = \'' + username.toLowerCase() + '\'');
+        //for now, but lets put a findOne func on repo
+        var user = users[0]
+        if (!user) {
+            return null;
+        }
+        if (comparePassword(password, user.password)) {
             return user;
         }
 
-        throw new Error('Password does not match');
+        return null;
     };
 
-    var authenticate = function () {
-        koapassport.authenticate("local", function*(err, trainer, info) {
-            if (err) {
-                throw err;
-            }
-            if (trainer === false) {
-                return {status: 401};
-            } else {
-                return {trainer: trainer};
-            }
-        })
-    };
+    // var authenticate = function (ctx, next) {
+    //     return 
+    // };
 
     return {
         createPassword: createPassword,
         comparePassword: comparePassword,
-        matchUser: matchUser,
-        authenticate: authenticate
+        matchUser: matchUser//,
+        // authenticate: authenticate
     };
 };

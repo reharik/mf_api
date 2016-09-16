@@ -15,7 +15,7 @@ module.exports = function(containerIPs,
         logger.info("approot " + __dirname);
         logger.info("appTitle " + config.app.title);
 
-        var app = koa();
+        var app = new koa();
         containerIPs();
         passportConfig(koapassport);
         koaConfig(app, koapassport);

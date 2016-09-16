@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "JSON": "^1.0.0",
+    "babel-polyfill": "^6.13.0",
     "bcryptjs": "^2.3.0",
     "bluebird": "^3.4.1",
     "co": "^4.4.0",
@@ -28,16 +29,17 @@
     "ges-eventsourcing": "reharik/ges-eventsourcing.git",
     "hosts-parser": "0.3.1",
     "invariant": "^2.1.0",
-    "koa": "^1.0.0",
-    "koa-bodyparser": "2.0.x",
-    "koa-compress": "1.0.x",
-    "koa-error": "1.1.x",
+    "koa": "^2.0.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-compress": "^2.0.0",
+    "koa-convert": "^1.2.0",
+    "koa-errorhandler": "^0.1.1",
     "koa-generic-session": "^1.9.2",
-    "koa-logger": "^1.3.0",
-    "koa-passport": "^1.2.0",
-    "koa-response-time": "1.0.x",
-    "koa-router": "^5.2.3",
-    "koa-static": "1.4.x",
+    "koa-logger": "^2.0.0",
+    "koa-passport": "next",
+    "koa-response-time": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "koa-static": "2.0.0",
     "lodash": "^3.10.0",
     "messagebinders": "git://github.com/reharik/mf_messagebinders.git",
     "moment": "^2.10.6",
@@ -49,11 +51,20 @@
     "uuid": "^2.0.1"
   },
   "devDependencies": {
-    "babel": "^5.5.6",
-    "babel-runtime": "^5.5.6",
+    "babel": "6.5.2",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-3": "^6.11.0",
+    "babel-register": "^6.14.0",
+    "babel-runtime": "6.11.6",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "mocha": "2.1.x",
     "must": "0.13.0-beta2"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-3"
+    ]
   }
 }

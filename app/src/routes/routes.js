@@ -6,9 +6,9 @@
 
 module.exports = function(koarouter, index_controller, trainerListController, auth_controller) {
 
-    var secured = function *(next) {
+    var secured = async function (next) {
         if (this.isAuthenticated()) {
-            yield next;
+            await next;
         } else {
             this.status = 401;
         }
@@ -22,9 +22,7 @@ module.exports = function(koarouter, index_controller, trainerListController, au
 //    var indexController = require("../controllers/index.controller");
 //    var authController = require("../controllers/auth.controller");
         var router = koarouter();
-        router.get("/", function *() {
-            yield index_controller.index.apply(this);
-        });
+        router.get("/", index_controller.index);
 
         router.get("/auth", auth_controller.checkAuth);
         router.post("/auth", auth_controller.signIn);

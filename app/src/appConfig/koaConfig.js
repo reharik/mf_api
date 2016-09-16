@@ -2,15 +2,15 @@
  * Created by reharik on 7/26/15.
  */
 "use strict";
-
 module.exports = function(koagenericsession,
                           koaresponsetime,
                           koalogger,
                           coviews,
                           koacompress,
-                          koaerror,
+                          koaErrorHandler,
                           koabodyparser,
-                          config){
+                          config,
+                          koaconvert){
 
     return function (app, passport) {
         if (!config.app.keys) {
@@ -22,23 +22,23 @@ module.exports = function(koagenericsession,
             app.use(koalogger());
         }
 
-        app.use(koaerror());
+        app.use(koaErrorHandler());
 
-        app.use(koagenericsession({
-            key: "methodfitness.sid"
-        }));
-
+        app.use(koaconvert(koagenericsession()));
         app.use(koabodyparser());
-        //app.use(passport.initialize());
-        //app.use(passport.session());
 
-        app.use(function * (next){
-            this.render = coviews(config.app.root + "/app/src/views", {
-                map: {html: "swig"},
-                cache: config.app.env === "development" ? "memory" : false
-            });
-            yield next;
-        });
+        app.use(passport.initialize());
+        app.use(passport.session());
+        console.log('==========passport=========');
+        console.log(passport);
+        console.log('==========END passport=========');
+        // app.use(async function (next){
+        //     this.render = coviews(config.app.root + "/app/src/views", {
+        //         map: {html: "swig"},
+        //         cache: config.app.env === "development" ? "memory" : false
+        //     });
+        //     await next;
+        // });
 
         app.use(koacompress());
         app.use(koaresponsetime());

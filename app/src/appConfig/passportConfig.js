@@ -4,13 +4,15 @@
 "use strict";
 
 module.exports = function(authentication,
-                          co,
                           passportlocal,
                           rsRepository,
                           config) {
 
     var localStrategy = passportlocal.Strategy;
     var serialize = function (user, done) {
+        console.log('==========serialize function=========');
+        console.log(user);
+        console.log('==========END serialize function=========');
         done(null, user.id);
     };
 
@@ -22,18 +24,27 @@ module.exports = function(authentication,
         });
     };
 
-    var authLocalUser = function (username, password, done) {
-        co(function *() {
-            try {
-                return yield authentication.matchUser(username, password);
-            } catch (ex) {
-                return null;
-            }
-        })(done);
+    var authLocalUser = async function(username, password, done) {
+        try {
+            var user = await authentication.matchUser(username, password);
+        } catch (ex) {
+            console.log('==========ex=========');
+            console.log(ex);
+            console.log('==========END ex=========');
+            return done(ex);
+        }
+
+        if (!user) {
+            return done(null, false);
+        }
+        console.log('==========user=========');
+        console.log(user);
+        console.log('==========END user=========');
+        return done(null, user);
     };
 
     return function (passport) {
-                passport.serializeUser(serialize);
+        passport.serializeUser(serialize);
         passport.deserializeUser(deserialize);
         passport.use(new localStrategy(authLocalUser));
     };

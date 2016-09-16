@@ -5,8 +5,8 @@
 
 module.exports = function(config) {
     return {
-        index: function *() {
-            this.body = yield this.render("basic", {
+        index: async function () {
+            this.body = await this.render("basic", {
                 version: "1",
                 commit: "1",
                 //frontend: config.frontend.ip,
