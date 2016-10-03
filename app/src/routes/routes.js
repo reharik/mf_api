@@ -14,7 +14,7 @@ module.exports = function(koarouter, index_controller, trainerListController, au
         }
     };
 
-    return function(app, passport){
+    return function(app){
 //var clientController = require("../controllers/client.server.controller");
 //var clientListController = require("../controllers/clientList.server.controller");
 //var trainerController = require("../controllers/trainer.server.controller");

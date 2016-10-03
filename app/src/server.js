@@ -6,8 +6,7 @@
 module.exports = function(containerIPs,
                           koa,
                           config,
-                          koapassport,
-                          passportConfig,
+                          papersConfig,
                           koaConfig,
                           routes,
                           logger){
@@ -17,9 +16,8 @@ module.exports = function(containerIPs,
 
         var app = new koa();
         containerIPs();
-        passportConfig(koapassport);
-        koaConfig(app, koapassport);
-        routes(app, koapassport);
+        koaConfig(app, papersConfig);
+        routes(app);
 
         //if (!module.parent) {
 
