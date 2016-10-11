@@ -14,7 +14,7 @@ module.exports = function(_options) {
         result = container(x=>
                 x.pathToRoot(path.join(__dirname, '/../'))
                     .requireDirectoryRecursively('./app/src')
-                    .requiredModuleRegistires(['ges-eventsourcing'])
+                    .requiredModuleRegistires(['ges-eventsourcing', 'messagebinders'])
                     .for('corelogger').renameTo('logger')
                     .for('ramda').renameTo('R')
                     .for('ramdafantasy').renameTo('_fantasy')
@@ -23,7 +23,8 @@ module.exports = function(_options) {
                     .complete(),
                 x=>x.instantiate('eventstore').asFunc().withParameters(options.children || {})
                 .instantiate('rsRepository').asFunc().withParameters(options.children || {})
-                .instantiate('gesConnection').asFunc().withParameters(options.children || {})
+                    .instantiate('gesConnection').asFunc().withParameters(options.children || {})
+                    .instantiate('messagebinders').asFunc().withParameters(options.children || {})
                 .instantiate('logger').asFunc().withParameters(options.logger || {})
                 .complete());
     } catch (ex) {

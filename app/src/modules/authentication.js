@@ -24,7 +24,7 @@ module.exports = function(bcryptjs, koapassport, rsRepository, messagebinders) {
             return null;
         }
         if (comparePassword(password, user.password)) {
-            return user;
+            return {user};
         }
 
         return null;

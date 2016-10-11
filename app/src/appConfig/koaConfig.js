@@ -2,8 +2,9 @@
  * Created by reharik on 7/26/15.
  */
 "use strict";
-module.exports = function(koagenericsession,
+module.exports = function(koasession,
                           koaresponsetime,
+                          koacors,
                           koalogger,
                           coviews,
                           koacompress,
@@ -24,11 +25,11 @@ module.exports = function(koagenericsession,
         }
 
         app.use(koaErrorHandler());
-
-        app.use(koaconvert(koagenericsession()));
+        app.use(koacors({origin:'http://localhost:8080'}));
+        app.use(koaconvert(koasession(app)));
         app.use(koabodyparser());
 
-        app.use(papersMiddleware);
+        app.use(koaconvert(papersMiddleware));
 
         // app.use(async function (next){
         //     this.render = coviews(config.app.root + "/app/src/views", {

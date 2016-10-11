@@ -11,17 +11,3 @@ services:
       APPLICATION_NAME: api
     ports:
       - 3000:3000
-
-  postgres:
-    image: postgres
-    environment:
-      - LANG=en_US.UTF-8
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=methodfitness
-    ports:
-      - 5432:5432
-  eventstore:
-    image: eventstore/eventstore
-    ports:
-      - 2113:2113
-      - 1113:1113
