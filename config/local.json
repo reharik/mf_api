@@ -1,0 +1,22 @@
+{
+  "configs": {
+  "children": {
+    "eventstore": {
+      "host": "192.168.0.2",
+      "systemUsers": {
+        "admin": "admin",
+        "adminPassword": "changeit"
+      }
+    },
+    "postgres": {
+      "connectionString": "postgres://methodfitness:password@192.168.0.3/",
+      "postgres": "postgres",
+      "database": "methodfitness"
+    }
+  },
+  "logger": {
+    "moduleName": "Api"
+  },
+  "env": "local"
+}
+}
