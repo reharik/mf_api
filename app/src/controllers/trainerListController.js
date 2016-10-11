@@ -9,14 +9,13 @@ module.exports = function(rsRepository, functionalHelpers, Promise){
         var toPromise = (future) => { return new Promise((resolve, reject) =>
             future.fork(reject, (x)=>{resolve(x.value)})) };
 
-        var query = await toPromise(rsRepository.query('SELECT * from "trainerSummary";'));
-
-        if (query) {
+        try {
+            var query = await toPromise(rsRepository.query('SELECT * from "trainerSummary";'));
+        }catch(ex){
+            throw ex;
+        }
             this.body = {trainers: query};
             this.status = 200;
-        } else{
-            this.status = 401;
-        }
     };
 
     return {

@@ -5,7 +5,7 @@
 
 module.exports = function(authentication,
                           paperslocal,
-                          papers,
+                          koapapers
                           ) {
 
     var serialize = function (user) {
@@ -16,20 +16,8 @@ module.exports = function(authentication,
         return user;
     };
 
-    var authLocalUser = async function(username, password) {
-        try {
-            var user = await authentication.matchUser(username, password);
-        } catch (ex) {
-            console.log('==========ex=========');
-            console.log(ex);
-            console.log('==========END ex=========');
-            return {error: ex};
-        }
-
-        if (!user) {
-            return {error:'No User Found with those credentials'};
-        }
-        return {user};
+    var authLocalUser = function(username, password) {
+        return authentication.matchUser(username, password);
     };
 
     var local = paperslocal(authLocalUser);
@@ -40,7 +28,7 @@ module.exports = function(authentication,
         deserializers: [deserialize]
     };
 
-    return papers().registerMiddleware(config);
+    return koapapers().registerMiddleware(config);
 };
 
 

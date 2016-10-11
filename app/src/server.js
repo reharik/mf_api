@@ -3,7 +3,7 @@
  */
 "use strict";
 
-module.exports = function(containerIPs,
+module.exports = function(
                           koa,
                           config,
                           papersConfig,
@@ -15,7 +15,6 @@ module.exports = function(containerIPs,
         logger.info("appTitle " + config.app.title);
 
         var app = new koa();
-        containerIPs();
         koaConfig(app, papersConfig);
         routes(app);
 
