@@ -2,16 +2,16 @@
  * Created by reharik on 7/26/15.
  */
 "use strict";
-module.exports = function(koasession,
+module.exports = function(koagenericsession,
                           koaresponsetime,
-                          koacors,
                           koalogger,
                           coviews,
                           koacompress,
                           koaErrorHandler,
                           koabodyparser,
                           config,
-                          koaconvert){
+                          koaconvert,
+                          koacors){
 
     return function (app, papersMiddleware) {
 
@@ -19,25 +19,26 @@ module.exports = function(koasession,
             throw new Error("Please add session secret key in the config file!");
         }
         app.keys = config.app.keys;
-
         if (config.app.env !== "test") {
             app.use(koalogger());
         }
 
+        app.use(koacors());
+        app.use(koaconvert(koagenericsession()));
+
         app.use(koaErrorHandler());
-        app.use(koacors({origin:'http://localhost:8080'}));
-        app.use(koaconvert(koasession(app)));
+
         app.use(koabodyparser());
 
-        app.use(koaconvert(papersMiddleware));
+//        app.use(koaconvert(papersMiddleware));
 
-        // app.use(async function (next){
-        //     this.render = coviews(config.app.root + "/app/src/views", {
-        //         map: {html: "swig"},
-        //         cache: config.app.env === "development" ? "memory" : false
-        //     });
-        //     await next;
-        // });
+        app.use(async function (ctx, next){
+            ctx.render = coviews(config.app.root + "/app/src/views", {
+                map: {html: "swig"}//,
+                // cache: config.app.env === "development" ? "memory" : false
+            });
+            await next();
+        });
 
         app.use(koacompress());
         app.use(koaresponsetime());

@@ -1,6 +1,7 @@
 {
   "frontend":{},
   "env": "dev",
+  "fontendUrl": "http://localhost:8080/app.bundle.js?9b3657d5912777bbf51",
   "app": {
     "title": "Method Fitness",
     "port": 3000,
@@ -13,14 +14,14 @@
   "configs": {
     "children": {
       "eventstore": {
-        "host": "172.18.0.2",
+        "host": "eventstore",
         "systemUsers": {
           "admin": "admin",
           "adminPassword": "changeit"
         }
       },
       "postgres": {
-        "connectionString": "postgres://methodfitness:password@172.18.0.3/",
+        "connectionString": "postgres://methodfitness:password@postgres/",
         "postgres": "postgres",
         "database": "methodfitness"
       }

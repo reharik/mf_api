@@ -5,12 +5,9 @@
 
 module.exports = function(config) {
     return {
-        index: async function () {
-            this.body = await this.render("basic", {
-                version: "1",
-                commit: "1",
-                //frontend: config.frontend.ip,
-                sitename: config.app.title
+        index: async function (ctx) {
+            ctx.body = await ctx.render("index", {
+                webpack: config.configs.frontendUrl
             });
         }
     };

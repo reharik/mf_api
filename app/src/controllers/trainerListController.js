@@ -2,20 +2,20 @@
 
 module.exports = function(rsRepository, functionalHelpers, Promise){
 
-    var  trainers = async function () {
+    var  trainers = async function (ctx) {
         console.log("arrived at trainerlist.trainers");
 
         // put this in functional helpers
-        var toPromise = (future) => { return new Promise((resolve, reject) =>
-            future.fork(reject, (x)=>{resolve(x.value)})) };
+        // var toPromise = (future) => { return new Promise((resolve, reject) =>
+        //     future.fork(reject, (x)=>{resolve(x.value)})) };
 
         try {
-            var query = await toPromise(rsRepository.query('SELECT * from "trainerSummary";'));
-        }catch(ex){
+            var query = await rsRepository.query('SELECT * from "trainerSummary";');
+        } catch (ex) {
             throw ex;
         }
-            this.body = {trainers: query};
-            this.status = 200;
+        ctx.body = {trainers: query};
+        ctx.status = 200;
     };
 
     return {

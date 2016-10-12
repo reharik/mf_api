@@ -7,18 +7,14 @@ module.exports = function(commands, commandPoster){
 
     var  signIn = function (ctx) {
         console.log("arrived at login");
-        console.log('==========ctx=========');
-        console.log(ctx.state.user);
-        console.log('==========END ctx=========');
 
-        if (ctx.status == 401) {
+        if (ctx.status === 401) {
             ctx.body = { "success": false };
         } else {
             let user = ctx.state.user;
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
             commandPoster(cmd, 'loginTrainer');
             ctx.body = {success: true, user };
-
         }
     };
 
