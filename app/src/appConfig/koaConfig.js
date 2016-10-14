@@ -23,7 +23,7 @@ module.exports = function(koagenericsession,
             app.use(koalogger());
         }
 
-        app.use(koacors());
+        app.use(koacors({origin:'http://localhost:8080', credentials:true}));
         app.use(koaconvert(koagenericsession()));
 
         app.use(koaErrorHandler());

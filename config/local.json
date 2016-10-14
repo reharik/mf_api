@@ -3,14 +3,14 @@
     "frontendUrl": "http://localhost:8080/app.bundle.js?9b3657d5912777bbf51",
     "children": {
       "eventstore": {
-        "host": "eventstore",
+        "host": "192.168.0.2",
         "systemUsers": {
           "admin": "admin",
           "adminPassword": "changeit"
         }
       },
       "postgres": {
-        "connectionString": "postgres://methodfitness:password@postgres/",
+        "connectionString": "postgres://methodfitness:password@192.168.0.3/",
         "postgres": "postgres",
         "database": "methodfitness"
       }
