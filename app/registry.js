@@ -20,6 +20,8 @@ module.exports = function(_options) {
                     .for('ramdafantasy').renameTo('_fantasy')
                     .for('bluebird').renameTo('Promise')
                     .for('applicationFunctions').renameTo('appfuncs')
+                  .groupAllInDirectory('./app/src/controllers', 'controllers')
+                  .groupAllInDirectory('./app/src/schemas', 'schemas',true)
                     .complete(),
                 x=>x.instantiate('eventstore').asFunc().withParameters(options.children || {})
                 .instantiate('rsRepository').asFunc().withParameters(options.children || {})

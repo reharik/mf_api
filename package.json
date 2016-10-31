@@ -24,7 +24,8 @@
     "co-views": "^2.1.0",
     "config": "^1.14.0",
     "corelogger": "git://github.com/reharik/core_logger.git",
-    "dagon": "1.0.0",
+    "dagon": "reharik/dagon",
+    "deref": "^0.6.4",
     "extend": "3.0.0",
     "ges-eventsourcing": "reharik/ges-eventsourcing.git",
     "hosts-parser": "0.3.1",
@@ -50,6 +51,7 @@
     "path": "^0.12.7",
     "pg-bluebird": "^1.0.8",
     "rx": "^4.0.0",
+    "swagger-jsdoc": "^1.8.1",
     "swig": "1.4.x",
     "uuid": "^2.0.1"
   },

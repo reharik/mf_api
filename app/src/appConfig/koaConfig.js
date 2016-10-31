@@ -11,7 +11,8 @@ module.exports = function(koagenericsession,
                           koabodyparser,
                           config,
                           koaconvert,
-                          koacors){
+                          koacors,
+                          swaggerSpec){
 
     return function (app, papersMiddleware) {
 
@@ -22,6 +23,7 @@ module.exports = function(koagenericsession,
         if (config.app.env !== "test") {
             app.use(koalogger());
         }
+        swaggerSpec();
 
         app.use(koacors({origin:'http://localhost:8080', credentials:true}));
         app.use(koaconvert(koagenericsession()));

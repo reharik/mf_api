@@ -1,0 +1,105 @@
+{
+  "definitions": {
+    "signIn": {
+      "title": "signIn",
+      "type": "object",
+      "properties": {
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "userName",
+        "password"
+      ]
+    },
+    "contact": {
+      "title": "contact",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "address": {
+          "type": "object",
+          "$ref": "#/definitions/address"
+        },
+        "secondaryPhone": {
+          "type": "string"
+        },
+        "mobilePhone": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "mobilePhone"
+      ]
+    },
+    "trainer": {
+      "title": "trainer",
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "object",
+          "$ref": "#/definitions/contact"
+        },
+        "account": {
+          "description": "The account information for users who can log in",
+          "type": "object",
+          "$ref": "#/definitions/account"
+        },
+        "birthDate": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "defaultClientRate": {
+          "type": "number"
+        }
+      }
+    },
+    "account": {
+      "title": "account",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "address": {
+      "title": "address",
+      "type": "object",
+      "properties": {
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

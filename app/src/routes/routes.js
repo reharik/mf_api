@@ -4,8 +4,7 @@
 
 "use strict";
 
-module.exports = function(koarouter, index_controller, trainerListController, auth_controller, koaconvert, papersConfig) {
-
+module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
     var secured = async function (next) {
         if (this.isAuthenticated()) {
             await next;
@@ -22,13 +21,14 @@ module.exports = function(koarouter, index_controller, trainerListController, au
 //    var indexController = require("../controllers/index.controller");
 //    var authController = require("../controllers/auth.controller");
         var router = koarouter();
-        router.get("/", index_controller.index);
+        router.get("/", controllers.indexController.index);
+        router.all("/swagger", controllers.swaggerController.swagger);
 
-        router.get("/auth", auth_controller.checkAuth);
-        router.post("/auth", koaconvert(papersConfig), auth_controller.signIn);
-        router.all("/signout", auth_controller.signOut);
+        router.get("/auth", controllers.authController.checkAuth);
+        router.post("/auth", koaconvert(papersConfig), controllers.authController.signIn);
+        router.all("/signout", controllers.authController.signOut);
 
-        router.get("/trainers", koaconvert(papersConfig), trainerListController.trainers);
+        router.get("/trainers", koaconvert(papersConfig), controllers.trainerListController.trainers);
         // router.post("/trainer/create", trainerController.create);
 
         app.use(router.routes());
