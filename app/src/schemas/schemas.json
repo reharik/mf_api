@@ -58,10 +58,13 @@
           "$ref": "#/definitions/account"
         },
         "birthDate": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time",
+          "x-input": "date-time"
         },
         "color": {
-          "type": "string"
+          "type": "string",
+          "x-input": "color-picker"
         },
         "defaultClientRate": {
           "type": "number"
@@ -94,10 +97,11 @@
           "type": "string"
         },
         "state": {
-          "type": "string"
+          "type": "string",
+          "x-input": "select"
         },
         "zipCode": {
-          "type": "number"
+          "type": "string"
         }
       }
     }

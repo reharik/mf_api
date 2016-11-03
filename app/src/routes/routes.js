@@ -25,10 +25,10 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.all("/swagger", controllers.swaggerController.swagger);
 
         router.get("/auth", controllers.authController.checkAuth);
-        router.post("/auth", koaconvert(papersConfig), controllers.authController.signIn);
+        router.post("/auth", controllers.authController.signIn);
         router.all("/signout", controllers.authController.signOut);
 
-        router.get("/trainers", koaconvert(papersConfig), controllers.trainerListController.trainers);
+        router.get("/trainers", controllers.trainerListController.trainers);
         // router.post("/trainer/create", trainerController.create);
 
         app.use(router.routes());
