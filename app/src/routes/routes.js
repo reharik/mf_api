@@ -22,7 +22,7 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
 //    var authController = require("../controllers/auth.controller");
         var router = koarouter();
         router.get("/", controllers.indexController.index);
-        router.all("/swagger", controllers.swaggerController.swagger);
+        router.get("/swagger", controllers.swaggerController.swagger);
 
         router.get("/auth", controllers.authController.checkAuth);
         router.post("/auth", controllers.authController.signIn);

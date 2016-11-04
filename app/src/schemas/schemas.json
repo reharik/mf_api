@@ -8,7 +8,8 @@
           "type": "string"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "x-input": "password"
         }
       },
       "required": [
@@ -79,7 +80,8 @@
           "type": "string"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "x-input": "password"
         }
       }
     },

@@ -8,10 +8,8 @@ module.exports = function(commands, commandPoster){
     var  signIn = function (ctx) {
         console.log("arrived at login");
 
-        if (ctx.status > 400) {
-            console.log('==========ctx.status=========');
-            console.log(ctx.status);
-            console.log('==========END ctx.status=========');
+        if (!ctx.state.user) {
+            ctx.status = 401;
             ctx.body = { "success": false };
         } else {
             let user = ctx.state.user;

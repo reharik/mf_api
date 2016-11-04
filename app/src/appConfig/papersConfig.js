@@ -26,8 +26,7 @@ module.exports = function(authentication,
         useSession: true,
         serializers: [serialize],
         deserializers: [deserialize],
-        whiteList: [{url:"/", method:"GET"},
-            {url:"/swagger", method:"GET"}]
+        whiteList: [{url:"/swagger", method:"GET"}]
     };
 
     return koapapers().registerMiddleware(config);
