@@ -1,5 +1,5 @@
 /**
- * Created by rharik on 10/1/15.
+xx * Created by rharik on 10/1/15.
  */
 "use strict";
 
@@ -26,7 +26,7 @@ module.exports = function(_options) {
                 x=>x.instantiate('eventstore').asFunc().withParameters(options.children || {})
                 .instantiate('rsRepository').asFunc().withParameters(options.children || {})
                     .instantiate('gesConnection').asFunc().withParameters(options.children || {})
-                    .instantiate('messagebinders').asFunc().withParameters(options.children || {})
+                    // .instantiate('messagebinders').asFunc().withParameters(options.children || {})
                 .instantiate('logger').asFunc().withParameters(options.logger || {})
                 .complete());
     } catch (ex) {

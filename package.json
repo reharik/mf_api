@@ -47,6 +47,7 @@
     "moment": "^2.10.6",
     "papers-local": "reharik/papers-local.git",
     "path": "^0.12.7",
+    "pg-async": "^2.4.0",
     "pg-bluebird": "^1.0.8",
     "rx": "^4.0.0",
     "swagger-jsdoc": "^1.8.1",

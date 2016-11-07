@@ -141,7 +141,10 @@
                             "type": "string",
                             "x-input": "password"
                         }
-                    }
+                    },
+                    "required": [
+                        "email"
+                    ]
                 },
                 "birthDate": {
                     "type": "string",
@@ -168,7 +171,10 @@
                     "type": "string",
                     "x-input": "password"
                 }
-            }
+            },
+            "required": [
+                "email"
+            ]
         },
         "address": {
             "title": "address",

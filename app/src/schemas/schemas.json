@@ -83,7 +83,10 @@
           "type": "string",
           "x-input": "password"
         }
-      }
+      },
+      "required": [
+        "email"
+      ]
     },
     "address": {
       "title": "address",

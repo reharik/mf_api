@@ -33,7 +33,7 @@ module.exports = function(koagenericsession,
         app.use(koabodyparser());
         app.use(koaconvert(koagenericsession()));
 
-       app.use(koaconvert(papersMiddleware));
+       // app.use(koaconvert(papersMiddleware));
 
         app.use(async function (ctx, next){
             ctx.render = coviews(config.app.root + "/app/src/views", {
