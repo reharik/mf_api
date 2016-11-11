@@ -1,4 +1,4 @@
-NAME=api
+NAME=mf_api
 VERSION=$$(git rev-parse --short HEAD)
 NODE_ENV=qa
 

@@ -1,7 +1,7 @@
 version: "2"
 services:
   api:
-    image: api
+    image: mf_api
     volumes:
       - ./../app:/home/current/app
     command: npm start #top -b #
