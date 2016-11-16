@@ -10,7 +10,7 @@ module.exports = function(rsRepository, functionalHelpers, Promise){
         //     future.fork(reject, (x)=>{resolve(x.value)})) };
 
         try {
-            var query = await rsRepository.query('SELECT * from "trainerSummary";');
+            var query = await rsRepository.query('SELECT * from "trainer";');
         } catch (ex) {
             throw ex;
         }

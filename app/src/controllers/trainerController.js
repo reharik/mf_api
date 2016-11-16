@@ -17,7 +17,7 @@ module.exports = function(rsRepository,
     console.log(JSON.stringify(notification));
     console.log('==========END "notification received=========');
     
-    ctx.body = {succes: true, result: notificatin};
+    ctx.body = {succes: true, result: notification};
     ctx.status = 200;
   };
 

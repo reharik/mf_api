@@ -36,6 +36,9 @@
         },
         "mobilePhone": {
           "type": "string"
+        },
+        "email": {
+          "type": "string"
         }
       },
       "required": [
@@ -76,16 +79,13 @@
       "title": "account",
       "type": "object",
       "properties": {
-        "email": {
-          "type": "string"
-        },
         "password": {
           "type": "string",
           "x-input": "password"
         }
       },
       "required": [
-        "email"
+        "password"
       ]
     },
     "address": {
