@@ -9,13 +9,9 @@ module.exports = function(rsRepository,
     console.log("arrived at trainer.create");
     const continuationId = uuid.v4();
 
-    let notificationPromise = notificationListener(continuationId)
+    let notificationPromise = notificationListener(continuationId);
     await messageBinders.commandPoster(messageBinders.commands.hireTrainerCommand(ctx.request.body), 'hireTrainer', continuationId);
     var notification = await notificationPromise;
-    
-    console.log('=========="notification received=========');
-    console.log(JSON.stringify(notification));
-    console.log('==========END "notification received=========');
     
     ctx.body = {succes: true, result: notification};
     ctx.status = 200;
