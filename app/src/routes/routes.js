@@ -29,7 +29,7 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.all("/signout", controllers.authController.signOut);
 
         router.get("/trainers", controllers.trainerListController.trainers);
-        router.post("/trainer/create", controllers.trainerController.createTrainer);
+        router.post("/trainer/upsert", controllers.trainerController.upsertTrainer);
         router.get("/trainer/:id", controllers.trainerController.getTrainer);
 
         app.use(router.routes());

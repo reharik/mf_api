@@ -5,16 +5,27 @@ module.exports = function(rsRepository,
                           notificationListener,
                           uuid) {
 
-  var createTrainer = async function (ctx) {
+  var upsertTrainer = async function (ctx) {
     console.log("arrived at trainer.create");
-    const continuationId = uuid.v4();
 
+    const payload = ctx.request.body;
+    const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
-    await messageBinders.commandPoster(messageBinders.commands.hireTrainerCommand(ctx.request.body), 'hireTrainer', continuationId);
+
+    const command = payload.id
+      ? messageBinders.commands.updateTrainerInfoCommand(payload)
+      : messageBinders.commands.hireTrainerCommand(payload);
+
+    await messageBinders.commandPoster(
+      command,
+      payload.id ? 'updateTrainerInfo' : 'hireTrainer',
+      continuationId);
+
     var notification = await notificationPromise;
-    
-    ctx.body = {succes: true, result: notification};
+
+    ctx.body = {success: true, result: notification};
     ctx.status = 200;
+
   };
 
   var getTrainer = async function (ctx) {
@@ -24,7 +35,7 @@ module.exports = function(rsRepository,
   };
 
   return {
-    createTrainer,
+    upsertTrainer,
     getTrainer
   };
 };

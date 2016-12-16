@@ -72,6 +72,10 @@
         },
         "defaultClientRate": {
           "type": "number"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
         }
       }
     },
