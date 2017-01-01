@@ -165,6 +165,65 @@
                 }
             }
         },
+        "client": {
+            "title": "client",
+            "type": "object",
+            "properties": {
+                "contact": {
+                    "type": "object",
+                    "title": "contact",
+                    "properties": {
+                        "firstName": {
+                            "type": "string"
+                        },
+                        "lastName": {
+                            "type": "string"
+                        },
+                        "address": {
+                            "type": "object",
+                            "title": "address",
+                            "properties": {
+                                "street1": {
+                                    "type": "string"
+                                },
+                                "street2": {
+                                    "type": "string"
+                                },
+                                "city": {
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "type": "string",
+                                    "x-input": "select"
+                                },
+                                "zipCode": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "secondaryPhone": {
+                            "type": "string"
+                        },
+                        "mobilePhone": {
+                            "type": "string"
+                        },
+                        "email": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "firstName",
+                        "lastName",
+                        "email",
+                        "mobilePhone"
+                    ]
+                },
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        },
         "account": {
             "title": "account",
             "type": "object",

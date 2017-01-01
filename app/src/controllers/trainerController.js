@@ -3,29 +3,60 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
-                          uuid) {
+                          uuid, authentication) {
 
-  var upsertTrainer = async function (ctx) {
-    console.log("arrived at trainer.create");
-
+  var hireTrainer = async function (ctx) {
+    console.log("arrived at trainer.hireTrainer");
     const payload = ctx.request.body;
+    payload.password = authentication.createPassword(payload.password);
+    const notification = await processMessage(payload, 'hireTrainer');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+
+  var updateTrainerInfo = async function (ctx) {
+    console.log("arrived at trainer.updateTrainerInfo");
+    const notification = await processMessage(ctx.request.body, 'updateTrainerInfo');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+
+  var updateTrainerContact = async function (ctx) {
+    console.log("arrived at trainer.updateTrainerContact");
+    const notification = await processMessage(ctx.request.body, 'updateTrainerContact');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+
+  var updateTrainerAddress = async function (ctx) {
+    console.log("arrived at trainer.updateTrainerAddress");
+
+    const notification = await processMessage(ctx.request.body, 'updateTrainerAddress');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+
+  var updateTrainerPassword = async function (ctx) {
+    console.log("arrived at trainer.updateTrainerPassword");
+    const payload = ctx.request.body;
+    payload.password = authentication.createPassword(payload.password);
+    const notification = await processMessage(payload, 'updateTrainerPassword');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+
+  var processMessage = async function(payload, commandName) {
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
 
-    const command = payload.id
-      ? messageBinders.commands.updateTrainerInfoCommand(payload)
-      : messageBinders.commands.hireTrainerCommand(payload);
+    const command = messageBinders.commands[commandName + 'Command'](payload);
 
     await messageBinders.commandPoster(
       command,
-      payload.id ? 'updateTrainerInfo' : 'hireTrainer',
+      commandName,
       continuationId);
 
-    var notification = await notificationPromise;
-
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
-
+    return await notificationPromise;
   };
 
   var getTrainer = async function (ctx) {
@@ -35,7 +66,11 @@ module.exports = function(rsRepository,
   };
 
   return {
-    upsertTrainer,
+    hireTrainer,
+    updateTrainerInfo,
+    updateTrainerContact,
+    updateTrainerAddress,
+    updateTrainerPassword,
     getTrainer
   };
 };

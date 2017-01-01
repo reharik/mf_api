@@ -29,8 +29,19 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.all("/signout", controllers.authController.signOut);
 
         router.get("/trainers", controllers.trainerListController.trainers);
-        router.post("/trainer/upsert", controllers.trainerController.upsertTrainer);
+        router.post("/trainer/hireTrainer", controllers.trainerController.hireTrainer);
+        router.post("/trainer/updateTrainerInfo", controllers.trainerController.updateTrainerInfo);
+        router.post("/trainer/updateTrainerContact", controllers.trainerController.updateTrainerContact);
+        router.post("/trainer/updateTrainerAddress", controllers.trainerController.updateTrainerAddress);
+        router.post("/trainer/updateTrainerPassword", controllers.trainerController.updateTrainerPassword);
         router.get("/trainer/:id", controllers.trainerController.getTrainer);
+
+        router.get("/clients", controllers.clientListController.clients);
+        router.post("/client/addClient", controllers.clientController.addClient);
+        router.post("/client/updateClientInfo", controllers.clientController.updateClientInfo);
+        router.post("/client/updateClientContact", controllers.clientController.updateClientContact);
+        router.post("/client/updateClientAddress", controllers.clientController.updateClientAddress);
+        router.get("/client/:id", controllers.clientController.getClient);
 
         app.use(router.routes());
         app.use(router.allowedMethods());

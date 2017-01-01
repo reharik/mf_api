@@ -13,7 +13,7 @@ module.exports = function(logger,
       .map(mAndF.transformEvent)
       .first(note => note.metadata.continuationId == continuationId
           && note.data.initialEvent.metadata.streamType == 'command')
-      .map(x=> x.data.handlerResult)
+      .map(x=> x.data)
       .toPromise();
   }
 }

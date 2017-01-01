@@ -79,6 +79,20 @@
         }
       }
     },
+    "client": {
+      "title": "client",
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "object",
+          "$ref": "#/definitions/contact"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    },
     "account": {
       "title": "account",
       "type": "object",
