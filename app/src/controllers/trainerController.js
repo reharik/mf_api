@@ -48,7 +48,6 @@ module.exports = function(rsRepository,
   var processMessage = async function(payload, commandName) {
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
-    let notificationPromise = notificationListener(continuationId);
 
     const command = messageBinders.commands[commandName + 'Command'](payload);
 

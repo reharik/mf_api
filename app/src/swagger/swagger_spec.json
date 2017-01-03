@@ -156,8 +156,69 @@
                     "type": "string",
                     "x-input": "color-picker"
                 },
-                "defaultClientRate": {
-                    "type": "number"
+                "clients": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "client",
+                        "properties": {
+                            "contact": {
+                                "type": "object",
+                                "title": "contact",
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "object",
+                                        "title": "address",
+                                        "properties": {
+                                            "street1": {
+                                                "type": "string"
+                                            },
+                                            "street2": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "type": "string",
+                                                "x-input": "select"
+                                            },
+                                            "zipCode": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "secondaryPhone": {
+                                        "type": "string"
+                                    },
+                                    "mobilePhone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "email",
+                                    "mobilePhone"
+                                ]
+                            },
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    },
+                    "uniqueItems": true,
+                    "x-input": "multi-select"
                 },
                 "id": {
                     "type": "string",

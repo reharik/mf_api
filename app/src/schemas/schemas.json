@@ -70,8 +70,14 @@
           "type": "string",
           "x-input": "color-picker"
         },
-        "defaultClientRate": {
-          "type": "number"
+        "clients": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "uniqueItems": true,
+          "x-input": "multi-select"
         },
         "id": {
           "type": "string",
