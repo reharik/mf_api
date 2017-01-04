@@ -45,6 +45,14 @@ module.exports = function(rsRepository,
     ctx.status = 200;
   };
 
+  var updateTrainersClients = async function (ctx) {
+    console.log("arrived at trainer.updateTrainersClients");
+
+    const notification = await processMessage(ctx.request.body, 'updateTrainersClients');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+
   var processMessage = async function(payload, commandName) {
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
@@ -71,6 +79,7 @@ module.exports = function(rsRepository,
     updateTrainerContact,
     updateTrainerAddress,
     updateTrainerPassword,
+    updateTrainersClients,
     getTrainer
   };
 };

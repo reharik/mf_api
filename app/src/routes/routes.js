@@ -34,6 +34,7 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.post("/trainer/updateTrainerContact", controllers.trainerController.updateTrainerContact);
         router.post("/trainer/updateTrainerAddress", controllers.trainerController.updateTrainerAddress);
         router.post("/trainer/updateTrainerPassword", controllers.trainerController.updateTrainerPassword);
+        router.post("/trainer/updateTrainersClients", controllers.trainerController.updateTrainersClients);
         router.get("/trainer/:id", controllers.trainerController.getTrainer);
 
         router.get("/clients", controllers.clientListController.clients);
