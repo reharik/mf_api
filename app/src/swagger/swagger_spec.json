@@ -262,6 +262,56 @@
                     "type": "string"
                 }
             }
+        },
+        "appointment": {
+            "title": "appointment",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "appointmentType": {
+                    "type": "string",
+                    "x-input": "select"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "x-input": "date-time"
+                },
+                "startTime": {
+                    "type": "string",
+                    "x-input": "select"
+                },
+                "endTime": {
+                    "type": "string"
+                },
+                "trainer": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "clients": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "uniqueItems": true,
+                    "x-input": "multi-select"
+                },
+                "notes": {
+                    "type": "string",
+                    "x-input": "textArea"
+                }
+            },
+            "required": [
+                "appointmentType",
+                "date",
+                "startTime",
+                "endTime",
+                "trainer"
+            ]
         }
     },
     "responses": {},
