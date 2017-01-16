@@ -13,8 +13,11 @@ module.exports = function(commands, commandPoster){
             ctx.body = { "success": false };
         } else {
             let user = ctx.state.user;
+
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
             commandPoster(cmd, 'loginTrainer');
+            delete user.password;
+            user.role = 'admin';
             ctx.body = {success: true, user };
         }
     };

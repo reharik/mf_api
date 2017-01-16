@@ -3,6 +3,25 @@ module.exports = function(rsRepository,
                           notificationListener,
                           uuid) {
 
+
+  var fetchAppointment = async function (ctx) {
+    console.log("arrived at appointment.fetchAppointment");
+    const appointment = await rsRepository.getById(ctx.params.id, 'appointment');
+    ctx.status = 200;
+    ctx.body = {success: true, data: appointment};
+  };
+
+  var fetchAppointments = async function (ctx) {
+    console.log("arrived at appointment.fetchAppointments");
+    const sql = `SELECT * from "appointment" 
+      where "trainerId" = '${ctx.params.trainerId}' 
+        AND "date" >= '${ctx.params.startDate}' 
+        AND "date" <= '${ctx.params.endDate}'`;
+    const appointments = await rsRepository.query(sql);
+    ctx.status = 200;
+    ctx.body = {success: true, data: appointments};
+  };
+
   var scheduleAppointment = async function (ctx) {
     console.log("arrived at appointment.scheduleAppointment");
     await processMessage(ctx, 'scheduleAppointment');
@@ -31,23 +50,6 @@ module.exports = function(rsRepository,
     ctx.body = {success: notification.result && notification.result === 'Success', result: notification};
     ctx.status = 200;
     return ctx;
-  };
-
-  var fetchAppointment = async function (ctx) {
-    const appointment = await rsRepository.getById(ctx.params.id, 'appointment');
-    ctx.status = 200;
-    ctx.body = appointment;
-  };
-
-  var fetchAppointments = async function (ctx) {
-    console.log("arrived at appointment.fetchAppointments");
-    try {
-      var query = await rsRepository.query('SELECT * from "appointment";');
-    } catch (ex) {
-      throw ex;
-    }
-    ctx.body = {appointment: query};
-    ctx.status = 200;
   };
 
   return {
