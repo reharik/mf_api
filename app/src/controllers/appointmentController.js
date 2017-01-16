@@ -1,6 +1,7 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
+                          moment,
                           uuid) {
 
 
@@ -24,17 +25,24 @@ module.exports = function(rsRepository,
 
   var scheduleAppointment = async function (ctx) {
     console.log("arrived at appointment.scheduleAppointment");
-    await processMessage(ctx, 'scheduleAppointment');
+    var payload = ctx.request.body;
+    console.log('==========payload=========');
+    console.log(payload);
+    console.log('==========END payload=========');
+    const notification =await processMessage(payload, 'scheduleAppointment');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
   };
 
   var updateAppointment = async function (ctx) {
     console.log("arrived at appointment.updateAppointment");
-    await processMessage(ctx, 'updateAppointment');
+    const notification = await processMessage(ctx.request.body, 'updateAppointment');
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
   };
 
-  var processMessage = async function(ctx, commandName) {
+  var processMessage = async function(payload, commandName) {
     console.log(`api: processing ${commandName}`);
-    const payload = ctx.request.body;
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
 
@@ -45,11 +53,7 @@ module.exports = function(rsRepository,
       commandName,
       continuationId);
 
-    var notification = await notificationPromise;
-
-    ctx.body = {success: notification.result && notification.result === 'Success', result: notification};
-    ctx.status = 200;
-    return ctx;
+    return await notificationPromise;
   };
 
   return {

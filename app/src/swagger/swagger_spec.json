@@ -288,14 +288,40 @@
                     "type": "string"
                 },
                 "trainer": {
-                    "type": "string",
-                    "format": "uuid"
+                    "type": "object",
+                    "title": "entity",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "display": {
+                            "type": "string"
+                        },
+                        "required": [
+                            "id",
+                            "display"
+                        ]
+                    }
                 },
                 "clients": {
                     "type": "array",
                     "items": {
-                        "type": "string",
-                        "format": "uuid"
+                        "type": "object",
+                        "title": "entity",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "display": {
+                                "type": "string"
+                            },
+                            "required": [
+                                "id",
+                                "display"
+                            ]
+                        }
                     },
                     "uniqueItems": true,
                     "x-input": "multi-select"
@@ -312,6 +338,23 @@
                 "endTime",
                 "trainer"
             ]
+        },
+        "entity": {
+            "title": "entity",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "display": {
+                    "type": "string"
+                },
+                "required": [
+                    "id",
+                    "display"
+                ]
+            }
         }
     },
     "responses": {},

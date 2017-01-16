@@ -24,7 +24,7 @@ module.exports = function(_options) {
                   .groupAllInDirectory('./app/src/schemas', 'schemas',true)
                     .complete(),
                 x=>x.instantiate('eventstore').asFunc().withParameters(options.children || {})
-                .instantiate('rsRepository').asFunc().withParameters(options.children || {})
+                .instantiate('pgFuture').asFunc().withParameters(options.children || {})
                     .instantiate('gesConnection').asFunc().withParameters(options.children || {})
                     // .instantiate('messagebinders').asFunc().withParameters(options.children || {})
                 .instantiate('logger').asFunc().withParameters(options.logger || {})
