@@ -44,7 +44,7 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.post("/client/updateClientAddress", controllers.clientController.updateClientAddress);
         router.get("/client/:id", controllers.clientController.getClient);
 
-        router.get("/fetchAppointments", controllers.appointmentController.fetchAppointments);
+        router.get("/fetchAppointments/:startDate/:endDate/:trainerId?", controllers.appointmentController.fetchAppointments);
         router.get("/fetchAppointment/:id", controllers.appointmentController.fetchAppointment);
         router.post("/appointment/scheduleAppointment", controllers.appointmentController.scheduleAppointment);
 

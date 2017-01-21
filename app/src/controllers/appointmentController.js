@@ -7,20 +7,20 @@ module.exports = function(rsRepository,
 
   var fetchAppointment = async function (ctx) {
     console.log("arrived at appointment.fetchAppointment");
-    const appointment = await rsRepository.getById(ctx.params.id, 'appointment');
+    const appointments = await rsRepository.getById(ctx.params.id, 'appointment');
     ctx.status = 200;
-    ctx.body = {success: true, data: appointment};
+    ctx.body = {appointments};
   };
 
   var fetchAppointments = async function (ctx) {
     console.log("arrived at appointment.fetchAppointments");
     const sql = `SELECT * from "appointment" 
-      where "trainerId" = '${ctx.params.trainerId}' 
-        AND "date" >= '${ctx.params.startDate}' 
+      where  "date" >= '${ctx.params.startDate}' 
         AND "date" <= '${ctx.params.endDate}'`;
+        // AND "trainer" = '${ctx.params.trainerId}'`;
     const appointments = await rsRepository.query(sql);
     ctx.status = 200;
-    ctx.body = {success: true, data: appointments};
+    ctx.body = {appointments};
   };
 
   var scheduleAppointment = async function (ctx) {
