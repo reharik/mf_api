@@ -26,32 +26,73 @@ module.exports = function(rsRepository,
   var scheduleAppointment = async function (ctx) {
     console.log("arrived at appointment.scheduleAppointment");
     var payload = ctx.request.body;
-    console.log('==========payload=========');
-    console.log(payload);
-    console.log('==========END payload=========');
-    const notification =await processMessage(payload, 'scheduleAppointment');
+    payload.commandName = 'scheduleAppointment';
+    const notification =await processMessage(payload, 'scheduleAppointmentFactory', 'scheduleAppointment');
     ctx.body = {success: true, result: notification};
     ctx.status = 200;
   };
 
   var updateAppointment = async function (ctx) {
     console.log("arrived at appointment.updateAppointment");
-    const notification = await processMessage(ctx.request.body, 'updateAppointment');
+    var body = ctx.request.body;
+    let notification;
+    let commandName = '';
+    const appointment = await rsRepository.getById(body.id, 'appointment');
+    
+    let clientsSame = true;
+    for(let i=0; i < body.clients.length; i++){
+      if(body.clients[i] !== appointment.clients[i]) {
+        clientsSame = false;
+      }
+    }
+    
+    if(appointment.date !== body.date) {
+      commandName += 'rescheduleAppointmentToNewDay';
+      body.originalEntityName = appointment.entityName;
+    } else if(appointment.startTime !== body.startTime){
+      commandName += 'rescheduleAppointmentTime'
+    }else if(appointment.appointmentType !== body.appointmentType){
+      commandName += 'changeAppointmentType'
+    }else if(!clientsSame){
+      commandName += 'changeAppointmentClients'
+    }else{
+      throw Error('UpdateAppointment called but no change in appointment');
+    }
+
+    body.commandName = commandName;
+    notification = await processMessage(body, 'scheduleAppointmentFactory', commandName);
+
+    ctx.body = {success: true, result: notification};
+    ctx.status = 200;
+  };
+  
+  var cancelAppointment = async function (ctx) {
+    console.log("arrived at appointment.removeAppointment");
+    var body = ctx.request.body;
+    let commandName = 'cancelAppointment';
+    
+    body.commandName = commandName;
+    const notification = await processMessage(body, 'removedAppointmentFactory', commandName);
+
     ctx.body = {success: true, result: notification};
     ctx.status = 200;
   };
 
-  var processMessage = async function(payload, commandName) {
+  var processCommandMessage = async function(payload, commandName) {
+    return await procesMessage(payload, commandName + 'Command', commandName + 'Command');
+  };
+  
+  var processMessage = async function(payload, commandFactory, commandName) {
     console.log(`api: processing ${commandName}`);
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
 
-    const command = messageBinders.commands[commandName + 'Command'](payload);
+    const command = messageBinders.commands[commandFactory](payload);
 
     await messageBinders.commandPoster(
-      command,
-      commandName,
-      continuationId);
+        command,
+        commandName,
+        continuationId);
 
     return await notificationPromise;
   };
@@ -59,6 +100,7 @@ module.exports = function(rsRepository,
   return {
     scheduleAppointment,
     updateAppointment,
+    cancelAppointment,
     fetchAppointment,
     fetchAppointments
   };
