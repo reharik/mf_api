@@ -28,53 +28,59 @@ module.exports = function(rsRepository,
     var payload = ctx.request.body;
     payload.commandName = 'scheduleAppointment';
     const notification =await processMessage(payload, 'scheduleAppointmentFactory', 'scheduleAppointment');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    ctx.body = {success: notification.result != 'Failure', result: notification.handlerResult};
+    ctx.status = notification.result === 'Success' ? 200 : 500;
   };
 
   var updateAppointment = async function (ctx) {
-    console.log("arrived at appointment.updateAppointment");
-    var body = ctx.request.body;
-    let notification;
-    let commandName = '';
-    const appointment = await rsRepository.getById(body.id, 'appointment');
-    
-    let clientsSame = true;
-    for(let i=0; i < body.clients.length; i++){
-      if(body.clients[i] !== appointment.clients[i]) {
-        clientsSame = false;
+    try {
+      console.log("arrived at appointment.updateAppointment");
+      var body = ctx.request.body;
+      let notification;
+      let commandName = '';
+      const appointment = await rsRepository.getById(body.id, 'appointment');
+      let clientsSame = true;
+      for (let i = 0; i < body.clients.length; i++) {
+        if (body.clients[i] !== appointment.clients[i]) {
+          clientsSame = false;
+        }
       }
-    }
-    
-    if(appointment.date !== body.date) {
-      commandName += 'rescheduleAppointmentToNewDay';
-      body.originalEntityName = appointment.entityName;
-    } else if(appointment.startTime !== body.startTime){
-      commandName += 'rescheduleAppointmentTime'
-    }else if(appointment.appointmentType !== body.appointmentType){
-      commandName += 'changeAppointmentType'
-    }else if(!clientsSame){
-      commandName += 'changeAppointmentClients'
-    }else{
-      throw Error('UpdateAppointment called but no change in appointment');
-    }
 
-    body.commandName = commandName;
-    notification = await processMessage(body, 'scheduleAppointmentFactory', commandName);
+      //TODO need case for update notes, and update trainer
 
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+      if (moment(appointment.date).format('YYYYMMDD') !== moment(body.date).format('YYYYMMDD')) {
+        commandName += 'rescheduleAppointmentToNewDay';
+        body.originalEntityName = appointment.entityName;
+      } else if (appointment.startTime !== body.startTime) {
+        commandName += 'rescheduleAppointmentTime'
+      } else if (appointment.appointmentType !== body.appointmentType) {
+        commandName += 'changeAppointmentType'
+      } else if (!clientsSame) {
+        commandName += 'changeAppointmentClients'
+      } else {
+        throw Error('UpdateAppointment called but no change in appointment');
+      }
+
+      body.commandName = commandName;
+      body.appointmentId = body.id;
+      notification = await processMessage(body, 'scheduleAppointmentFactory', commandName);
+      ctx.body = {success: true, result: notification.handlerResult};
+      ctx.status = 200;
+    } catch (ex) {
+      ctx.body = {success: false, result: ex};
+      ctx.status = 500;
+    }
   };
   
   var cancelAppointment = async function (ctx) {
-    console.log("arrived at appointment.removeAppointment");
+    console.log("arrived at appointment.cancelAppointment");
     var body = ctx.request.body;
     let commandName = 'cancelAppointment';
     
     body.commandName = commandName;
     const notification = await processMessage(body, 'removedAppointmentFactory', commandName);
 
-    ctx.body = {success: true, result: notification};
+    ctx.body = {success: true, result: notification.handlerResult};
     ctx.status = 200;
   };
 
@@ -86,9 +92,7 @@ module.exports = function(rsRepository,
     console.log(`api: processing ${commandName}`);
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
-
     const command = messageBinders.commands[commandFactory](payload);
-
     await messageBinders.commandPoster(
         command,
         commandName,

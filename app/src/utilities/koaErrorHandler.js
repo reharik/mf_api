@@ -8,7 +8,7 @@ module.exports = function () {
         ctx.status = err.statusCode || err.status || 500;
 
         // application
-        ctx.app.emit('error', err, this);
+        // ctx.app.emit('error', err, this);
 
         ctx.body = {
           status: ctx.status,

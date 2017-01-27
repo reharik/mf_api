@@ -107,8 +107,14 @@
           "type": "string",
           "x-input": "password"
         }
+        "role": {
+          "type": "string",
+          "x-input": "select"
+        }
       },
       "required": [
+        "password",
+        "role"
       ]
     },
     "address": {
