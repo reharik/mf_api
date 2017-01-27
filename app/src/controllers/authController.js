@@ -5,7 +5,7 @@
 
 module.exports = function(commands, commandPoster){
 
-    var  signIn = function (ctx) {
+    var signIn = function (ctx) {
         console.log("arrived at login");
 
         if (!ctx.state.user) {
