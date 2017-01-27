@@ -57,8 +57,12 @@ module.exports = function(rsRepository,
         commandName += 'changeAppointmentType'
       } else if (!clientsSame) {
         commandName += 'changeAppointmentClients'
+      } else if (appointment.trainer !== body.trainer) {
+        commandName += 'changeAppointmentTrainer'
+      } else if (appointment.notes !== body.notes) {
+        commandName += 'updateNotesForAppointment'
       } else {
-        throw Error('UpdateAppointment called but no change in appointment');
+        throw new Error('UpdateAppointment called but no change in appointment');
       }
 
       body.commandName = commandName;

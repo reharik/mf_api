@@ -143,9 +143,16 @@
                         "password": {
                             "type": "string",
                             "x-input": "password"
+                        },
+                        "role": {
+                            "type": "string",
+                            "x-input": "select"
                         }
                     },
-                    "required": []
+                    "required": [
+                        "password",
+                        "role"
+                    ]
                 },
                 "birthDate": {
                     "type": "string",
@@ -237,9 +244,16 @@
                 "password": {
                     "type": "string",
                     "x-input": "password"
+                },
+                "role": {
+                    "type": "string",
+                    "x-input": "select"
                 }
             },
-            "required": []
+            "required": [
+                "password",
+                "role"
+            ]
         },
         "address": {
             "title": "address",
@@ -288,40 +302,15 @@
                     "type": "string"
                 },
                 "trainer": {
-                    "type": "object",
-                    "title": "entity",
-                    "properties": {
-                        "id": {
-                            "type": "string",
-                            "format": "uuid"
-                        },
-                        "display": {
-                            "type": "string"
-                        },
-                        "required": [
-                            "id",
-                            "display"
-                        ]
-                    }
+                    "type": "string",
+                    "format": "uuid",
+                    "x-input": "select"
                 },
                 "clients": {
                     "type": "array",
                     "items": {
-                        "type": "object",
-                        "title": "entity",
-                        "properties": {
-                            "id": {
-                                "type": "string",
-                                "format": "uuid"
-                            },
-                            "display": {
-                                "type": "string"
-                            },
-                            "required": [
-                                "id",
-                                "display"
-                            ]
-                        }
+                        "type": "string",
+                        "format": "uuid"
                     },
                     "uniqueItems": true,
                     "x-input": "multi-select"
