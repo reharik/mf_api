@@ -3,7 +3,7 @@
  */
 "use strict";
 module.exports = function(koagenericsession,
-                          koaresponsetime,
+                          koa2responsetime,
                           koalogger,
                           coviews,
                           koacompress,
@@ -11,8 +11,10 @@ module.exports = function(koagenericsession,
                           koabodyparser,
                           config,
                           koaconvert,
-                          koacors,
-                          swaggerSpec){
+                          koa2cors,
+                          swaggerSpec,
+                          swagger2,
+                          swagger2koa){
 
     return function (app, papersMiddleware) {
 
@@ -20,7 +22,7 @@ module.exports = function(koagenericsession,
             throw new Error("Please add session secret key in the config file!");
         }
 
-        swaggerSpec();
+        var swaggerDocument = swaggerSpec();
 
         app.keys = config.app.keys;
         if (config.app.env !== "test") {
@@ -28,12 +30,19 @@ module.exports = function(koagenericsession,
         }
         app.use(koaErrorHandler());
 
-        app.use(koacors({origin:'http://localhost:8080', credentials:true}));
+        app.use(koa2cors({origin:'http://localhost:8080', credentials:true}));
+       // app.use(koacors({origin:config.app.swagger_ui_url}));
 
         app.use(koabodyparser());
-        app.use(koaconvert(koagenericsession()));
+        app.use(koagenericsession());
 
        app.use(koaconvert(papersMiddleware));
+
+        var JSONSwaggerDoc = JSON.parse(swaggerDocument);
+        if (!swagger2.validateDocument(JSONSwaggerDoc)) {
+            throw Error(`./swagger.yml does not conform to the Swagger 2.0 schema`);
+        }
+        // app.use(swagger2koa.validate(JSONSwaggerDoc));
 
         app.use(async function (ctx, next){
             ctx.render = coviews(config.app.root + "/app/src/views", {
@@ -44,6 +53,6 @@ module.exports = function(koagenericsession,
         });
 
         app.use(koacompress());
-        app.use(koaresponsetime());
+        app.use(koa2responsetime.responseTime());
     };
 };

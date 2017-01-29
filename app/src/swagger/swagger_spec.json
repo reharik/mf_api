@@ -14,7 +14,20 @@
     "produces": [
         "application/json"
     ],
-    "paths": {},
+    "paths": {
+        "/swagger": {
+            "get": {
+                "x-name": "swagger",
+                "description": "Returns swagger spec",
+                "operationId": "swagger",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    },
     "definitions": {
         "signIn": {
             "title": "signIn",
@@ -327,23 +340,6 @@
                 "endTime",
                 "trainer"
             ]
-        },
-        "entity": {
-            "title": "entity",
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "display": {
-                    "type": "string"
-                },
-                "required": [
-                    "id",
-                    "display"
-                ]
-            }
         }
     },
     "responses": {},

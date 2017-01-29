@@ -189,23 +189,6 @@
         "endTime",
         "trainer"
       ]
-    },
-    "entity": {
-      "title": "entity",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "display": {
-          "type": "string"
-        },
-        "required": [
-          "id",
-          "display"
-        ]
-      }
     }
   }
 }

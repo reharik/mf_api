@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(bcryptjs, koapassport, rsRepository, messagebinders) {
+module.exports = function(bcryptjs, rsRepository, messagebinders) {
     var createPassword = function (_password) {
         try {
             var salt = bcryptjs.genSaltSync(10);

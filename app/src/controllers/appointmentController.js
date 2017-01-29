@@ -16,8 +16,8 @@ module.exports = function(rsRepository,
     console.log("arrived at appointment.fetchAppointments");
     const sql = `SELECT * from "appointment" 
       where  "date" >= '${ctx.params.startDate}' 
-        AND "date" <= '${ctx.params.endDate}'`;
-        // AND "trainer" = '${ctx.params.trainerId}'`;
+        AND "date" <= '${ctx.params.endDate}'
+        ${ctx.state.user.role !== 'admin' ? ` AND "trainer" = '${ctx.state.user.id}'` : ``}`;
     const appointments = await rsRepository.query(sql);
     ctx.status = 200;
     ctx.body = {appointments};

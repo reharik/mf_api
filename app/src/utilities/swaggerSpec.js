@@ -22,11 +22,13 @@ module.exports = function (swaggerjsdoc, fs, schemas, deref) {
     };
 
     var swaggerSpec = swaggerjsdoc(options);
-    swaggerSpec.definitions =  deref()(schemas, true).definitions;
-    
+    swaggerSpec.definitions = deref()(schemas, true).definitions;
+
     if (!fs.existsSync('./app/src/swagger/')) {
       fs.mkdirSync('./app/src/swagger/');
     }
-    fs.writeFileSync('./app/src/swagger/swagger_spec.json', JSON.stringify(swaggerSpec, null, 4), { mode: 0o0777 });
+    var swaggerDocument = JSON.stringify(swaggerSpec, null, 4);
+    fs.writeFileSync('./app/src/swagger/swagger_spec.json', swaggerDocument, {mode: 0o0777});
+    return swaggerDocument;
   };
 };

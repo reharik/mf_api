@@ -14,17 +14,23 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
     };
 
     return function(app){
-//var clientController = require("../controllers/client.server.controller");
-//var clientListController = require("../controllers/clientList.server.controller");
-//var trainerController = require("../controllers/trainer.server.controller");
-//var trainerListController = require("../controllers/trainerList.server.controller");
-//    var indexController = require("../controllers/index.controller");
-//    var authController = require("../controllers/auth.controller");
+
         var router = koarouter();
         router.get("/", controllers.indexController.index);
+        /**
+         * @swagger
+         * /swagger:
+         *   get:
+         *     x-name: swagger
+         *     description: Returns swagger spec
+         *     operationId: swagger
+         *     responses:
+         *       200:
+         *         description: Success
+         */
         router.get("/swagger", controllers.swaggerController.swagger);
 
-        router.get("/auth", controllers.authController.checkAuth);
+        // router.get("/auth", controllers.authController.checkAuth);
         router.post("/auth", controllers.authController.signIn);
         router.all("/signout", controllers.authController.signOut);
 

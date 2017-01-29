@@ -21,15 +21,15 @@ module.exports = function(commands, commandPoster){
             ctx.body = {success: true, user };
         }
     };
-
-    var  checkAuth = async function () {
-        if (this.passport.user) {
-            this.body = {user: this.passport.user};
-            this.status = 200;
-        } else{
-            this.status = 401;
-        }
-    };
+    //
+    // var  checkAuth = async function () {
+    //     if (this.passport.user) {
+    //         this.body = {user: this.passport.user};
+    //         this.status = 200;
+    //     } else{
+    //         this.status = 401;
+    //     }
+    // };
 
     var  signOut = async function () {
         this.logout();
@@ -40,7 +40,7 @@ module.exports = function(commands, commandPoster){
     return {
         signIn:signIn,
         signOut:signOut,
-        checkAuth:checkAuth
+        // checkAuth:checkAuth
     }
 
 };
