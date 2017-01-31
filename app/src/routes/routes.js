@@ -25,11 +25,32 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *     description: Returns swagger spec
          *     operationId: swagger
          *     responses:
-         *       200:
-         *         description: Success
+         *       '200':
+         *           description: Success
+         *           schema:
+         *               type: object
+         *               additionalProperties: {}
          */
         router.get("/swagger", controllers.swaggerController.swagger);
-
+        /**
+         * @swagger
+         * /auth:
+         *   post:
+         *     x-name: loggin
+         *     description: checks credentials
+         *     operationId: auth
+         *     parameters:
+         *       - name: body
+         *         in: body
+         *         required: true
+         *         schema:
+         *           $ref: "#/definitions/signIn"
+         *     responses:
+         *       200:
+         *         description: Success
+         *         schema:
+         *             $ref: "#/definitions/auth"
+         */
         // router.get("/auth", controllers.authController.checkAuth);
         router.post("/auth", controllers.authController.signIn);
         router.all("/signout", controllers.authController.signOut);

@@ -42,7 +42,7 @@ module.exports = function(koagenericsession,
         if (!swagger2.validateDocument(JSONSwaggerDoc)) {
             throw Error(`./swagger.yml does not conform to the Swagger 2.0 schema`);
         }
-        // app.use(swagger2koa.validate(JSONSwaggerDoc));
+        app.use(swagger2koa.validate(JSONSwaggerDoc));
 
         app.use(async function (ctx, next){
             ctx.render = coviews(config.app.root + "/app/src/views", {

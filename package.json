@@ -4,8 +4,8 @@
   "private": true,
   "main": "app/index.js",
   "scripts": {
-    "start": "node --harmony-async-await app/index.js",
-    "watch": "nodemon --harmony-async-await --debug -V -w src/app/controllers -w src/app/models -w src/app/routes -w config -w config/env -w lib -w node_modules",
+    "start1": "node --harmony-async-await app/index.js",
+    "start": "nodemon --harmony-async-await --debug -V -w src/app/controllers -w src/app/models -w src/app/routes -w config -w config/env -w lib -w node_modules/swagger2",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js",
     "intTest": "mocha --require ./babelhook --opts ./tests/mocha.opts ./tests/integrationTests/temp.js"
   },
@@ -46,7 +46,7 @@
     "pg-async": "^2.4.0",
     "pg-bluebird": "^1.0.8",
     "rx": "^4.0.0",
-    "swagger-jsdoc": "^1.8.1",
+    "swagger-jsdoc": "^1.9.1",
     "swagger2-koa": "0.0.31",
     "swig": "1.4.x",
     "uuid": "^2.0.1"

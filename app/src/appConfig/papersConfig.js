@@ -20,7 +20,7 @@ module.exports = function(authentication,
         return authentication.matchUser(username, password);
     };
 
-    var local = paperslocal(authLocalUser);
+    var local = paperslocal(authLocalUser,{usernameField:'userName'});
     var config = {
         strategies: [local],
         useSession: true,

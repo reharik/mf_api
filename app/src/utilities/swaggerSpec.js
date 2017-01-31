@@ -1,4 +1,4 @@
-module.exports = function (swaggerjsdoc, fs, schemas, deref) {
+module.exports = function (swaggerjsdoc, fs, schemas, deref, dagon) {
   return function () {
     var options = {
       swaggerDefinition: {
@@ -7,7 +7,6 @@ module.exports = function (swaggerjsdoc, fs, schemas, deref) {
           version: '0.0.1',
           title: 'MethodFitness'
         },
-        basePath: '/',
         schemes: [
           'http'
         ],
@@ -22,8 +21,8 @@ module.exports = function (swaggerjsdoc, fs, schemas, deref) {
     };
 
     var swaggerSpec = swaggerjsdoc(options);
-    swaggerSpec.definitions = deref()(schemas, true).definitions;
-
+    var schemaDefs = Object.assign({}, schemas.domainSchemas.definitions, schemas.responseSchemas.definitions);
+    swaggerSpec.definitions = deref()({definitions:schemaDefs}, true).definitions;
     if (!fs.existsSync('./app/src/swagger/')) {
       fs.mkdirSync('./app/src/swagger/');
     }

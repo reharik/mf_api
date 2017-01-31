@@ -4,7 +4,6 @@
         "version": "0.0.1",
         "title": "MethodFitness"
     },
-    "basePath": "/",
     "schemes": [
         "http"
     ],
@@ -22,7 +21,36 @@
                 "operationId": "swagger",
                 "responses": {
                     "200": {
-                        "description": "Success"
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/auth": {
+            "post": {
+                "x-name": "loggin",
+                "description": "checks credentials",
+                "operationId": "auth",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/signIn"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
                     }
                 }
             }
@@ -340,6 +368,55 @@
                 "endTime",
                 "trainer"
             ]
+        },
+        "auth": {
+            "title": "auth",
+            "properties": {
+                "success": {
+                    "type": "boolean"
+                },
+                "user": {
+                    "type": "object",
+                    "title": "authUser",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "role": {
+                            "type": "string"
+                        },
+                        "active": {
+                            "type": "boolean"
+                        },
+                        "userName": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "success",
+                "user"
+            ]
+        },
+        "authUser": {
+            "title": "authUser",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "active": {
+                    "type": "boolean"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
         }
     },
     "responses": {},

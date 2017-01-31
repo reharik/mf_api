@@ -3,10 +3,12 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
-                          uuid, authentication) {
+                          uuid,
+                          logger,
+                          authentication) {
 
   var hireTrainer = async function (ctx) {
-    console.log("arrived at trainer.hireTrainer");
+    logger.debug("arrived at trainer.hireTrainer");
     const payload = ctx.request.body;
     payload.password = authentication.createPassword(payload.password);
     const notification = await processMessage(payload, 'hireTrainer');
@@ -15,21 +17,21 @@ module.exports = function(rsRepository,
   };
 
   var updateTrainerInfo = async function (ctx) {
-    console.log("arrived at trainer.updateTrainerInfo");
+    logger.debug("arrived at trainer.updateTrainerInfo");
     const notification = await processMessage(ctx.request.body, 'updateTrainerInfo');
     ctx.body = {success: true, result: notification};
     ctx.status = 200;
   };
 
   var updateTrainerContact = async function (ctx) {
-    console.log("arrived at trainer.updateTrainerContact");
+    logger.debug("arrived at trainer.updateTrainerContact");
     const notification = await processMessage(ctx.request.body, 'updateTrainerContact');
     ctx.body = {success: true, result: notification};
     ctx.status = 200;
   };
 
   var updateTrainerAddress = async function (ctx) {
-    console.log("arrived at trainer.updateTrainerAddress");
+    logger.debug("arrived at trainer.updateTrainerAddress");
 
     const notification = await processMessage(ctx.request.body, 'updateTrainerAddress');
     ctx.body = {success: true, result: notification};
@@ -37,7 +39,7 @@ module.exports = function(rsRepository,
   };
 
   var updateTrainerPassword = async function (ctx) {
-    console.log("arrived at trainer.updateTrainerPassword");
+    logger.debug("arrived at trainer.updateTrainerPassword");
     const payload = ctx.request.body;
     payload.password = authentication.createPassword(payload.password);
     const notification = await processMessage(payload, 'updateTrainerPassword');
@@ -46,7 +48,7 @@ module.exports = function(rsRepository,
   };
 
   var updateTrainersClients = async function (ctx) {
-    console.log("arrived at trainer.updateTrainersClients");
+    logger.debug("arrived at trainer.updateTrainersClients");
 
     const notification = await processMessage(ctx.request.body, 'updateTrainersClients');
     ctx.body = {success: true, result: notification};

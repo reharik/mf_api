@@ -21,7 +21,7 @@ module.exports = function(_options) {
                     .for('bluebird').renameTo('Promise')
                     .for('applicationFunctions').renameTo('appfuncs')
                   .groupAllInDirectory('./app/src/controllers', 'controllers')
-                  .groupAllInDirectory('./app/src/schemas', 'schemas',true)
+                  .groupAllInDirectory('./app/src/schemas', 'schemas', true)
                     .complete(),
                 x=>x.instantiate('eventstore').asFunc().withParameters(options.children || {})
                 .instantiate('pgFuture').asFunc().withParameters(options.children || {})

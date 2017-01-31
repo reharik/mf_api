@@ -3,17 +3,16 @@
  */
 "use strict";
 
-module.exports = function(commands, commandPoster){
+module.exports = function(commands, commandPoster, logger){
 
     var signIn = function (ctx) {
-        console.log("arrived at login");
+        logger.debug("arrived at login");
 
         if (!ctx.state.user) {
             ctx.status = 401;
             ctx.body = { "success": false };
         } else {
             let user = ctx.state.user;
-
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
             commandPoster(cmd, 'loginTrainer');
             delete user.password;

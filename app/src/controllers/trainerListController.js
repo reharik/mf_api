@@ -1,9 +1,9 @@
 "use strict";
 
-module.exports = function(rsRepository){
+module.exports = function(rsRepository, logger){
 
     var  trainers = async function (ctx) {
-        console.log("arrived at trainerlist.trainers");
+        logger.debug("arrived at trainerlist.trainers");
 
         try {
             var query = await rsRepository.query('SELECT * from "trainer";');

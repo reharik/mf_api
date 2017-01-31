@@ -19,7 +19,7 @@ module.exports = function(bcryptjs, rsRepository, messagebinders) {
     var matchUser = async function (username, password, done) {
         var users = await rsRepository.query('select * from "user" where "document" ->> \'userName\' = \'' + username.toLowerCase() + '\'');
         //for now, but lets put a findOne func on repo
-        var user = users[0]
+        var user = users[0];
         if (!user) {
             return null;
         }

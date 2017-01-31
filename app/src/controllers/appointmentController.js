@@ -2,18 +2,19 @@ module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
                           moment,
+                          logger,
                           uuid) {
 
 
   var fetchAppointment = async function (ctx) {
-    console.log("arrived at appointment.fetchAppointment");
+    logger.debug("arrived at appointment.fetchAppointment");
     const appointments = await rsRepository.getById(ctx.params.id, 'appointment');
     ctx.status = 200;
     ctx.body = {appointments};
   };
 
   var fetchAppointments = async function (ctx) {
-    console.log("arrived at appointment.fetchAppointments");
+    logger.debug("arrived at appointment.fetchAppointments");
     const sql = `SELECT * from "appointment" 
       where  "date" >= '${ctx.params.startDate}' 
         AND "date" <= '${ctx.params.endDate}'
@@ -24,7 +25,7 @@ module.exports = function(rsRepository,
   };
 
   var scheduleAppointment = async function (ctx) {
-    console.log("arrived at appointment.scheduleAppointment");
+    logger.debug("arrived at appointment.scheduleAppointment");
     var payload = ctx.request.body;
     payload.commandName = 'scheduleAppointment';
     const notification =await processMessage(payload, 'scheduleAppointmentFactory', 'scheduleAppointment');
@@ -34,7 +35,7 @@ module.exports = function(rsRepository,
 
   var updateAppointment = async function (ctx) {
     try {
-      console.log("arrived at appointment.updateAppointment");
+      logger.debug("arrived at appointment.updateAppointment");
       var body = ctx.request.body;
       let notification;
       let commandName = '';
@@ -77,7 +78,7 @@ module.exports = function(rsRepository,
   };
   
   var cancelAppointment = async function (ctx) {
-    console.log("arrived at appointment.cancelAppointment");
+    logger.debug("arrived at appointment.cancelAppointment");
     var body = ctx.request.body;
     let commandName = 'cancelAppointment';
     
@@ -93,7 +94,7 @@ module.exports = function(rsRepository,
   };
   
   var processMessage = async function(payload, commandFactory, commandName) {
-    console.log(`api: processing ${commandName}`);
+    logger.debug(`api: processing ${commandName}`);
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
     const command = messageBinders.commands[commandFactory](payload);

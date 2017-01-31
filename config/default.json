@@ -15,16 +15,22 @@
   "configs": {
     "children": {
       "eventstore": {
-        "host": "eventstore",
+        "host": "localhost",
         "systemUsers": {
           "admin": "admin",
           "adminPassword": "changeit"
         }
       },
       "postgres": {
-        "connectionString": "postgres://methodfitness:password@postgres/",
-        "postgres": "postgres",
-        "database": "methodfitness"
+        "config" :{
+          "user": "methodfitness",
+          "database": "methodfitness",
+          "host"     : "127.0.0.1",
+          "password": "password",
+          "port": "5432",
+          "max": "10",
+          "idleTimeoutMillis": "30000"
+        }
       }
     },
     "logger": {

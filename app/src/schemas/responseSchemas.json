@@ -1,0 +1,38 @@
+{
+  "definitions": {
+    "auth": {
+      "title": "auth",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "user": {
+          "type": "object",
+          "$ref": "#/definitions/authUser"
+        }
+      },
+      "required": [
+        "success",
+        "user"
+      ]
+    },
+    "authUser": {
+      "title": "authUser",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "role": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "userName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

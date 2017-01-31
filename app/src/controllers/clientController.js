@@ -3,30 +3,31 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
+                          logger,
                           uuid) {
 
   var addClient = async function (ctx) {
-    console.log("arrived at client.addClient");
+    logger.debug("arrived at client.addClient");
     await processMessage(ctx, 'addClient');
   };
 
   var updateClientInfo = async function (ctx) {
-    console.log("arrived at client.updateClientInfo");
+    logger.debug("arrived at client.updateClientInfo");
     await processMessage(ctx, 'updateClientInfo');
   };
 
   var updateClientContact = async function (ctx) {
-    console.log("arrived at client.updateClientContact");
+    logger.debug("arrived at client.updateClientContact");
     await processMessage(ctx, 'updateClientContact');
   };
 
   var updateClientAddress = async function (ctx) {
-    console.log("arrived at client.updateClientAddress");
+    logger.debug("arrived at client.updateClientAddress");
     await processMessage(ctx, 'updateClientAddress');
   };
 
   var processMessage = async function(ctx, commandName) {
-    console.log(`api: processing ${commandName}`);
+    logger.debug(`api: processing ${commandName}`);
     const payload = ctx.request.body;
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
