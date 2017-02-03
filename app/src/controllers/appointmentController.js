@@ -47,8 +47,6 @@ module.exports = function(rsRepository,
         }
       }
 
-      //TODO need case for update notes, and update trainer
-
       if (moment(appointment.date).format('YYYYMMDD') !== moment(body.date).format('YYYYMMDD')) {
         commandName += 'rescheduleAppointmentToNewDay';
         body.originalEntityName = appointment.entityName;
@@ -80,23 +78,27 @@ module.exports = function(rsRepository,
   var cancelAppointment = async function (ctx) {
     logger.debug("arrived at appointment.cancelAppointment");
     var body = ctx.request.body;
-    let commandName = 'cancelAppointment';
     
-    body.commandName = commandName;
-    const notification = await processMessage(body, 'removedAppointmentFactory', commandName);
+    const notification = await processCommandMessage(body, 'cancelAppointment');
 
     ctx.body = {success: true, result: notification.handlerResult};
     ctx.status = 200;
   };
 
   var processCommandMessage = async function(payload, commandName) {
-    return await procesMessage(payload, commandName + 'Command', commandName + 'Command');
+    return await processMessage(payload, commandName + 'Command', commandName + 'Command');
   };
   
   var processMessage = async function(payload, commandFactory, commandName) {
     logger.debug(`api: processing ${commandName}`);
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
+    console.log(`==========messageBinders.commands=========`);
+    console.log(messageBinders.commands);
+    console.log(`==========END messageBinders.commands=========`);
+    console.log(`==========commandFactory=========`);
+    console.log(commandFactory);
+    console.log(`==========END commandFactory=========`);
     const command = messageBinders.commands[commandFactory](payload);
     await messageBinders.commandPoster(
         command,

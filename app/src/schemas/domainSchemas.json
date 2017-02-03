@@ -2,7 +2,6 @@
   "definitions": {
     "signIn": {
       "title": "signIn",
-      "type": "object",
       "properties": {
         "userName": {
           "type": "string"
@@ -19,7 +18,6 @@
     },
     "contact": {
       "title": "contact",
-      "type": "object",
       "properties": {
         "firstName": {
           "type": "string"
@@ -28,7 +26,6 @@
           "type": "string"
         },
         "address": {
-          "type": "object",
           "$ref": "#/definitions/address"
         },
         "secondaryPhone": {
@@ -50,7 +47,6 @@
     },
     "trainer": {
       "title": "trainer",
-      "type": "object",
       "properties": {
         "contact": {
           "type": "object",
@@ -87,21 +83,39 @@
     },
     "client": {
       "title": "client",
-      "type": "object",
       "properties": {
         "contact": {
-          "type": "object",
           "$ref": "#/definitions/contact"
         },
         "id": {
           "type": "string",
           "format": "uuid"
+        },
+        "source": {
+          "type": "string",
+          "x-input": "select"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-input": "date-time"
+        },
+        "sourceNotes": {
+          "type": "string",
+          "x-input": "textArea"
+        },
+        "birthDate": {
+          "type": "string",
+          "format": "date-time",
+          "x-input": "date-time"
         }
-      }
+      },
+      "required": [
+        "startDate"
+      ]
     },
     "account": {
       "title": "account",
-      "type": "object",
       "properties": {
         "password": {
           "type": "string",
@@ -119,7 +133,6 @@
     },
     "address": {
       "title": "address",
-      "type": "object",
       "properties": {
         "street1": {
           "type": "string"
@@ -141,7 +154,6 @@
     },
     "appointment": {
       "title": "appointment",
-      "type": "object",
       "properties": {
         "id": {
           "type": "string",

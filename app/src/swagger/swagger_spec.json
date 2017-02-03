@@ -23,7 +23,6 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "type": "object",
                             "additionalProperties": {}
                         }
                     }
@@ -54,12 +53,483 @@
                     }
                 }
             }
+        },
+        "/trainers": {
+            "get": {
+                "x-name": "trainers",
+                "description": "retrieve all trainers",
+                "operationId": "trainers",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/trainersResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/hireTrainer": {
+            "post": {
+                "x-name": "/trainer/hireTrainer",
+                "description": "hire trainer",
+                "operationId": "/trainer/hireTrainer",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/trainer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/updateTrainerInfo": {
+            "post": {
+                "x-name": "/trainer/updateTrainerInfo",
+                "description": "update Trainer Info",
+                "operationId": "/trainer/updateTrainerInfo",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateTrainerInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/updateTrainerContact": {
+            "post": {
+                "x-name": "/trainer/updateTrainerContact",
+                "description": "update Trainer Contact",
+                "operationId": "/trainer/updateTrainerContact",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateTrainerContact"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/updateTrainerAddress": {
+            "post": {
+                "x-name": "/trainer/updateTrainerAddress",
+                "description": "update Trainer Address",
+                "operationId": "/trainer/updateTrainerAddress",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateTrainerAddress"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/updateTrainerPassword": {
+            "post": {
+                "x-name": "/trainer/updateTrainerPassword",
+                "description": "update Trainer Password",
+                "operationId": "/trainer/updateTrainerPassword",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateTrainerPassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/updateTrainersClients": {
+            "post": {
+                "x-name": "/trainer/updateTrainersClients",
+                "description": "update Trainers Clients",
+                "operationId": "/trainer/updateTrainersClients",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateTrainersClients"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/getTrainer/{id}": {
+            "get": {
+                "x-name": "trainer",
+                "description": "retrieve single trainer by id",
+                "operationId": "trainer",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "The trainers id",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/trainer"
+                        }
+                    }
+                }
+            }
+        },
+        "/clients": {
+            "get": {
+                "x-name": "clients",
+                "description": "retrieve all clients",
+                "operationId": "clients",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/clientsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/addClient": {
+            "post": {
+                "x-name": "/client/addClient",
+                "description": "add client",
+                "operationId": "/client/addClient",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/updateClientInfo": {
+            "post": {
+                "x-name": "/client/updateClientInfo",
+                "description": "update Client Info",
+                "operationId": "/client/updateClientInfo",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateClientInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/updateClientContact": {
+            "post": {
+                "x-name": "/client/updateClientContact",
+                "description": "update Client Contact",
+                "operationId": "/client/updateClientContact",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateClientContact"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/updateClientAddress": {
+            "post": {
+                "x-name": "/client/updateClientAddress",
+                "description": "update Client Address",
+                "operationId": "/client/updateClientAddress",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateClientAddress"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/getClient/{id}": {
+            "get": {
+                "x-name": "client",
+                "description": "retrieve single client by id",
+                "operationId": "client",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "The client id",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+                    }
+                }
+            }
+        },
+        "/fetchAppointments/{startDate}/{endDate}": {
+            "get": {
+                "x-name": "fetchAppointments",
+                "description": "fetch Appointments",
+                "operationId": "fetchAppointments",
+                "parameters": [
+                    {
+                        "name": "startDate",
+                        "in": "path",
+                        "required": true,
+                        "description": "the beginning of the span of time to retrieve appointments for",
+                        "type": "string"
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "path",
+                        "required": true,
+                        "description": "the ending of the span of time to retrieve appointments for",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/appointmentsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fetchAppointments/{startDate}/{endDate}/{trainerId}": {
+            "get": {
+                "x-name": "fetchAppointments",
+                "description": "fetch Appointments",
+                "operationId": "fetchAppointments",
+                "parameters": [
+                    {
+                        "name": "startDate",
+                        "in": "path",
+                        "required": true,
+                        "description": "the beginning of the span of time to retrieve appointments for",
+                        "type": "string"
+                    },
+                    {
+                        "name": "endDate",
+                        "in": "path",
+                        "required": true,
+                        "description": "the ending of the span of time to retrieve appointments for",
+                        "type": "string"
+                    },
+                    {
+                        "name": "trainerId",
+                        "in": "path",
+                        "required": false,
+                        "description": "the trainer id for whom to retrieve appointments",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/appointmentsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/appointment/scheduleAppointment": {
+            "post": {
+                "x-name": "/appointment/scheduleAppointment",
+                "description": "schedule Appointment",
+                "operationId": "/appointment/scheduleAppointment",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/scheduleAppointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/appointment/updateAppointment": {
+            "post": {
+                "x-name": "/appointment/updateAppointment",
+                "description": "update Appointment",
+                "operationId": "/appointment/updateAppointment",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/scheduleAppointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
+        },
+        "/appointment/cancelAppointment": {
+            "post": {
+                "x-name": "/appointment/cancelAppointment",
+                "description": "cancel Appointment",
+                "operationId": "/appointment/cancelAppointment",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/cancelAppointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/auth"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
         "signIn": {
             "title": "signIn",
-            "type": "object",
             "properties": {
                 "userName": {
                     "type": "string"
@@ -76,7 +546,6 @@
         },
         "contact": {
             "title": "contact",
-            "type": "object",
             "properties": {
                 "firstName": {
                     "type": "string"
@@ -85,7 +554,6 @@
                     "type": "string"
                 },
                 "address": {
-                    "type": "object",
                     "title": "address",
                     "properties": {
                         "street1": {
@@ -125,7 +593,6 @@
         },
         "trainer": {
             "title": "trainer",
-            "type": "object",
             "properties": {
                 "contact": {
                     "type": "object",
@@ -138,7 +605,6 @@
                             "type": "string"
                         },
                         "address": {
-                            "type": "object",
                             "title": "address",
                             "properties": {
                                 "street1": {
@@ -221,10 +687,8 @@
         },
         "client": {
             "title": "client",
-            "type": "object",
             "properties": {
                 "contact": {
-                    "type": "object",
                     "title": "contact",
                     "properties": {
                         "firstName": {
@@ -234,7 +698,6 @@
                             "type": "string"
                         },
                         "address": {
-                            "type": "object",
                             "title": "address",
                             "properties": {
                                 "street1": {
@@ -275,12 +738,32 @@
                 "id": {
                     "type": "string",
                     "format": "uuid"
+                },
+                "source": {
+                    "type": "string",
+                    "x-input": "select"
+                },
+                "startDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "x-input": "date-time"
+                },
+                "sourceNotes": {
+                    "type": "string",
+                    "x-input": "textArea"
+                },
+                "birthDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "x-input": "date-time"
                 }
-            }
+            },
+            "required": [
+                "startDate"
+            ]
         },
         "account": {
             "title": "account",
-            "type": "object",
             "properties": {
                 "password": {
                     "type": "string",
@@ -298,7 +781,6 @@
         },
         "address": {
             "title": "address",
-            "type": "object",
             "properties": {
                 "street1": {
                     "type": "string"
@@ -320,7 +802,6 @@
         },
         "appointment": {
             "title": "appointment",
-            "type": "object",
             "properties": {
                 "id": {
                     "type": "string",
@@ -414,6 +895,266 @@
                     "type": "boolean"
                 },
                 "userName": {
+                    "type": "string"
+                }
+            }
+        },
+        "trainersResponse": {
+            "title": "trainersResponse",
+            "properties": {
+                "trainers": {
+                    "type": "array",
+                    "items": {
+                        "title": "trainer",
+                        "properties": {
+                            "contact": {
+                                "type": "object",
+                                "title": "contact",
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "title": "address",
+                                        "properties": {
+                                            "street1": {
+                                                "type": "string"
+                                            },
+                                            "street2": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "type": "string",
+                                                "x-input": "select"
+                                            },
+                                            "zipCode": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "secondaryPhone": {
+                                        "type": "string"
+                                    },
+                                    "mobilePhone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "email",
+                                    "mobilePhone"
+                                ]
+                            },
+                            "account": {
+                                "description": "The account information for users who can log in",
+                                "type": "object",
+                                "title": "account",
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "x-input": "password"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "x-input": "select"
+                                    }
+                                },
+                                "required": [
+                                    "password",
+                                    "role"
+                                ]
+                            },
+                            "birthDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "x-input": "date-time"
+                            },
+                            "color": {
+                                "type": "string",
+                                "x-input": "color-picker"
+                            },
+                            "clients": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "uniqueItems": true,
+                                "x-input": "multi-select"
+                            },
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "clientsResponse": {
+            "title": "clientsResponse",
+            "properties": {
+                "trainers": {
+                    "type": "array",
+                    "items": {
+                        "title": "client",
+                        "properties": {
+                            "contact": {
+                                "title": "contact",
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "title": "address",
+                                        "properties": {
+                                            "street1": {
+                                                "type": "string"
+                                            },
+                                            "street2": {
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "type": "string",
+                                                "x-input": "select"
+                                            },
+                                            "zipCode": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "secondaryPhone": {
+                                        "type": "string"
+                                    },
+                                    "mobilePhone": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "email",
+                                    "mobilePhone"
+                                ]
+                            },
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "source": {
+                                "type": "string",
+                                "x-input": "select"
+                            },
+                            "startDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "x-input": "date-time"
+                            },
+                            "sourceNotes": {
+                                "type": "string",
+                                "x-input": "textArea"
+                            },
+                            "birthDate": {
+                                "type": "string",
+                                "format": "date-time",
+                                "x-input": "date-time"
+                            }
+                        },
+                        "required": [
+                            "startDate"
+                        ]
+                    }
+                }
+            }
+        },
+        "appointmentsResponse": {
+            "title": "appointmentsResponse",
+            "properties": {
+                "trainers": {
+                    "type": "array",
+                    "items": {
+                        "title": "appointment",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "appointmentType": {
+                                "type": "string",
+                                "x-input": "select"
+                            },
+                            "date": {
+                                "type": "string",
+                                "format": "date-time",
+                                "x-input": "date-time"
+                            },
+                            "startTime": {
+                                "type": "string",
+                                "x-input": "select"
+                            },
+                            "endTime": {
+                                "type": "string"
+                            },
+                            "trainer": {
+                                "type": "string",
+                                "format": "uuid",
+                                "x-input": "select"
+                            },
+                            "clients": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "uniqueItems": true,
+                                "x-input": "multi-select"
+                            },
+                            "notes": {
+                                "type": "string",
+                                "x-input": "textArea"
+                            }
+                        },
+                        "required": [
+                            "appointmentType",
+                            "date",
+                            "startTime",
+                            "endTime",
+                            "trainer"
+                        ]
+                    }
+                }
+            }
+        },
+        "updateClientInfo": {
+            "title": "clientInfoRequest",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
                     "type": "string"
                 }
             }

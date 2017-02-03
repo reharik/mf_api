@@ -33,6 +33,39 @@
           "type": "string"
         }
       }
+    },
+    "trainersResponse": {
+      "title": "trainersResponse",
+      "properties": {
+        "trainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/trainer"
+          }
+        }
+      }
+    },
+    "clientsResponse": {
+      "title": "clientsResponse",
+      "properties": {
+        "trainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/client"
+          }
+        }
+      }
+    },
+    "appointmentsResponse": {
+      "title": "appointmentsResponse",
+      "properties": {
+        "trainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/appointment"
+          }
+        }
+      }
     }
   }
 }

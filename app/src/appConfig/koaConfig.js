@@ -39,9 +39,9 @@ module.exports = function(koagenericsession,
        app.use(koaconvert(papersMiddleware));
 
         var JSONSwaggerDoc = JSON.parse(swaggerDocument);
-        if (!swagger2.validateDocument(JSONSwaggerDoc)) {
-            throw Error(`./swagger.yml does not conform to the Swagger 2.0 schema`);
-        }
+        // if (!swagger2.validateDocument(JSONSwaggerDoc)) {
+        //     throw Error(`./swagger.yml does not conform to the Swagger 2.0 schema`);
+        // }
         app.use(swagger2koa.validate(JSONSwaggerDoc));
 
         app.use(async function (ctx, next){

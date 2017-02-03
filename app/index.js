@@ -18,9 +18,6 @@ module.exports = function(_options) {
     extend(true, options, config.get('configs') || {}, _options || {});
     var container = require('./registry')(options);
     var api = container.getInstanceOf('server');
-    console.log(`==========api.whatDoIHave({showAll:true}}=========`);
-    console.log(container.whatDoIHave({showAll:true}).filter(x=>x.name === 'schemas'));
-    console.log(`==========END api.whatDoIHave({showAll:true}}=========`);
     api();
 }();
 
