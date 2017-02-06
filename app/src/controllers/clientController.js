@@ -42,16 +42,13 @@ module.exports = function(rsRepository,
     var notification = await notificationPromise;
 
     ctx.body = {success: notification.result && notification.result === 'Success', result: notification};
-    ctx.status = 200;
+    ctx.status = notification.result === 'Success' ? 200 : 500;
     return ctx;
   };
 
   var getClient = async function (ctx) {
     const client = await rsRepository.getById(ctx.params.id, 'client');
     ctx.status = 200;
-    console.log(`==========client=========`);
-    console.log(client);
-    console.log(`==========END client=========`);
     ctx.body = client;
   };
 
