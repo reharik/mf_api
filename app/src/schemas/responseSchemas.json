@@ -34,8 +34,48 @@
         }
       }
     },
-    "trainersResponse": {
-      "title": "trainersResponse",
+    "standardSuccessResponse": {
+      "title": "standardResponse",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "payload": {
+          "type": "string"
+        }
+      }
+    },
+    "standardFailureResponse": {
+      "title": "standardResponse",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "error": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/errorMessage"
+          }
+        }
+      }
+    },
+    "errorMessage": {
+      "title": "errorMessage",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+  "trainersResponse": {
+    "title": "trainersResponse",
       "properties": {
         "trainers": {
           "type": "array",

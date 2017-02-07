@@ -52,7 +52,8 @@
         "type": "string"
       },
       "email": {
-        "type": "string"
+        "type": "string",
+        "format": "email"
       }
     }
   },
@@ -184,6 +185,7 @@
       },
       "clients": {
         "type": "array",
+        "minItems": 1,
         "items": {
           "type": "string",
           "format": "uuid"
@@ -193,7 +195,14 @@
       "notes": {
         "type": "string"
       }
-    }
+    },
+    "required": [
+      "appointmentType",
+      "date",
+      "startTime",
+      "endTime",
+      "trainer"
+    ]
   },
   "cancelAppointment": {
     "title": "cancelAppointment",

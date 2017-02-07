@@ -1,6 +1,7 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
+                          notificationParser,
                           moment,
                           logger,
                           uuid) {
@@ -29,8 +30,10 @@ module.exports = function(rsRepository,
     var payload = ctx.request.body;
     payload.commandName = 'scheduleAppointment';
     const notification =await processMessage(payload, 'scheduleAppointmentFactory', 'scheduleAppointment');
-    ctx.body = {success: notification.result != 'Failure', result: notification.handlerResult};
-    ctx.status = notification.result === 'Success' ? 200 : 500;
+    const result = notificationParser(notification);
+
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var updateAppointment = async function (ctx) {
@@ -67,10 +70,12 @@ module.exports = function(rsRepository,
       body.commandName = commandName;
       body.appointmentId = body.id;
       notification = await processMessage(body, 'scheduleAppointmentFactory', commandName);
-      ctx.body = {success: true, result: notification.handlerResult};
-      ctx.status = 200;
+      const result = notificationParser(notification);
+
+      ctx.body = result.body;
+      ctx.status = result.status;
     } catch (ex) {
-      ctx.body = {success: false, result: ex};
+      ctx.body = {success: false, error: ex};
       ctx.status = 500;
     }
   };
@@ -80,9 +85,10 @@ module.exports = function(rsRepository,
     var body = ctx.request.body;
     
     const notification = await processCommandMessage(body, 'cancelAppointment');
+    const result = notificationParser(notification);
 
-    ctx.body = {success: true, result: notification.handlerResult};
-    ctx.status = 200;
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var processCommandMessage = async function(payload, commandName) {
@@ -93,12 +99,6 @@ module.exports = function(rsRepository,
     logger.debug(`api: processing ${commandName}`);
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
-    console.log(`==========messageBinders.commands=========`);
-    console.log(messageBinders.commands);
-    console.log(`==========END messageBinders.commands=========`);
-    console.log(`==========commandFactory=========`);
-    console.log(commandFactory);
-    console.log(`==========END commandFactory=========`);
     const command = messageBinders.commands[commandFactory](payload);
     await messageBinders.commandPoster(
         command,

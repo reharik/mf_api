@@ -3,6 +3,7 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
+                          notificationParser,
                           uuid,
                           logger,
                           authentication) {
@@ -12,47 +13,54 @@ module.exports = function(rsRepository,
     const payload = ctx.request.body;
     payload.password = authentication.createPassword(payload.password);
     const notification = await processMessage(payload, 'hireTrainer');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    const result = notificationParser(notification);
+
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var updateTrainerInfo = async function (ctx) {
     logger.debug("arrived at trainer.updateTrainerInfo");
-    const notification = await processMessage(ctx.request.body, 'updateTrainerInfo');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    const result = await processMessage(ctx.request.body, 'updateTrainerInfo');
+
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var updateTrainerContact = async function (ctx) {
     logger.debug("arrived at trainer.updateTrainerContact");
-    const notification = await processMessage(ctx.request.body, 'updateTrainerContact');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    const result = await processMessage(ctx.request.body, 'updateTrainerContact');
+
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var updateTrainerAddress = async function (ctx) {
     logger.debug("arrived at trainer.updateTrainerAddress");
 
-    const notification = await processMessage(ctx.request.body, 'updateTrainerAddress');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    const result = await processMessage(ctx.request.body, 'updateTrainerAddress');
+    
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var updateTrainerPassword = async function (ctx) {
     logger.debug("arrived at trainer.updateTrainerPassword");
     const payload = ctx.request.body;
     payload.password = authentication.createPassword(payload.password);
-    const notification = await processMessage(payload, 'updateTrainerPassword');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    const result = await processMessage(payload, 'updateTrainerPassword');
+    
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var updateTrainersClients = async function (ctx) {
     logger.debug("arrived at trainer.updateTrainersClients");
 
-    const notification = await processMessage(ctx.request.body, 'updateTrainersClients');
-    ctx.body = {success: true, result: notification};
-    ctx.status = 200;
+    const result = await processMessage(ctx.request.body, 'updateTrainersClients');
+    
+    ctx.body = result.body;
+    ctx.status = result.status;
   };
 
   var processMessage = async function(payload, commandName) {
@@ -66,7 +74,8 @@ module.exports = function(rsRepository,
       commandName,
       continuationId);
 
-    return await notificationPromise;
+    const notification = await notificationPromise;
+    return notificationParser(notification);
   };
 
   var getTrainer = async function (ctx) {

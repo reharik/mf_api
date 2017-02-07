@@ -104,7 +104,12 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
+         *             
          */
         router.post("/trainer/updateTrainerInfo", controllers.trainerController.updateTrainerInfo);
         /**
@@ -124,7 +129,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/trainer/updateTrainerContact", controllers.trainerController.updateTrainerContact);
         /**
@@ -144,7 +153,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/trainer/updateTrainerAddress", controllers.trainerController.updateTrainerAddress);
         /**
@@ -164,7 +177,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/trainer/updateTrainerPassword", controllers.trainerController.updateTrainerPassword);
         /**
@@ -184,7 +201,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/trainer/updateTrainersClients", controllers.trainerController.updateTrainersClients);
         /**
@@ -204,7 +225,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *           "$ref": "#/definitions/trainer"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.get("/trainer/getTrainer/:id", controllers.trainerController.getTrainer);
         /**
@@ -258,7 +283,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/client/updateClientInfo", controllers.clientController.updateClientInfo);
         /**
@@ -278,7 +307,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/client/updateClientContact", controllers.clientController.updateClientContact);
         /**
@@ -298,7 +331,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/client/updateClientAddress", controllers.clientController.updateClientAddress);
         /**
@@ -318,7 +355,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *           "$ref": "#/definitions/client"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.get("/client/getClient/:id", controllers.clientController.getClient);
         /**
@@ -431,7 +472,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/appointment/updateAppointment", controllers.appointmentController.updateAppointment);
         /**
@@ -451,7 +496,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/appointment/cancelAppointment", controllers.appointmentController.cancelAppointment);
 

@@ -3,6 +3,7 @@
 module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
+                          notificationParser,
                           logger,
                           uuid) {
 
@@ -40,9 +41,10 @@ module.exports = function(rsRepository,
       continuationId);
 
     var notification = await notificationPromise;
+    const result = notificationParser(notification);
 
-    ctx.body = {success: notification.result && notification.result === 'Success', result: notification};
-    ctx.status = 200;
+    ctx.body = result.body;
+    ctx.status = result.status;
     return ctx;
   };
 

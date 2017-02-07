@@ -28,6 +28,7 @@
     "ges-eventsourcing": "reharik/ges-eventsourcing.git",
     "hosts-parser": "0.3.1",
     "invariant": "^2.1.0",
+    "json-schema-deref-sync": "^0.3.3",
     "koa": "^2.0.0",
     "koa-bodyparser": "^3.2.0",
     "koa-compress": "^2.0.0",
@@ -47,6 +48,7 @@
     "pg-bluebird": "^1.0.8",
     "rx": "^4.0.0",
     "swagger-jsdoc": "^1.9.1",
+    "swagger-model-validator": "git://github.com/reharik/swagger-model-validator.git",
     "swagger2-koa": "0.0.31",
     "swig": "1.4.x",
     "uuid": "^2.0.1"
