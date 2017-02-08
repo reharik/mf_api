@@ -14,9 +14,6 @@ module.exports = function() {
         GetErrorMessages: () => `can not validate: ${value}, when there is no applicable schema`
       };
     }
-    console.log(`==========value=========`);
-    console.log(value);
-    console.log(`==========END value=========`);
     return schema.validator(value);
   }
 
@@ -31,20 +28,17 @@ module.exports = function() {
       return;
     }
     var parameters = operation.resolvedParameters;
-    var validationResult = {valid: true, errors:[]};
+    var validationResult = {valid: true, errors:[], where: []};
     var bodyDefined = false;
     // check all the parameters match swagger schema
     if (parameters.length === 0) {
-      var result = validate(body, {validator: isEmpty});
-      if (!result.valid) {
-        validationResult.valid = false;
-        validationResult.errors = result.GetErrorMessages();
-        validationResult.where = 'body';
-      }
+      validationResult = validate(body, {validator: isEmpty});
+        validationResult.where.push('body');
+
       if (query !== undefined && Object.keys(query).length > 0) {
         validationResult.valid = false;
         validationResult.errors.push(`Expected empty query string but received ${JSON.stringify(query)}`);
-        validationResult.where = 'query';
+        validationResult.where.push('query');
       }
       return validationResult;
     }
@@ -71,15 +65,9 @@ module.exports = function() {
       }
       var paramResult = validate(value, parameter);
       if (!paramResult.valid) {
-        console.log(`==========paramResult.GetErrorMessages()=========`);
-        console.log(paramResult.GetErrorMessages());
-        console.log(`==========END paramResult.GetErrorMessages()=========`);
         validationResult.valid = false;
-        validationResult.errors = validationResult.errors.concat(paramResult.GetErrorMessages());
-        validationResult.where = parameter.in;
-        console.log(`==========validationResult=========`);
-        console.log(validationResult);
-        console.log(`==========END validationResult=========`);
+        validationResult.errors = validationResult.errors.concat(paramResult.errors);
+        validationResult.where.push(parameter.in);
       }
     });
     // ensure body is undefined if no body schema is defined
@@ -87,7 +75,7 @@ module.exports = function() {
       var error = validate(body, {validator: isEmpty});
       if (!error.valid) {
         validationResult.valid = false;
-        validationResult.where = 'body';
+        validationResult.where .push('body');
         validationResult.errors.push(`Expected empty body but received ${JSON.stringify(body)}`);
       }
     }
@@ -110,8 +98,7 @@ module.exports = function() {
     var result = validate(body, response);
     var validationResult = Object.assign({}, result);
     if(!result.valid) {
-      validationResult.where = 'body';
-      validationResult.errors = result.GetErrorMessages();
+      validationResult.where.push('body');
     }
     return validationResult;
   }

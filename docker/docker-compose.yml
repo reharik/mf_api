@@ -5,9 +5,5 @@ services:
     volumes:
       - ./../app:/home/current/app
     command: npm start #top -b #
-    environment:
-      DEBUG: "true"
-      NODE_ENV: development
-      APPLICATION_NAME: api
     ports:
       - 3000:3000

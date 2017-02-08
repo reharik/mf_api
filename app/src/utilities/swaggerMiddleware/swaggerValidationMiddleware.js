@@ -26,15 +26,10 @@ module.exports = function(compiler, validateMethods) {
         ctx.status = 405;
         return;
       }
-      console.log(`==========validationErrors=========`);
-      console.log(validationErrors);
-      console.log(`==========END validationErrors=========`);
       if (!validationErrors.valid) {
-        ctx.status = 400;
-        ctx.body = {
-          code: 'SWAGGER_REQUEST_VALIDATION_FAILED',
-          errors: validationErrors
-        };
+        validationErrors.code='SWAGGER_REQUEST_VALIDATION_FAILED';
+        ctx.status = 422;
+        ctx.body = validationErrors;
         return;
       }
 
@@ -44,11 +39,9 @@ module.exports = function(compiler, validateMethods) {
       // check the response matches the swagger schema
       let responseResult = validateMethods.response(compiledPath, ctx.method, ctx.status, ctx.body);
       if (!responseResult.valid) {
+        validationErrors.code = 'SWAGGER_RESPONSE_VALIDATION_FAILED';
         ctx.status = 500;
-        ctx.body = {
-          code: 'SWAGGER_RESPONSE_VALIDATION_FAILED',
-          errors: [responseResult]
-        };
+        ctx.body = responseResult
       }
     };
   }
