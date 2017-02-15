@@ -41,7 +41,7 @@
           "type": "boolean"
         },
         "payload": {
-          "type": "string"
+          "type": "object"
         }
       }
     },

@@ -11,9 +11,8 @@ module.exports = function(rsRepository,
   var hireTrainer = async function (ctx) {
     logger.debug("arrived at trainer.hireTrainer");
     const payload = ctx.request.body;
-    payload.password = authentication.createPassword(payload.password);
-    const notification = await processMessage(payload, 'hireTrainer');
-    const result = notificationParser(notification);
+    payload.credentials.password = authentication.createPassword(payload.credentials.password);
+    const result = await processMessage(payload, 'hireTrainer');
 
     ctx.body = result.body;
     ctx.status = result.status;
@@ -65,7 +64,7 @@ module.exports = function(rsRepository,
 
   var processMessage = async function(payload, commandName) {
     const continuationId = uuid.v4();
-    let notificationPromise = notificationListener(continuationId);
+    let notificationPromise = notificationListener(continuationId, commandName);
 
     const command = messageBinders.commands[commandName + 'Command'](payload);
 

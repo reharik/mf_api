@@ -16,4 +16,4 @@ module.exports = function(logger,
       .map(x=> x.data)
       .toPromise();
   }
-}
+};

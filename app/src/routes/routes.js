@@ -84,7 +84,7 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
          */
         router.post("/trainer/hireTrainer", controllers.trainerController.hireTrainer);
         /**
@@ -452,7 +452,11 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *       200:
          *         description: Success
          *         schema:
-         *             $ref: "#/definitions/auth"
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/appointment/scheduleAppointment", controllers.appointmentController.scheduleAppointment);
         /**

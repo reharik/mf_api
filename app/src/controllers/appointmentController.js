@@ -92,7 +92,7 @@ module.exports = function(rsRepository,
   };
 
   var processCommandMessage = async function(payload, commandName) {
-    return await processMessage(payload, commandName + 'Command', commandName + 'Command');
+    return await processMessage(payload, commandName + 'Command', commandName);
   };
   
   var processMessage = async function(payload, commandFactory, commandName) {

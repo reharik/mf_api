@@ -10,10 +10,11 @@ module.exports = function() {
     // if no schema, treat as an error
     if (schema === undefined) {
       return {
-        valid: false,
-        GetErrorMessages: () => `can not validate: ${value}, when there is no applicable schema`
+        success: false,
+        errors: [{message: `can not validate: ${JSON.stringify(value)}, when there is no applicable schema`}]
       };
     }
+
     return schema.validator(value);
   }
 
@@ -21,6 +22,7 @@ module.exports = function() {
     if (compiledPath === undefined) {
       return;
     }
+    
     // get operation object for path and method
     var operation = compiledPath.path[method.toLowerCase()];
     if (operation === undefined) {
@@ -28,21 +30,27 @@ module.exports = function() {
       return;
     }
     var parameters = operation.resolvedParameters;
-    var validationResult = {valid: true, errors:[], where: []};
+    var validationResult = {success: true, errors:[], where: []};
     var bodyDefined = false;
+
     // check all the parameters match swagger schema
     if (parameters.length === 0) {
-      validationResult = validate(body, {validator: isEmpty});
+      var emptyBodyResult = validate(body, {validator: isEmpty});
+      if (!emptyBodyResult.valid) {
+        validationResult.success = false;
+        validationResult.errors.push(`Expected empty body but received ${body}`);
         validationResult.where.push('body');
+      }
 
       if (query !== undefined && Object.keys(query).length > 0) {
-        validationResult.valid = false;
+        validationResult.success = false;
         validationResult.errors.push(`Expected empty query string but received ${JSON.stringify(query)}`);
         validationResult.where.push('query');
       }
+
       return validationResult;
     }
-    
+
     parameters.forEach(function (parameter) {
       var value;
       switch (parameter.in) {
@@ -65,7 +73,7 @@ module.exports = function() {
       }
       var paramResult = validate(value, parameter);
       if (!paramResult.valid) {
-        validationResult.valid = false;
+        validationResult.success = false;
         validationResult.errors = validationResult.errors.concat(paramResult.errors);
         validationResult.where.push(parameter.in);
       }
@@ -74,7 +82,7 @@ module.exports = function() {
     if (!bodyDefined && body !== undefined) {
       var error = validate(body, {validator: isEmpty});
       if (!error.valid) {
-        validationResult.valid = false;
+        validationResult.success = false;
         validationResult.where .push('body');
         validationResult.errors.push(`Expected empty body but received ${JSON.stringify(body)}`);
       }
@@ -91,13 +99,17 @@ module.exports = function() {
     }
     var operation = compiledPath.path[method.toLowerCase()];
     // check the response matches the swagger schema
+
     var response = operation.responses[status];
     if (response === undefined) {
       response = operation.responses['default'];
     }
+
     var result = validate(body, response);
-    var validationResult = Object.assign({}, result);
+    var validationResult = {success: true, errors:[], where: []};
     if(!result.valid) {
+      validationResult.success = false;
+      validationResult.errors = result.errors;
       validationResult.where.push('body');
     }
     return validationResult;

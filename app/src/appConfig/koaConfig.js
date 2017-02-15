@@ -42,6 +42,7 @@ swaggerValidationMiddleware) {
     app.use(koacompress());
 
     var JSONSwaggerDoc = JSON.parse(swaggerDocument);
+
     // if (!swagger2.validateDocument(JSONSwaggerDoc)) {
     //     throw Error(`./swagger.yml does not conform to the Swagger 2.0 schema`);
     // }

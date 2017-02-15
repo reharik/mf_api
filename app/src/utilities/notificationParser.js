@@ -8,8 +8,9 @@ module.exports = function() {
       body.errors = notification.errors
     }else{
       body.success = notification.success;
-      body.payload = notification.payload;
+      body.payload = notification.handlerResult;
     }
+
     return {
       body,
       status

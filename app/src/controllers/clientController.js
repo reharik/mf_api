@@ -51,9 +51,6 @@ module.exports = function(rsRepository,
   var getClient = async function (ctx) {
     const client = await rsRepository.getById(ctx.params.id, 'client');
     ctx.status = 200;
-    console.log(`==========client=========`);
-    console.log(client);
-    console.log(`==========END client=========`);
     ctx.body = client;
   };
 

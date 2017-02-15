@@ -10,7 +10,7 @@ module.exports = function(commands, commandPoster, logger){
 
         if (!ctx.state.user) {
             ctx.status = 401;
-            ctx.body = { "success": false };
+            ctx.body = { "success": false, errors:['Invalid credentials provided'] };
         } else {
             let user = ctx.state.user;
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
