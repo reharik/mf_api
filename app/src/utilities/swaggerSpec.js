@@ -25,9 +25,6 @@ module.exports = function (swaggerjsdoc, fs, schemas, deref, dagon) {
       schemas.domainSchemas.definitions,
       schemas.responseSchemas.definitions,
       schemas.requestSchemas.definitions);
-    console.log('==========schemaDefs=========');
-    console.log(schemas.requestSchemas.definitions);
-    console.log('==========END schemaDefs=========');
 
     swaggerSpec.definitions = deref()({definitions:schemaDefs}, true).definitions;
     if (!fs.existsSync('./app/src/swagger/')) {

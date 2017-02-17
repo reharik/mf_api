@@ -101,11 +101,14 @@ module.exports = function() {
     // check the response matches the swagger schema
 
     var response = operation.responses[status];
-    if (response === undefined) {
-      response = operation.responses['default'];
+    var result = {};
+    if (response) {
+      result = validate(body, response);
+    } else {
+      result.valid = false;
+      result.errors = [{message: `No response provided in schema for status: ${status}`}];
     }
 
-    var result = validate(body, response);
     var validationResult = {success: true, errors:[], where: []};
     if(!result.valid) {
       validationResult.success = false;

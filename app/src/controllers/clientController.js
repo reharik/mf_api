@@ -17,6 +17,11 @@ module.exports = function(rsRepository,
     await processMessage(ctx, 'updateClientInfo');
   };
 
+  var updateClientSource = async function (ctx) {
+    logger.debug("arrived at client.updateClientSource");
+    await processMessage(ctx, 'updateClientSource');
+  };
+
   var updateClientContact = async function (ctx) {
     logger.debug("arrived at client.updateClientContact");
     await processMessage(ctx, 'updateClientContact');

@@ -313,7 +313,13 @@
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/auth"
+                            "$ref": "#/definitions/standardSuccessResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "#/definitions/standardFailureResponse"
                         }
                     }
                 }
