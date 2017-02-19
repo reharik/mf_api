@@ -1,9 +1,9 @@
 
 module.exports = function(compiler, validateMethods) {
-  return function (document) {
+  return function (document, customValidators) {
 
     // construct a validation object, pre-compiling all schema and regex required
-    let compiled = compiler(document);
+    let compiled = compiler(document, customValidators);
     return async(ctx, next) => {
 
       if (document.basePath !== undefined && !ctx.path.startsWith(document.basePath)) {

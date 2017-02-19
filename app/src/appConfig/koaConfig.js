@@ -13,10 +13,8 @@ module.exports = function(koagenericsession,
                           koaconvert,
                           koa2cors,
                           swaggerSpec,
-                          swagger2,
-                          swagger2koa,
-                          swaggermodelvalidator,
-swaggerValidationMiddleware) {
+                          customValidators,
+                          swaggerValidationMiddleware) {
 
   return function (app, papersMiddleware) {
 
@@ -43,11 +41,7 @@ swaggerValidationMiddleware) {
 
     var JSONSwaggerDoc = JSON.parse(swaggerDocument);
 
-    // if (!swagger2.validateDocument(JSONSwaggerDoc)) {
-    //     throw Error(`./swagger.yml does not conform to the Swagger 2.0 schema`);
-    // }
-
-    app.use(swaggerValidationMiddleware(JSONSwaggerDoc));
+    app.use(swaggerValidationMiddleware(JSONSwaggerDoc, customValidators));
 
     app.use(async function (ctx, next) {
       ctx.render = coviews(config.app.root + "/app/src/views", {

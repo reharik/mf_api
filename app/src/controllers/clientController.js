@@ -32,6 +32,11 @@ module.exports = function(rsRepository,
     await processMessage(ctx, 'updateClientAddress');
   };
 
+  var archiveClient = async function (ctx) {
+    logger.debug("arrived at client.archiveClient");
+    await processMessage(ctx, ctx.request.body.archived ? 'unArchiveClient' : 'archiveClient');
+  };
+
   var processMessage = async function(ctx, commandName) {
     logger.debug(`api: processing ${commandName}`);
     const payload = ctx.request.body;
@@ -64,6 +69,7 @@ module.exports = function(rsRepository,
     updateClientInfo,
     updateClientContact,
     updateClientAddress,
+    updateClientSource,
     getClient
   };
 };

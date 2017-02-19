@@ -66,6 +66,9 @@
           "type": "string",
           "x-input": "color-picker"
         },
+        "archived": {
+          "type": "boolean"
+        },
         "clients": {
           "type": "array",
           "items": {
@@ -108,6 +111,9 @@
           "type": "string",
           "format": "date-time",
           "x-input": "date-time"
+        },
+        "archived": {
+          "type": "boolean"
         }
       },
       "required": [

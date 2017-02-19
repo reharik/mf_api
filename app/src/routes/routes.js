@@ -55,18 +55,32 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.all("/signout", controllers.authController.signOut);
         /**
          * @swagger
-         * /trainers:
+         * /fetchTrainers:
          *   get:
-         *     x-name: trainers
-         *     description: retrieve all trainers
-         *     operationId: trainers
+         *     x-name: fetchTrainers
+         *     description: retrieve trainers
+         *     operationId: fetchTrainers
          *     responses:
          *       200:
          *         description: Success
          *         schema:
          *           $ref: "#/definitions/trainersResponse"
          */
-        router.get("/trainers", controllers.trainerListController.trainers);
+        router.get("/fetchTrainers", controllers.trainerListController.fetchTrainers);
+        /**
+         * @swagger
+         * /fetchAllTrainers:
+         *   get:
+         *     x-name: fetchAllTrainers
+         *     description: retrieve all trainers
+         *     operationId: fetchAllTrainers
+         *     responses:
+         *       200:
+         *         description: Success
+         *         schema:
+         *           $ref: "#/definitions/trainersResponse"
+         */
+        router.get("/fetchAllTrainers", controllers.trainerListController.fetchAllTrainers);
         /**
          * @swagger
          * /trainer/hireTrainer:
@@ -234,18 +248,32 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
         router.get("/trainer/getTrainer/:id", controllers.trainerController.getTrainer);
         /**
          * @swagger
-         * /clients:
+         * /fetchClients:
          *   get:
-         *     x-name: clients
-         *     description: retrieve all clients
-         *     operationId: clients
+         *     x-name: fetchClients
+         *     description: retrieve clients
+         *     operationId: fetchClients
          *     responses:
          *       200:
          *         description: Success
          *         schema:
          *           $ref: "#/definitions/clientsResponse"
          */
-        router.get("/clients", controllers.clientListController.clients);
+        router.get("/fetchClients", controllers.clientListController.fetchClients);
+        /**
+         * @swagger
+         * /fetchAllClients:
+         *   get:
+         *     x-name: fetchAllClients
+         *     description: retrieve all clients
+         *     operationId: fetchAllClients
+         *     responses:
+         *       200:
+         *         description: Success
+         *         schema:
+         *           $ref: "#/definitions/clientsResponse"
+         */
+        router.get("/fetchAllClients", controllers.clientListController.fetchAllClients);
         /**
          * @swagger
          * /client/addClient:
@@ -295,6 +323,30 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/client/updateClientInfo", controllers.clientController.updateClientInfo);
+        /**
+         * @swagger
+         * /client/updateClientSource:
+         *   post:
+         *     x-name: /client/updateClientSource
+         *     description: update Client Source
+         *     operationId: /client/updateClientSource
+         *     parameters:
+         *       - name: body
+         *         in: body
+         *         required: true
+         *         schema:
+         *           $ref: "#/definitions/updateClientSource"
+         *     responses:
+         *       200:
+         *         description: Success
+         *         schema:
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
+         */
+        router.post("/client/updateClientSource", controllers.clientController.updateClientSource);
         /**
          * @swagger
          * /client/updateClientContact:
@@ -512,6 +564,55 @@ module.exports = function(koarouter, controllers, koaconvert, papersConfig) {
          *             $ref: "#/definitions/standardFailureResponse"
          */
         router.post("/appointment/cancelAppointment", controllers.appointmentController.cancelAppointment);
+
+        /**
+         * @swagger
+         * /client/archiveClient:
+         *   post:
+         *     x-name: /client/archiveClient
+         *     description: archive Client
+         *     operationId: /client/archiveClient
+         *     parameters:
+         *       - name: body
+         *         in: body
+         *         required: true
+         *         schema:
+         *           $ref: "#/definitions/archiveClient"
+         *     responses:
+         *       200:
+         *         description: Success
+         *         schema:
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
+         */
+        router.post("/client/archiveClient", controllers.clientController.archiveClient);
+        /**
+         * @swagger
+         * /trainer/archiveTrainer:
+         *   post:
+         *     x-name: /trainer/archiveTrainer
+         *     description: archive Trainer
+         *     operationId: /trainer/archiveTrainer
+         *     parameters:
+         *       - name: body
+         *         in: body
+         *         required: true
+         *         schema:
+         *           $ref: "#/definitions/archiveTrainer"
+         *     responses:
+         *       200:
+         *         description: Success
+         *         schema:
+         *             $ref: "#/definitions/standardSuccessResponse"
+         *       422:
+         *         description: Failure
+         *         schema:
+         *             $ref: "#/definitions/standardFailureResponse"
+         */
+        router.post("/trainer/archiveTrainer", controllers.trainerController.archiveTrainer);
 
         app.use(router.routes());
         app.use(router.allowedMethods());

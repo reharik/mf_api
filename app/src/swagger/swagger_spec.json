@@ -54,11 +54,26 @@
                 }
             }
         },
-        "/trainers": {
+        "/fetchTrainers": {
             "get": {
-                "x-name": "trainers",
+                "x-name": "fetchTrainers",
+                "description": "retrieve trainers",
+                "operationId": "fetchTrainers",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/trainersResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fetchAllTrainers": {
+            "get": {
+                "x-name": "fetchAllTrainers",
                 "description": "retrieve all trainers",
-                "operationId": "trainers",
+                "operationId": "fetchAllTrainers",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -279,11 +294,26 @@
                 }
             }
         },
-        "/clients": {
+        "/fetchClients": {
             "get": {
-                "x-name": "clients",
+                "x-name": "fetchClients",
+                "description": "retrieve clients",
+                "operationId": "fetchClients",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/clientsResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/fetchAllClients": {
+            "get": {
+                "x-name": "fetchAllClients",
                 "description": "retrieve all clients",
-                "operationId": "clients",
+                "operationId": "fetchAllClients",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -337,6 +367,37 @@
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/updateClientInfo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/standardSuccessResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "#/definitions/standardFailureResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/client/updateClientSource": {
+            "post": {
+                "x-name": "/client/updateClientSource",
+                "description": "update Client Source",
+                "operationId": "/client/updateClientSource",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/updateClientSource"
                         }
                     }
                 ],
@@ -609,6 +670,68 @@
                     }
                 }
             }
+        },
+        "/client/archiveClient": {
+            "post": {
+                "x-name": "/client/archiveClient",
+                "description": "archive Client",
+                "operationId": "/client/archiveClient",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/archiveClient"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/standardSuccessResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "#/definitions/standardFailureResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/trainer/archiveTrainer": {
+            "post": {
+                "x-name": "/trainer/archiveTrainer",
+                "description": "archive Trainer",
+                "operationId": "/trainer/archiveTrainer",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/archiveTrainer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/standardSuccessResponse"
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "schema": {
+                            "$ref": "#/definitions/standardFailureResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -754,6 +877,9 @@
                     "type": "string",
                     "x-input": "color-picker"
                 },
+                "archived": {
+                    "type": "boolean"
+                },
                 "clients": {
                     "type": "array",
                     "items": {
@@ -840,6 +966,9 @@
                     "type": "string",
                     "format": "date-time",
                     "x-input": "date-time"
+                },
+                "archived": {
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1116,6 +1245,9 @@
                                 "type": "string",
                                 "x-input": "color-picker"
                             },
+                            "archived": {
+                                "type": "boolean"
+                            },
                             "clients": {
                                 "type": "array",
                                 "items": {
@@ -1210,6 +1342,9 @@
                                 "type": "string",
                                 "format": "date-time",
                                 "x-input": "date-time"
+                            },
+                            "archived": {
+                                "type": "boolean"
                             }
                         },
                         "required": [
@@ -1275,21 +1410,6 @@
                             "trainer"
                         ]
                     }
-                }
-            }
-        },
-        "updateClientInfo": {
-            "title": "clientInfoRequest",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "firstName": {
-                    "type": "string"
-                },
-                "lastName": {
-                    "type": "string"
                 }
             }
         },
@@ -1393,6 +1513,40 @@
                 }
             }
         },
+        "updateClientInfo": {
+            "title": "clientInfoRequest",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateClientSource": {
+            "title": "updateClientSource",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "sourceName": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "updateClientContact": {
             "title": "updateClientContact",
             "properties": {
@@ -1449,7 +1603,8 @@
                     "type": "string"
                 },
                 "date": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "date-time"
                 },
                 "startTime": {
                     "type": "string"
@@ -1490,6 +1645,30 @@
                 },
                 "entityName": {
                     "type": "string"
+                }
+            }
+        },
+        "archiveClient": {
+            "title": "archiveClient",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "archived": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "archiveTrainer": {
+            "title": "archiveTrainer",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "archived": {
+                    "type": "boolean"
                 }
             }
         }

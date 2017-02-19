@@ -14,11 +14,14 @@ module.exports = function() {
         errors: [{message: `can not validate: ${JSON.stringify(value)}, when there is no applicable schema`}]
       };
     }
+console.log('==========schema.validator=========');
+console.log(schema.validator.toString());
+console.log('==========END schema.validator=========');
 
     return schema.validator(value);
   }
 
-  function request(compiledPath, method, query, body, headers) {
+  function request(compiledPath, method, query, body, headers, customValidators) {
     if (compiledPath === undefined) {
       return;
     }
@@ -90,13 +93,14 @@ module.exports = function() {
     return validationResult;
   }
 
-  function response(compiledPath, method, status, body) {
+  function response(compiledPath, method, status, body, customValidators) {
     if (compiledPath === undefined) {
       return {
         actual: 'UNDEFINED_PATH',
         expected: 'PATH'
       };
     }
+    
     var operation = compiledPath.path[method.toLowerCase()];
     // check the response matches the swagger schema
 

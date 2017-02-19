@@ -52,7 +52,8 @@
     "swagger-model-validator": "git://github.com/reharik/swagger-model-validator.git",
     "swagger2-koa": "0.0.31",
     "swig": "1.4.x",
-    "uuid": "^2.0.1"
+    "uuid": "^2.0.1",
+    "uuid-validate": "0.0.2"
   },
   "devDependencies": {
     "del": "^1.2.0",

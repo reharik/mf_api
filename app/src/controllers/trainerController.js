@@ -62,6 +62,15 @@ module.exports = function(rsRepository,
     ctx.status = result.status;
   };
 
+  var archiveTrainer = async function (ctx) {
+    logger.debug("arrived at trainer.archiveTrainer");
+
+    const result = await processMessage(ctx.request.body, ctx.request.body.archived ? 'unArchiveTrainer' : 'archiveTrainer');
+
+    ctx.body = result.body;
+    ctx.status = result.status;
+  };
+
   var processMessage = async function(payload, commandName) {
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId, commandName);
@@ -90,6 +99,7 @@ module.exports = function(rsRepository,
     updateTrainerAddress,
     updateTrainerPassword,
     updateTrainersClients,
+    archiveTrainer,
     getTrainer
   };
 };

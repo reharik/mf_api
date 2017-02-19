@@ -88,8 +88,8 @@ module.exports = function(jsonschemaderefsync, curriedValidator) {
     };
   }
 
-  function compile(document) {
-    const curriedValidatorWithDoc = curriedValidator(document);
+  function compile(document, customValidators) {
+    const curriedValidatorWithDoc = curriedValidator(document, customValidators);
     // get the de-referenced version of the swagger document
     var swagger = jsonschemaderefsync(document);
     // add a validator for every parameter in swagger document

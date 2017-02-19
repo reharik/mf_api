@@ -1,20 +1,5 @@
 {
   "definitions": {
-    "updateClientInfo": {
-      "title": "clientInfoRequest",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        }
-      }
-    },
     "updateTrainerInfo": {
       "title": "updateTrainerInfoRequest",
       "properties": {
@@ -115,6 +100,40 @@
         }
       }
     },
+    "updateClientInfo": {
+      "title": "clientInfoRequest",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    },
+    "updateClientSource": {
+      "title": "updateClientSource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "source": {
+          "type": "string"
+        },
+        "sourceName": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "updateClientContact": {
       "title": "updateClientContact",
       "properties": {
@@ -171,7 +190,8 @@
           "type": "string"
         },
         "date": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "startTime": {
           "type": "string"
@@ -212,6 +232,30 @@
         },
         "entityName": {
           "type": "string"
+        }
+      }
+    },
+    "archiveClient": {
+      "title": "archiveClient",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      }
+    },
+    "archiveTrainer": {
+      "title": "archiveTrainer",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "archived": {
+          "type": "boolean"
         }
       }
     }
