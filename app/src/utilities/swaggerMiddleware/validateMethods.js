@@ -14,9 +14,6 @@ module.exports = function() {
         errors: [{message: `can not validate: ${JSON.stringify(value)}, when there is no applicable schema`}]
       };
     }
-console.log('==========schema.validator=========');
-console.log(schema.validator.toString());
-console.log('==========END schema.validator=========');
 
     return schema.validator(value);
   }
@@ -104,7 +101,11 @@ console.log('==========END schema.validator=========');
     var operation = compiledPath.path[method.toLowerCase()];
     // check the response matches the swagger schema
 
+    var validationResult = {success: true, errors:[], where: []};
     var response = operation.responses[status];
+    if(!response.schema && !body){
+      return validationResult;
+    }
     var result = {};
     if (response) {
       result = validate(body, response);
@@ -113,7 +114,6 @@ console.log('==========END schema.validator=========');
       result.errors = [{message: `No response provided in schema for status: ${status}`}];
     }
 
-    var validationResult = {success: true, errors:[], where: []};
     if(!result.valid) {
       validationResult.success = false;
       validationResult.errors = result.errors;

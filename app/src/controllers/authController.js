@@ -16,7 +16,6 @@ module.exports = function(commands, commandPoster, logger){
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
             commandPoster(cmd, 'loginTrainer');
             delete user.password;
-            user.role = 'admin';
             ctx.body = {success: true, user };
         }
     };
@@ -30,10 +29,12 @@ module.exports = function(commands, commandPoster, logger){
     //     }
     // };
 
-    var  signOut = async function () {
-        this.logout();
-        this.session = null;
-        this.status = 204;
+    var  signOut = async function (ctx) {
+        ctx.user = null;
+        if (ctx.session && ctx.session['papers']) {
+            delete ctx.session['papers'].user;
+        }
+        ctx.status = 204;
     };
 
     return {

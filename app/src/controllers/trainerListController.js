@@ -6,7 +6,11 @@ module.exports = function(rsRepository, logger){
         logger.debug("arrived at trainerlist.fetchTrainers");
 
         try {
-            var query = await rsRepository.query('SELECT * from "trainer" where not "archived";');
+            var sql = 'SELECT * from "trainer" where not "archived"';
+            if (ctx.state.user.role !== 'admin') {
+                sql += ` and id = '${ctx.state.user.id}'`;
+            }
+            var query = await rsRepository.query(sql);
         } catch (ex) {
             throw ex;
         }

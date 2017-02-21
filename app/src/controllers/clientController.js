@@ -34,6 +34,23 @@ module.exports = function(rsRepository,
 
   var archiveClient = async function (ctx) {
     logger.debug("arrived at client.archiveClient");
+    var query = await rsRepository.query('SELECT * from "trainer";');
+    const id = ctx.request.body.id;
+
+    var trainerClients = query.filter(x => x.clients && x.clients.some(c => c === id))
+      .map(x=> {
+        x.clients.splice(x.clients.indexOf(id), 1);
+        return {id:x.id, clients:x.clients}
+      });
+
+    for(let payload of trainerClients) {
+      const command = messageBinders.commands['updateTrainersClientsCommand'](payload);
+      await messageBinders.commandPoster(
+        command,
+        'updateTrainersClients',
+        uuid.v4());
+    }
+
     await processMessage(ctx, ctx.request.body.archived ? 'unArchiveClient' : 'archiveClient');
   };
 
@@ -59,7 +76,15 @@ module.exports = function(rsRepository,
   };
 
   var getClient = async function (ctx) {
-    const client = await rsRepository.getById(ctx.params.id, 'client');
+    let client;
+    if (ctx.state.user.role !== 'admin') {
+      const trainer = await rsRepository.getById(ctx.state.user.id, 'trainer');
+      if (trainer.clients && !trainer.clients.some(x=> x === ctx.params.id)) {
+        throw new Error('Attempt to access client not associated with current trainer');
+      }
+    }
+    client = await rsRepository.getById(ctx.params.id, 'client');
+
     ctx.status = 200;
     ctx.body = client;
   };
@@ -70,6 +95,7 @@ module.exports = function(rsRepository,
     updateClientContact,
     updateClientAddress,
     updateClientSource,
+    archiveClient,
     getClient
   };
 };

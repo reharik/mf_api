@@ -1,8 +1,3 @@
-/**
-xx * Created by rharik on 10/1/15.
- */
-"use strict";
-
 var dagon = require('dagon');
 var path = require('path');
 

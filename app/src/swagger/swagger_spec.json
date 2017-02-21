@@ -54,6 +54,18 @@
                 }
             }
         },
+        "/signout": {
+            "post": {
+                "x-name": "signout",
+                "description": "sign out",
+                "operationId": "signout",
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/fetchTrainers": {
             "get": {
                 "x-name": "fetchTrainers",
