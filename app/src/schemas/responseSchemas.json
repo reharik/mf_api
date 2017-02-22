@@ -74,8 +74,8 @@
         }
       }
     },
-  "trainersResponse": {
-    "title": "trainersResponse",
+    "trainersResponse": {
+      "title": "trainersResponse",
       "properties": {
         "trainers": {
           "type": "array",

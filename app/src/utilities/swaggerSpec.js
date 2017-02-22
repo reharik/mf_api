@@ -1,4 +1,4 @@
-module.exports = function (swaggerjsdoc, fs, schemas, deref, dagon) {
+module.exports = function (swaggerjsdoc, fs, schemas, deref) {
   return function () {
     var options = {
       swaggerDefinition: {
