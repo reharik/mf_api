@@ -18,7 +18,7 @@ module.exports = function() {
     return schema.validator(value);
   }
 
-  function request(compiledPath, method, query, body, headers, customValidators) {
+  function request(compiledPath, method, query, body, headers) {
     if (compiledPath === undefined) {
       return;
     }
@@ -90,7 +90,7 @@ module.exports = function() {
     return validationResult;
   }
 
-  function response(compiledPath, method, status, body, customValidators) {
+  function response(compiledPath, method, status, body) {
     if (compiledPath === undefined) {
       return {
         actual: 'UNDEFINED_PATH',

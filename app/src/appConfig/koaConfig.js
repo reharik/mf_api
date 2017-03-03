@@ -22,7 +22,6 @@ module.exports = function(koagenericsession,
       throw new Error("Please add session secret key in the config file!");
     }
 
-    var swaggerDocument = swaggerSpec();
 
     app.keys = config.app.keys;
     if (config.app.env !== "test") {
@@ -39,8 +38,7 @@ module.exports = function(koagenericsession,
     app.use(koaconvert(papersMiddleware));
     app.use(koacompress());
 
-    var JSONSwaggerDoc = JSON.parse(swaggerDocument);
-
+    var JSONSwaggerDoc = JSON.parse(swaggerSpec());
     app.use(swaggerValidationMiddleware(JSONSwaggerDoc, customValidators));
 
     app.use(async function (ctx, next) {
