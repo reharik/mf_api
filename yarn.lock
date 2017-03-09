@@ -1920,7 +1920,7 @@ memory-cache@~0.1.5:
 
 messagebinders@reharik/mf_messagebinders#eventstore_node:
   version "1.0.0"
-  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/3b39659544eea2617905cc92c3623edbe4409821"
+  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/bf2eb3eb16b930153c674311b7d9d8011c6548b4"
   dependencies:
     corelogger reharik/core_logger
     dagon reharik/dagon
