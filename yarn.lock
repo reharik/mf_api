@@ -920,7 +920,7 @@ generic-pool@2.4.2:
 
 ges-eventsourcing@reharik/ges-eventsourcing#eventstore_node:
   version "0.0.1"
-  resolved "https://codeload.github.com/reharik/ges-eventsourcing/tar.gz/d0ef24ca518701ef7725691ab83afa90a6f78232"
+  resolved "https://codeload.github.com/reharik/ges-eventsourcing/tar.gz/c7101caf5c8640a0630c4b69e98398c434db9611"
   dependencies:
     JSON "^1.0.0"
     bluebird "^3.4.1"
@@ -1920,7 +1920,7 @@ memory-cache@~0.1.5:
 
 messagebinders@reharik/mf_messagebinders#eventstore_node:
   version "1.0.0"
-  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/4a2ae45f77e4d9589a6aa56b43b6c9522e145adc"
+  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/d22c7c8c97e5d93bdce199f47061ef734d9875d2"
   dependencies:
     corelogger reharik/core_logger
     dagon reharik/dagon
@@ -2378,8 +2378,8 @@ pg@4.x, pg@^4.4.3:
     semver "^4.1.0"
 
 pg@^6.1.0:
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-6.1.3.tgz#8e5e497329c2b81dbfd563f1541c5803c7269de4"
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-6.1.4.tgz#53f74440b81e1eb641e219bf4b3ee77d382f676a"
   dependencies:
     buffer-writer "1.0.1"
     packet-reader "0.2.0"
