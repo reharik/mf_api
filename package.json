@@ -41,7 +41,6 @@
     "koa2-cors": "^2.0.3",
     "koa2-response-time": "0.0.10",
     "lodash": "^3.10.0",
-    "messagebinders": "reharik/mf_messagebinders#eventstore_node",
     "moment": "^2.10.6",
     "papers-local": "reharik/papers-local",
     "path": "^0.12.7",

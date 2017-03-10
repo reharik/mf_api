@@ -1918,15 +1918,6 @@ memory-cache@~0.1.5:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/memory-cache/-/memory-cache-0.1.6.tgz#2ed9933ed7a8c718249be7366f7ca8749acf8a24"
 
-messagebinders@reharik/mf_messagebinders#eventstore_node:
-  version "1.0.0"
-  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/fe17a26aa41c8359ac28c137ac55a2f6e9551276"
-  dependencies:
-    corelogger reharik/core_logger
-    dagon reharik/dagon
-    extend "^3.0.0"
-    invariant "^2.1.0"
-
 methods@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
