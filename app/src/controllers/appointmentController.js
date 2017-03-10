@@ -1,5 +1,4 @@
 module.exports = function(rsRepository,
-                          messageBinders,
                           eventstore,
                           notificationListener,
                           notificationParser,

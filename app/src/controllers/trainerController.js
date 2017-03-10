@@ -1,7 +1,6 @@
 "use strict";
 
 module.exports = function(rsRepository,
-                          messageBinders,
                           notificationListener,
                           notificationParser,
                           eventstore,
