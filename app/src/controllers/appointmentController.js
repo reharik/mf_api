@@ -1,5 +1,6 @@
 module.exports = function(rsRepository,
                           messageBinders,
+                          eventstore,
                           notificationListener,
                           notificationParser,
                           moment,
@@ -100,7 +101,7 @@ module.exports = function(rsRepository,
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
     const command = messageBinders.commands[commandFactory](payload);
-    await messageBinders.commandPoster(
+    await eventstore.commandPoster(
         command,
         commandName,
         continuationId);

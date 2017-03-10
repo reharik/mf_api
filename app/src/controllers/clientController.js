@@ -4,6 +4,7 @@ module.exports = function(rsRepository,
                           messageBinders,
                           notificationListener,
                           notificationParser,
+                          eventstore,
                           logger,
                           uuid) {
 
@@ -45,7 +46,7 @@ module.exports = function(rsRepository,
 
     for(let payload of trainerClients) {
       const command = messageBinders.commands['updateTrainersClientsCommand'](payload);
-      await messageBinders.commandPoster(
+      await eventstore.commandPoster(
         command,
         'updateTrainersClients',
         uuid.v4());
@@ -62,7 +63,7 @@ module.exports = function(rsRepository,
 
     const command = messageBinders.commands[commandName + 'Command'](payload);
 
-    await messageBinders.commandPoster(
+    await eventstore.commandPoster(
       command,
       commandName,
       continuationId);

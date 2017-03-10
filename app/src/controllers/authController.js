@@ -3,7 +3,7 @@
  */
 "use strict";
 
-module.exports = function(commands, commandPoster, logger){
+module.exports = function(commands, eventstore, logger){
 
     var signIn = function (ctx) {
         logger.debug("arrived at login");
@@ -14,7 +14,7 @@ module.exports = function(commands, commandPoster, logger){
         } else {
             let user = ctx.state.user;
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
-            commandPoster(cmd, 'loginTrainer');
+            eventstore.commandPoster(cmd, 'loginTrainer');
             delete user.password;
             ctx.body = {success: true, user };
         }

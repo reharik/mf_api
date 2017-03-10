@@ -41,8 +41,8 @@
   resolved "https://registry.yarnpkg.com/@types/long/-/long-3.0.31.tgz#08635b0d0d322676940c1a88a7a9cef661c6f34a"
 
 "@types/node@*":
-  version "7.0.7"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.7.tgz#92637c6c4844bfc9a0a686323e38f3e9319118c2"
+  version "7.0.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.8.tgz#25e4dd804b630c916ae671233e6d71f6ce18124a"
 
 "@types/node@^6.0.47":
   version "6.0.65"
@@ -500,7 +500,7 @@ core-util-is@~1.0.0:
 
 corelogger@reharik/core_logger:
   version "0.0.1"
-  resolved "https://codeload.github.com/reharik/core_logger/tar.gz/2d758bd2edf074ae7d34939efba1656da29b2631"
+  resolved "https://codeload.github.com/reharik/core_logger/tar.gz/a369c51b4479532a9432950da51ffefee9a91ef4"
   dependencies:
     moment "^2.17.1"
     os "^0.1.1"
@@ -920,7 +920,7 @@ generic-pool@2.4.2:
 
 ges-eventsourcing@reharik/ges-eventsourcing#eventstore_node:
   version "0.0.1"
-  resolved "https://codeload.github.com/reharik/ges-eventsourcing/tar.gz/c7101caf5c8640a0630c4b69e98398c434db9611"
+  resolved "https://codeload.github.com/reharik/ges-eventsourcing/tar.gz/0bd6a98c358d85b950641e4a7a91be59e544ff28"
   dependencies:
     JSON "^1.0.0"
     bluebird "^3.4.1"
@@ -1920,13 +1920,11 @@ memory-cache@~0.1.5:
 
 messagebinders@reharik/mf_messagebinders#eventstore_node:
   version "1.0.0"
-  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/d22c7c8c97e5d93bdce199f47061ef734d9875d2"
+  resolved "https://codeload.github.com/reharik/mf_messagebinders/tar.gz/fe17a26aa41c8359ac28c137ac55a2f6e9551276"
   dependencies:
     corelogger reharik/core_logger
     dagon reharik/dagon
-    eventstore-node "^0.0.29"
     extend "^3.0.0"
-    ges-eventsourcing reharik/ges-eventsourcing#eventstore_node
     invariant "^2.1.0"
 
 methods@^1.0.1:
