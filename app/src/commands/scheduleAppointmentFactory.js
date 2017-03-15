@@ -13,10 +13,10 @@ module.exports = function(invariant) {
         entityName}) {
         
         if(commandName !== 'scheduleAppointment') {
-            invariant(appointmentId, `${commandName} requires that you pass the appointmentId`);
+            invariant(appointmentId, `scheduleAppointment requires that you pass the appointmentId`);
         }
-        if(commandName === 'rescheduleAppointmentToNewDay'){
-            invariant(originalEntityName, `${commandName} requires that you pass in the originalEntityName`);
+        if(commandName === 'rescheduleAppointment'){
+            invariant(originalEntityName, `rescheduleAppointment requires that you pass in the originalEntityName`);
         }
         invariant(appointmentType, `${commandName} requires that you pass the appointmentType`);
         invariant(trainer, `${commandName} requires that you pass trainer`);
@@ -40,7 +40,7 @@ module.exports = function(invariant) {
         if(commandName !== 'scheduleAppointment') {
             result.appointmentId = appointmentId;
         }
-        if(commandName === 'rescheduleAppointmentToNewDay') {
+        if(commandName === 'rescheduleAppointmen') {
             result.originalEntityName = originalEntityName;
         }
         return result;

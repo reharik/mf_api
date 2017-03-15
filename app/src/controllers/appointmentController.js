@@ -50,19 +50,15 @@ module.exports = function(rsRepository,
         }
       }
 
-      if (moment(appointment.date).format('YYYYMMDD') !== moment(body.date).format('YYYYMMDD')) {
-        commandName += 'rescheduleAppointmentToNewDay';
+      if (moment(appointment.date).format('YYYYMMDD') !== moment(body.date).format('YYYYMMDD'
+              || appointment.startTime !== body.startTime)) {
+        commandName += 'rescheduleAppointment';
         body.originalEntityName = appointment.entityName;
-      } else if (appointment.startTime !== body.startTime) {
-        commandName += 'rescheduleAppointmentTime'
-      } else if (appointment.appointmentType !== body.appointmentType) {
-        commandName += 'changeAppointmentType'
-      } else if (!clientsSame) {
-        commandName += 'changeAppointmentClients'
-      } else if (appointment.trainer !== body.trainer) {
-        commandName += 'changeAppointmentTrainer'
-      } else if (appointment.notes !== body.notes) {
-        commandName += 'updateNotesForAppointment'
+      } else if (appointment.appointmentType !== body.appointmentType
+          || !clientsSame
+          || appointment.trainer !== body.trainer
+          || appointment.notes !== body.notes) {
+        commandName += 'updateAppointment'
       } else {
         throw new Error('UpdateAppointment called but no change in appointment');
       }
