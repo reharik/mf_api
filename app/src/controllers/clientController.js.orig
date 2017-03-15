@@ -70,8 +70,13 @@ module.exports = function(rsRepository,
     var notification = await notificationPromise;
     const result = notificationParser(notification);
 
+<<<<<<< HEAD
+    ctx.body = {success: notification.result && notification.result === 'Success', result: notification};
+    ctx.status = notification.result === 'Success' ? 200 : 500;
+=======
     ctx.body = result.body;
     ctx.status = result.status;
+>>>>>>> 6161e7896d00eaf0ac40bb266c43e620f86b08d1
     return ctx;
   };
 

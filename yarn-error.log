@@ -1,14 +1,14 @@
 Arguments: 
-  /usr/bin/nodejs /usr/bin/yarn
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
 Yarn version: 
-  0.17.6
+  0.20.3
 
 Node version: 
-  6.3.1
+  7.7.1
 
 Platform: 
   linux x64
@@ -20,8 +20,9 @@ npm manifest:
     "private": true,
     "main": "app/index.js",
     "scripts": {
-      "start": "node --harmony-async-await app/index.js",
-      "watch": "nodemon --harmony-async-await --debug -V -w src/app/controllers -w src/app/models -w src/app/routes -w config -w config/env -w lib -w node_modules",
+      "start1": "node --harmony-async-await app/index.js",
+      "start": "NODE_ENV=local LOGGING_TRANSPORTS=console nodemon --ignore app/src/swagger --harmony-async-await --debug -V -w app/src -w node_modules",
+      "docker": "nodemon --ignore app/src/swagger --harmony-async-await --debug -V -w app/src -w node_modules",
       "test": "NODE_ENV=test ./node_modules/.bin/mocha --harmony --reporter spec ./test/test-*.js",
       "intTest": "mocha --require ./babelhook --opts ./tests/mocha.opts ./tests/integrationTests/temp.js"
     },
@@ -37,38 +38,37 @@ npm manifest:
       "co-body": "^4.0.0",
       "co-views": "^2.1.0",
       "config": "^1.14.0",
-      "corelogger": "git://github.com/reharik/core_logger.git",
+      "corelogger": "reharik/core_logger.git",
       "dagon": "reharik/dagon",
       "deref": "^0.6.4",
       "extend": "3.0.0",
-      "ges-eventsourcing": "reharik/ges-eventsourcing.git",
+      "ges-eventsourcing": "reharik/ges-eventsourcing.git#eventstore_node",
       "hosts-parser": "0.3.1",
       "invariant": "^2.1.0",
+      "json-schema-deref-sync": "^0.3.3",
       "koa": "^2.0.0",
       "koa-bodyparser": "^3.2.0",
       "koa-compress": "^2.0.0",
       "koa-convert": "^1.2.0",
-      "koa-cors": "0.0.16",
-      "koa-errorhandler": "^0.1.1",
       "koa-generic-session": "^1.11.3",
       "koa-logger": "^2.0.0",
       "koa-papers": "reharik/koa-papers.git",
-      "koa-passport": "next",
-      "koa-response-time": "^2.0.0",
       "koa-router": "^7.0.1",
-      "koa-session": "^3.3.1",
-      "koa-static": "2.0.0",
+      "koa2-cors": "^2.0.3",
+      "koa2-response-time": "0.0.10",
       "lodash": "^3.10.0",
-      "messagebinders": "git://github.com/reharik/mf_messagebinders.git",
+      "messagebinders": "reharik/mf_messagebinders.git#eventstore_node",
       "moment": "^2.10.6",
       "papers-local": "reharik/papers-local.git",
       "path": "^0.12.7",
       "pg-async": "^2.4.0",
       "pg-bluebird": "^1.0.8",
       "rx": "^4.0.0",
-      "swagger-jsdoc": "^1.8.1",
+      "swagger-jsdoc": "^1.9.1",
+      "swagger-model-validator": "reharik/swagger-model-validator.git",
       "swig": "1.4.x",
-      "uuid": "^2.0.1"
+      "uuid": "^2.0.1",
+      "uuid-validate": "0.0.2"
     },
     "devDependencies": {
       "del": "^1.2.0",
@@ -92,13 +92,4 @@ Lockfile:
   No lockfile
 
 Trace: 
-  Error: TODO
-      at /usr/lib/node_modules/yarn/lib/resolvers/exotics/hosted-git-resolver.js:135:15
-      at next (native)
-      at step (/usr/lib/node_modules/yarn/node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30)
-      at /usr/lib/node_modules/yarn/node_modules/babel-runtime/helpers/asyncToGenerator.js:28:13
-      at run (/usr/lib/node_modules/yarn/node_modules/core-js/library/modules/es6.promise.js:87:22)
-      at /usr/lib/node_modules/yarn/node_modules/core-js/library/modules/es6.promise.js:100:28
-      at flush (/usr/lib/node_modules/yarn/node_modules/core-js/library/modules/_microtask.js:18:9)
-      at _combinedTickCallback (internal/process/next_tick.js:67:7)
-      at process._tickCallback (internal/process/next_tick.js:98:9)
+  Error: ENOTEMPTY: directory not empty, rmdir '/home/rharik/.cache/yarn/npm-dagon-1.2.0-db811b45d8f296edd808de82ae8b47f6cb87a590/tests/TestModules'

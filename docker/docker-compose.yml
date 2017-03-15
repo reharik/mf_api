@@ -4,10 +4,8 @@ services:
     image: mf_api
     volumes:
       - ./../app:/home/current/app
-    command: npm start #top -b #
-    environment:
-      DEBUG: "true"
-      NODE_ENV: development
-      APPLICATION_NAME: api
+    command: npm run docker #top -b #
     ports:
       - 3000:3000
+    env_file:
+      - ./.env

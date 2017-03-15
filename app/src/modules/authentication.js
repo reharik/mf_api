@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(bcryptjs, rsRepository, messagebinders) {
+module.exports = function(bcryptjs, rsRepository) {
     var createPassword = function (_password) {
         try {
             var salt = bcryptjs.genSaltSync(10);
@@ -17,7 +17,7 @@ module.exports = function(bcryptjs, rsRepository, messagebinders) {
     };
 
     var matchUser = async function (username, password, done) {
-        var users = await rsRepository.query('select * from "user" where "document" ->> \'userName\' = \'' + username.toLowerCase() + '\'');
+        var users = await rsRepository.query(`select * from "user" where not "archived" AND "document" ->> 'userName' = '${username.toLowerCase()}'`);
         //for now, but lets put a findOne func on repo
         var user = users[0];
         if (!user) {

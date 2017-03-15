@@ -3,20 +3,19 @@
  */
 "use strict";
 
-module.exports = function(commands, commandPoster, logger){
+module.exports = function(commands, eventstore, logger){
 
     var signIn = function (ctx) {
         logger.debug("arrived at login");
 
         if (!ctx.state.user) {
             ctx.status = 401;
-            ctx.body = { "success": false };
+            ctx.body = { "success": false, errors:['Invalid credentials provided'] };
         } else {
             let user = ctx.state.user;
             var cmd = commands.loginTrainerCommand(user.id, user.userName);
-            commandPoster(cmd, 'loginTrainer');
+            eventstore.commandPoster(cmd, 'loginTrainer');
             delete user.password;
-            user.role = 'admin';
             ctx.body = {success: true, user };
         }
     };
@@ -30,10 +29,12 @@ module.exports = function(commands, commandPoster, logger){
     //     }
     // };
 
-    var  signOut = async function () {
-        this.logout();
-        this.session = null;
-        this.status = 204;
+    var  signOut = async function (ctx) {
+        ctx.user = null;
+        if (ctx.session && ctx.session['papers']) {
+            delete ctx.session['papers'].user;
+        }
+        ctx.status = 204;
     };
 
     return {
