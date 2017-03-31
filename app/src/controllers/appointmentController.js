@@ -2,6 +2,7 @@ module.exports = function(rsRepository,
                           eventstore,
                           notificationListener,
                           notificationParser,
+                          commands,
                           moment,
                           logger,
                           uuid) {
@@ -95,7 +96,7 @@ module.exports = function(rsRepository,
     logger.debug(`api: processing ${commandName}`);
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
-    const command = messageBinders.commands[commandFactory](payload);
+    const command = commands[commandFactory](payload);
     await eventstore.commandPoster(
         command,
         commandName,

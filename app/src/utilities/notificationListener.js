@@ -2,18 +2,29 @@
 module.exports = function(logger,
                           eventstore,
                           rx,
+                          applicationFunctions,
                           mapAndFilterStream) {
 
   return continuationId => {
     logger.info('startDispatching | startDispatching called');
+    const eventAppeared = eventstore.eventEmitterInstance();
+    var mAndF = mapAndFilterStream('notification');
+    var ef = applicationFunctions.eventFunctions;
+    var subscription = eventstore.gesConnection.subscribeToAllFrom(
+      null,
+      false,
+      eventAppeared.emitEvent,null,null,
+      eventstore.credentials);
 
-    var mAndF  = mapAndFilterStream('notification');
-    return rx.Observable.fromEvent(eventstore.subscribeToAllFrom(), 'event')
+    logger.info("subscription.isSubscribedToAll: " + subscription.isSubscribedToAll);
+
+    return rx.Observable.fromEvent(eventAppeared.emitter, 'event')
+
       .filter(mAndF.isValidStreamType)
-      .map(mAndF.transformEvent)
-      .first(note => note.metadata.continuationId == continuationId
-          && note.data.initialEvent.metadata.streamType == 'command')
-      .map(x=> x.data)
+
+      .first(note => mAndF.continuationId(note).getOrElse() == continuationId
+        && ef.parseData(note).getOrElse().initialEvent.metadata.streamType == 'command')
+      .map(ef.parseData.getOrElse())
       .toPromise();
   }
 };

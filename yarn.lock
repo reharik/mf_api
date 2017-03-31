@@ -916,9 +916,9 @@ generic-pool@2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-2.4.2.tgz#886bc5bf0beb7db96e81bcbba078818de5a62683"
 
-ges-eventsourcing@reharik/ges-eventsourcing#05:
+ges-eventsourcing@reharik/ges-eventsourcing#08:
   version "0.0.1"
-  resolved "https://codeload.github.com/reharik/ges-eventsourcing/tar.gz/1a5e37b5bbd328da4f95eae36611375f781923de"
+  resolved "https://codeload.github.com/reharik/ges-eventsourcing/tar.gz/666ab83e93ae8963173d9b70e3a34529c5410616"
   dependencies:
     JSON "^1.0.0"
     bluebird "^3.4.1"

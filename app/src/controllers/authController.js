@@ -7,9 +7,6 @@ module.exports = function(commands, eventstore, logger, config){
 
     var signIn = function (ctx) {
         logger.debug("arrived at login");
-console.log(`==========config=========`);
-console.log(config.configs.children.eventstore);
-console.log(`==========END config=========`);
         if (!ctx.state.user) {
             ctx.status = 401;
             ctx.body = { "success": false, errors:['Invalid credentials provided'] };

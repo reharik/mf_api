@@ -4,6 +4,7 @@ module.exports = function(rsRepository,
                           notificationListener,
                           notificationParser,
                           eventstore,
+                          commands,
                           uuid,
                           logger,
                           authentication) {
@@ -21,6 +22,9 @@ module.exports = function(rsRepository,
   var updateTrainerInfo = async function (ctx) {
     logger.debug("arrived at trainer.updateTrainerInfo");
     const result = await processMessage(ctx.request.body, 'updateTrainerInfo');
+console.log('==========result=========');
+console.log(result);
+console.log('==========END result=========');
 
     ctx.body = result.body;
     ctx.status = result.status;
@@ -75,8 +79,7 @@ module.exports = function(rsRepository,
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId, commandName);
 
-    const command = messageBinders.commands[commandName + 'Command'](payload);
-
+    const command = commands[commandName + 'Command'](payload);
     await eventstore.commandPoster(
       command,
       commandName,

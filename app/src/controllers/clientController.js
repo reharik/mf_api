@@ -4,6 +4,7 @@ module.exports = function(rsRepository,
                           notificationListener,
                           notificationParser,
                           eventstore,
+                          commands,
                           logger,
                           uuid) {
 
@@ -44,7 +45,7 @@ module.exports = function(rsRepository,
       });
 
     for(let payload of trainerClients) {
-      const command = messageBinders.commands['updateTrainersClientsCommand'](payload);
+      const command = commands['updateTrainersClientsCommand'](payload);
       await eventstore.commandPoster(
         command,
         'updateTrainersClients',
@@ -60,15 +61,28 @@ module.exports = function(rsRepository,
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
 
-    const command = messageBinders.commands[commandName + 'Command'](payload);
+    const command = commands[commandName + 'Command'](payload);
+console.log('==========command=========');
+console.log(command);
+console.log('==========END command=========');
 
     await eventstore.commandPoster(
       command,
       commandName,
       continuationId);
+console.log('=========="Posted"=========');
+console.log("Posted");
+console.log('==========END "Posted"=========');
 
     var notification = await notificationPromise;
+    console.log('==========notification=========');
+    console.log(notification);
+    console.log('==========END notification=========');
+    
     const result = notificationParser(notification);
+console.log('==========result=========');
+console.log(result);
+console.log('==========END result=========');
 
     ctx.body = result.body;
     ctx.status = result.status;
