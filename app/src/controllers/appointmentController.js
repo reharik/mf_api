@@ -51,14 +51,16 @@ module.exports = function(rsRepository,
         }
       }
 
-      if (moment(appointment.date).format('YYYYMMDD') !== moment(body.date).format('YYYYMMDD'
-              || appointment.startTime !== body.startTime)) {
+      if (moment(appointment.date).format('YYYYMMDD') !== moment(body.date).format('YYYYMMDD')
+              || appointment.startTime !== body.startTime) {
+
         commandName += 'rescheduleAppointment';
         body.originalEntityName = appointment.entityName;
       } else if (appointment.appointmentType !== body.appointmentType
           || !clientsSame
           || appointment.trainer !== body.trainer
           || appointment.notes !== body.notes) {
+
         commandName += 'updateAppointment'
       } else {
         throw new Error('UpdateAppointment called but no change in appointment');
@@ -66,7 +68,9 @@ module.exports = function(rsRepository,
 
       body.commandName = commandName;
       body.appointmentId = body.id;
+
       notification = await processMessage(body, 'scheduleAppointmentFactory', commandName);
+
       const result = notificationParser(notification);
 
       ctx.body = result.body;
