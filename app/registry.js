@@ -17,6 +17,7 @@ module.exports = function(_options) {
           .for('applicationFunctions').renameTo('appfuncs')
           .groupAllInDirectory('./app/src/controllers', 'controllers')
           .groupAllInDirectory('./app/src/schemas', 'schemas', true)
+          .groupAllInDirectory('./app/src/routes/routers', 'routers_array')
           .groupAllInDirectory('./app/src/commands', 'commands')
           .complete(),
       x => x.instantiate('eventstore').asFunc().withParameters(options.children || {})

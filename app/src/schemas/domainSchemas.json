@@ -208,6 +208,48 @@
         "endTime",
         "trainer"
       ]
+    },
+    "sessionsPurchase": {
+      "title": "sessionsPurchase",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "fulHour": {
+          "type": "number"
+        },
+        "fulHourTenPack": {
+          "type": "number"
+        },
+        "halfHour": {
+          "type": "number"
+        },
+        "halfHourTenPack": {
+          "type": "number"
+        },
+        "pair": {
+          "type": "number"
+        },
+        "pairTenPack": {
+          "type": "number"
+        },
+        "client": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "notes": {
+          "type": "string",
+          "x-input": "textArea"
+        }
+      },
+      "required": [
+        "appointmentType",
+        "date",
+        "startTime",
+        "endTime",
+        "trainer"
+      ]
     }
   }
 }
