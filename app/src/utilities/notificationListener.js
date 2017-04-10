@@ -24,7 +24,7 @@ module.exports = function(logger,
 
       .first(note => mAndF.continuationId(note).getOrElse() == continuationId
         && ef.parseData(note).getOrElse().initialEvent.metadata.streamType == 'command')
-      .map(ef.parseData.getOrElse())
+      .map(note => ef.parseData(note).getOrElse())
       .toPromise();
   }
 };
