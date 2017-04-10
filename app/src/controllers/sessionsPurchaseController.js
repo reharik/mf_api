@@ -9,22 +9,22 @@ module.exports = function(rsRepository,
                           uuid) {
 
   var purchaseSessions = async function (ctx) {
-    logger.debug("arrived at purchaseSessions.purchaseSessions");
+    logger.debug("arrived at sessionsPurchase.purchaseSessions");
     await processMessage(ctx, 'purchaseSessions');
   };
 
   var updateSessionPurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
-    logger.debug("arrived at purchaseSessions.updateSessionPurchase");
+    logger.debug("arrived at sessionsPurchase.updateSessionPurchase");
     await processMessage(ctx, 'updateSessionPurchase');
   };
 
   var cancelSessionPurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
-    logger.debug("arrived at purchaseSessions.cancelSessionPurchase");
-    await processMessage(ctx, 'cancelSessionPurchase');
+    logger.debug("arrived at sessionsPurchase.cancelSessionPurchase");
+    await processMessage(ctx, 'cancelSessionPurchaseDueToError');
   };
 
   var processMessage = async function(ctx, commandName) {
