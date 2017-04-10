@@ -58,13 +58,16 @@ module.exports = function(rsRepository,
           || !clientsSame
           || appointment.trainer !== body.trainer
           || appointment.notes !== body.notes) {
+
         commandName += 'updateAppointment'
       } else {
         throw new Error('UpdateAppointment called but no change in appointment');
       }
       body.commandName = commandName;
       body.appointmentId = body.id;
+
       notification = await processMessage(body, 'scheduleAppointmentFactory', commandName);
+
       const result = notificationParser(notification);
 
       ctx.body = result.body;
