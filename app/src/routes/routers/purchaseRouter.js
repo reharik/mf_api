@@ -1,21 +1,21 @@
-module.exports = function purchaseSessionsRouter(koarouter, controllers) {
+module.exports = function purchasesRouter(koarouter, controllers) {
   return function (appRouter) {
 
     const router = koarouter();
 
     /**
      * @swagger
-     * /sessionsPurchase/purchaseSessions:
+     * /sessionsPurchase/purchases:
      *   post:
-     *     x-name: /sessionsPurchase/purchaseSessions
+     *     x-name: /sessionsPurchase/purchases
      *     description: purchase sessions for a client
-     *     operationId: /sessionsPurchase/purchaseSessions
+     *     operationId: /sessionsPurchase/purchases
      *     parameters:
      *       - name: body
      *         in: body
      *         required: true
      *         schema:
-     *           $ref: "#/definitions/purchaseSessions"
+     *           $ref: "#/definitions/purchases"
      *     responses:
      *       200:
      *         description: Success
@@ -27,7 +27,7 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *             $ref: "#/definitions/standardFailureResponse"
      *
      */
-    router.post("/sessionsPurchase/purchaseSessions", controllers.sessionsPurchaseController.purchaseSessions);
+    router.post("/sessionsPurchase/purchases", controllers.sessionsPurchaseController.purchases);
     /**
      * @swagger
      * /sessionsPurchase/updateSessionsPurchase:
@@ -78,11 +78,11 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
     router.post("/sessionsPurchase/cancelSessionsPurchase", controllers.sessionsPurchaseController.cancelSessionsPurchase);
     /**
      * @swagger
-     * /sessionsPurchase/fetchSessionPurchase/{id}:
+     * /sessionsPurchase/fetchPurchase/{id}:
      *   get:
      *     x-name: trainer
      *     description: retrieve single trainer by id
-     *     operationId: sessionsPurchase/fetchSessionPurchase/{id}
+     *     operationId: sessionsPurchase/fetchPurchase/{id}
      *     parameters:
      *       - name: id
      *         in: path
@@ -99,21 +99,21 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *         schema:
      *             $ref: "#/definitions/standardFailureResponse"
      */
-    router.get("/sessionsPurchase/fetchSessionPurchase/:id", controllers.sessionsPurchaseController.fetchSessionPurchase);
+    router.get("/sessionsPurchase/fetchPurchase/:id", controllers.sessionsPurchaseController.fetchPurchase);
     /**
      * @swagger
-     * /purchaseSessionsList/fetchSessionPurchases:
+     * /purchasesList/fetchPurchases:
      *   get:
-     *     x-name: /purchaseSessionsList/fetchSessionPurchases
+     *     x-name: /purchasesList/fetchPurchases
      *     description: retrieve clients
      *     operationId: fetchClients
      *     responses:
      *       200:
      *         description: Success
      *         schema:
-     *           $ref: "#/definitions/purchaseSessionsResponse"
+     *           $ref: "#/definitions/purchasesResponse"
      */
-    router.get("/sessionsPurchaseList/fetchSessionPurchases", controllers.sessionsPurchaseList.fetchSessionPurchases);
+    router.get("/sessionsPurchaseList/fetchPurchases", controllers.sessionsPurchaseList.fetchPurchases);
 
     appRouter.use(router.routes(), router.allowedMethods());
   };

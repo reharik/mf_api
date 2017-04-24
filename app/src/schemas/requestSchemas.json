@@ -259,8 +259,8 @@
         }
       }
     },
-    "purchaseSession": {
-      "title": "purchaseSession",
+    "purchase": {
+      "title": "purchase",
       "properties": {
         "id": {
           "type": "string",

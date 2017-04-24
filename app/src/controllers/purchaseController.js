@@ -8,27 +8,27 @@ module.exports = function(rsRepository,
                           logger,
                           uuid) {
 
-  var purchaseSessions = async function (ctx) {
-    logger.debug("arrived at sessionsPurchase.purchaseSessions");
+  var purchases = async function (ctx) {
+    logger.debug("arrived at sessionsPurchase.purchases");
     let payload = ctx.request.body;
     payload.totalHours = (payload.fullHourTenPack * 10) + payload.fullHour;
     payload.totalHalfHours = (payload.halfHourTenPack * 10) + payload.halfHour;
     payload.totalpairs = (payload.pairTenPack * 10) + payload.pair;
-    await processMessage(ctx, 'purchaseSessions', payload);
+    await processMessage(ctx, 'purchases', payload);
   };
 
-  var updateSessionPurchase = async function (ctx) {
+  var updatePurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
-    logger.debug("arrived at sessionsPurchase.updateSessionPurchase");
-    await processMessage(ctx, 'updateSessionPurchase', ctx.request.body);
+    logger.debug("arrived at sessionsPurchase.updatePurchase");
+    await processMessage(ctx, 'updatePurchase', ctx.request.body);
   };
 
-  var cancelSessionPurchase = async function (ctx) {
+  var cancelPurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
-    logger.debug("arrived at purchaseSessions.cancelSessionPurchase");
-    await processMessage(ctx, 'cancelSessionPurchase', ctx.request.body);
+    logger.debug("arrived at purchases.cancelPurchase");
+    await processMessage(ctx, 'cancelPurchase', ctx.request.body);
   };
 
   var processMessage = async function(ctx, commandName, payload) {
@@ -51,18 +51,18 @@ module.exports = function(rsRepository,
     return ctx;
   };
 
-  var fetchSessionPurchase = async function (ctx) {
-    let sessionPurchase = await rsRepository.getById(ctx.params.id, 'sessionPurchase');
+  var fetchPurchase = async function (ctx) {
+    let purchase = await rsRepository.getById(ctx.params.id, 'purchase');
 
     ctx.status = 200;
-    ctx.body = sessionPurchase;
+    ctx.body = purchase;
   };
 
   return {
-    purchaseSessions,
-    updateSessionPurchase,
-    cancelSessionPurchase,
-    fetchSessionPurchase
+    purchases,
+    updatePurchase,
+    cancelPurchase,
+    fetchPurchase
   };
 };
 

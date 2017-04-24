@@ -474,18 +474,18 @@
                 }
             }
         },
-        "/purchaseSessions/purchaseSessions": {
+        "/purchases/purchases": {
             "post": {
-                "x-name": "/purchaseSessions/purchaseSessions",
+                "x-name": "/purchases/purchases",
                 "description": "purchase sessions for a client",
-                "operationId": "/purchaseSessions/purchaseSessions",
+                "operationId": "/purchases/purchases",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/purchaseSessions"
+                            "$ref": "#/definitions/purchases"
                         }
                     }
                 ],
@@ -505,11 +505,11 @@
                 }
             }
         },
-        "/purchaseSessions/updateSessionsPurchase": {
+        "/purchases/updateSessionsPurchase": {
             "post": {
-                "x-name": "/purchaseSessions/updateSessionsPurchase",
+                "x-name": "/purchases/updateSessionsPurchase",
                 "description": "update session purchase for client",
-                "operationId": "/purchaseSessions/updateSessionsPurchase",
+                "operationId": "/purchases/updateSessionsPurchase",
                 "parameters": [
                     {
                         "name": "body",
@@ -536,11 +536,11 @@
                 }
             }
         },
-        "/purchaseSessions/cancelSessionsPurchase": {
+        "/purchases/cancelSessionsPurchase": {
             "post": {
-                "x-name": "/purchaseSessions/cancelSessionsPurchase",
+                "x-name": "/purchases/cancelSessionsPurchase",
                 "description": "cancel session purchase for client",
-                "operationId": "/purchaseSessions/cancelSessionsPurchase",
+                "operationId": "/purchases/cancelSessionsPurchase",
                 "parameters": [
                     {
                         "name": "body",
@@ -567,11 +567,11 @@
                 }
             }
         },
-        "/purchaseSessions/fetchSessionPurchase/{id}": {
+        "/purchases/fetchPurchase/{id}": {
             "get": {
                 "x-name": "trainer",
                 "description": "retrieve single trainer by id",
-                "operationId": "purchaseSessions/fetchSessionPurchase/{id}",
+                "operationId": "purchases/fetchPurchase/{id}",
                 "parameters": [
                     {
                         "name": "id",
@@ -597,16 +597,16 @@
                 }
             }
         },
-        "/purchaseSessionsList/fetchSessionPurchases": {
+        "/purchasesList/fetchPurchases": {
             "get": {
-                "x-name": "/purchaseSessionsList/fetchSessionPurchases",
+                "x-name": "/purchasesList/fetchPurchases",
                 "description": "retrieve clients",
                 "operationId": "fetchClients",
                 "responses": {
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "$ref": "#/definitions/purchaseSessionsResponse"
+                            "$ref": "#/definitions/purchasesResponse"
                         }
                     }
                 }
@@ -1864,8 +1864,8 @@
                 }
             }
         },
-        "purchaseSession": {
-            "title": "purchaseSession",
+        "purchase": {
+            "title": "purchase",
             "properties": {
                 "id": {
                     "type": "string",
