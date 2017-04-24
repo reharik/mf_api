@@ -258,6 +258,62 @@
           "type": "boolean"
         }
       }
+    },
+    "purchaseSession": {
+      "title": "purchaseSession",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "clientId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "fullHour": {
+          "type": "number"
+        },
+        "fullHourTenPack": {
+          "type": "number"
+        },
+        "halfHour": {
+          "type": "number"
+        },
+        "halfHourTenPack": {
+          "type": "number"
+        },
+        "pair": {
+          "type": "number"
+        },
+        "pairTenPack": {
+          "type": "number"
+        },
+        "fullHourTotal": {
+          "type": "number"
+        },
+        "fullHourTenPackTotal": {
+          "type": "number"
+        },
+        "halfHourTotal": {
+          "type": "number"
+        },
+        "halfHourTenPackTotal": {
+          "type": "number"
+        },
+        "pairTotal": {
+          "type": "number"
+        },
+        "pairTenPackTotal": {
+          "type": "number"
+        },
+        "purchaseTotal": {
+          "type": "number"
+        },
+        "notes": {
+          "type": "string",
+          "x-input": "textArea"
+        }
+      }
     }
   }
 }

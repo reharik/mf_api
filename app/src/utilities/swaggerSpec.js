@@ -1,5 +1,11 @@
 module.exports = function (swaggerjsdoc, fs, schemas, deref) {
   return function () {
+    const apis = fs.readdirSync('./app/src/routes/routers/')
+      .map(x => `./app/src/routes/routers/${x}`);
+console.log('==========apis=========');
+console.log(apis);
+console.log('==========END apis=========');
+
     var options = {
       swaggerDefinition: {
         swagger: '2.0',
@@ -17,7 +23,7 @@ module.exports = function (swaggerjsdoc, fs, schemas, deref) {
           'application/json'
         ]
       },
-      apis: ['./app/src/routes/routes.js']
+      apis
     };
 
     var swaggerSpec = swaggerjsdoc(options);

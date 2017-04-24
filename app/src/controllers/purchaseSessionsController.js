@@ -10,26 +10,29 @@ module.exports = function(rsRepository,
 
   var purchaseSessions = async function (ctx) {
     logger.debug("arrived at purchaseSessions.purchaseSessions");
-    await processMessage(ctx, 'purchaseSessions');
+    let payload = ctx.request.body;
+    payload.totalHours = (payload.fullHourTenPack * 10) + payload.fullHour;
+    payload.totalHalfHours = (payload.halfHourTenPack * 10) + payload.halfHour;
+    payload.totalpairs = (payload.pairTenPack * 10) + payload.pair;
+    await processMessage(ctx, 'purchaseSessions', payload);
   };
 
   var updateSessionPurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
     logger.debug("arrived at purchaseSessions.updateSessionPurchase");
-    await processMessage(ctx, 'updateSessionPurchase');
+    await processMessage(ctx, 'updateSessionPurchase', ctx.request.body);
   };
 
   var cancelSessionPurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
     logger.debug("arrived at purchaseSessions.cancelSessionPurchase");
-    await processMessage(ctx, 'cancelSessionPurchase');
+    await processMessage(ctx, 'cancelSessionPurchase', ctx.request.body);
   };
 
-  var processMessage = async function(ctx, commandName) {
+  var processMessage = async function(ctx, commandName, payload) {
     logger.debug(`api: processing ${commandName}`);
-    const payload = ctx.request.body;
     const continuationId = uuid.v4();
     let notificationPromise = notificationListener(continuationId);
 
