@@ -9,7 +9,7 @@ module.exports = function(rsRepository,
                           uuid) {
 
   var purchaseSessions = async function (ctx) {
-    logger.debug("arrived at purchaseSessions.purchaseSessions");
+    logger.debug("arrived at sessionsPurchase.purchaseSessions");
     let payload = ctx.request.body;
     payload.totalHours = (payload.fullHourTenPack * 10) + payload.fullHour;
     payload.totalHalfHours = (payload.halfHourTenPack * 10) + payload.halfHour;
@@ -20,7 +20,7 @@ module.exports = function(rsRepository,
   var updateSessionPurchase = async function (ctx) {
     // will want logic here for only allowing admin and distinguishing
     // between accident and refund.
-    logger.debug("arrived at purchaseSessions.updateSessionPurchase");
+    logger.debug("arrived at sessionsPurchase.updateSessionPurchase");
     await processMessage(ctx, 'updateSessionPurchase', ctx.request.body);
   };
 

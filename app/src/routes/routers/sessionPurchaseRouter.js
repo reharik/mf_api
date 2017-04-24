@@ -5,11 +5,11 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
 
     /**
      * @swagger
-     * /purchaseSessions/purchaseSessions:
+     * /sessionsPurchase/purchaseSessions:
      *   post:
-     *     x-name: /purchaseSessions/purchaseSessions
+     *     x-name: /sessionsPurchase/purchaseSessions
      *     description: purchase sessions for a client
-     *     operationId: /purchaseSessions/purchaseSessions
+     *     operationId: /sessionsPurchase/purchaseSessions
      *     parameters:
      *       - name: body
      *         in: body
@@ -27,14 +27,14 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *             $ref: "#/definitions/standardFailureResponse"
      *
      */
-    router.post("/purchaseSessions/purchaseSessions", controllers.purchaseSessionsController.purchaseSessions);
+    router.post("/sessionsPurchase/purchaseSessions", controllers.sessionsPurchaseController.purchaseSessions);
     /**
      * @swagger
-     * /purchaseSessions/updateSessionsPurchase:
+     * /sessionsPurchase/updateSessionsPurchase:
      *   post:
-     *     x-name: /purchaseSessions/updateSessionsPurchase
+     *     x-name: /sessionsPurchase/updateSessionsPurchase
      *     description: update session purchase for client
-     *     operationId: /purchaseSessions/updateSessionsPurchase
+     *     operationId: /sessionsPurchase/updateSessionsPurchase
      *     parameters:
      *       - name: body
      *         in: body
@@ -51,14 +51,14 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *         schema:
      *             $ref: "#/definitions/standardFailureResponse"
      */
-    router.post("/purchaseSessions/updateSessionsPurchase", controllers.purchaseSessionsController.updateSessionsPurchase);
+    router.post("/sessionsPurchase/updateSessionsPurchase", controllers.sessionsPurchaseController.updateSessionsPurchase);
     /**
      * @swagger
-     * /purchaseSessions/cancelSessionsPurchase:
+     * /sessionsPurchase/cancelSessionsPurchase:
      *   post:
-     *     x-name: /purchaseSessions/cancelSessionsPurchase
+     *     x-name: /sessionsPurchase/cancelSessionsPurchase
      *     description: cancel session purchase for client
-     *     operationId: /purchaseSessions/cancelSessionsPurchase
+     *     operationId: /sessionsPurchase/cancelSessionsPurchase
      *     parameters:
      *       - name: body
      *         in: body
@@ -75,14 +75,14 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *         schema:
      *             $ref: "#/definitions/standardFailureResponse"
      */
-    router.post("/purchaseSessions/cancelSessionsPurchase", controllers.clientController.cancelSessionsPurchase);
+    router.post("/sessionsPurchase/cancelSessionsPurchase", controllers.sessionsPurchaseController.cancelSessionsPurchase);
     /**
      * @swagger
-     * /purchaseSessions/fetchSessionPurchase/{id}:
+     * /sessionsPurchase/fetchSessionPurchase/{id}:
      *   get:
      *     x-name: trainer
      *     description: retrieve single trainer by id
-     *     operationId: purchaseSessions/fetchSessionPurchase/{id}
+     *     operationId: sessionsPurchase/fetchSessionPurchase/{id}
      *     parameters:
      *       - name: id
      *         in: path
@@ -99,7 +99,7 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *         schema:
      *             $ref: "#/definitions/standardFailureResponse"
      */
-    router.get("/purchaseSessions/fetchSessionPurchase/:id", controllers.purchaseSessionsController.fetchSessionPurchase);
+    router.get("/sessionsPurchase/fetchSessionPurchase/:id", controllers.sessionsPurchaseController.fetchSessionPurchase);
     /**
      * @swagger
      * /purchaseSessionsList/fetchSessionPurchases:
@@ -113,7 +113,7 @@ module.exports = function purchaseSessionsRouter(koarouter, controllers) {
      *         schema:
      *           $ref: "#/definitions/purchaseSessionsResponse"
      */
-    router.get("/purchaseSessionsList/fetchSessionPurchases", controllers.purchaseSessionsList.fetchSessionPurchases);
+    router.get("/sessionsPurchaseList/fetchSessionPurchases", controllers.sessionsPurchaseList.fetchSessionPurchases);
 
     appRouter.use(router.routes(), router.allowedMethods());
   };

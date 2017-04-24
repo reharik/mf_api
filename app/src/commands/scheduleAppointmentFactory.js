@@ -11,7 +11,7 @@ module.exports = function(invariant) {
         notes,
         originalEntityName,
         entityName}) {
-        
+
         if(commandName !== 'scheduleAppointment') {
             invariant(appointmentId, `scheduleAppointment requires that you pass the appointmentId`);
         }
@@ -35,7 +35,8 @@ module.exports = function(invariant) {
             trainer,
             clients,
             notes,
-            entityName
+            entityName,
+            originalEntityName
         };
         if(commandName !== 'scheduleAppointment') {
             result.appointmentId = appointmentId;
