@@ -106,6 +106,17 @@
           }
         }
       }
+    },
+    "purchasesResponse": {
+      "title": "purchasesResponse",
+      "properties": {
+        "trainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/purchase"
+          }
+        }
+      }
     }
   }
 }

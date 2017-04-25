@@ -1,9 +1,3 @@
-/**
- * Created by reharik on 7/26/15.
- */
-
-"use strict";
-
 module.exports = function(koarouter, routers_array, controllers, logger) {
   var secured = async function (next) {
     if (this.isAuthenticated()) {
@@ -23,8 +17,6 @@ module.exports = function(koarouter, routers_array, controllers, logger) {
 
       routers_array.forEach(x => x(router));
 
-      app.use(router.routes());
-      app.use(router.allowedMethods());
 
 
     } catch (ex) {

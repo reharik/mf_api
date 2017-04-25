@@ -11,7 +11,6 @@ module.exports = function(compiler, validateMethods) {
         await next();
         return;
       }
-
       let compiledPath = compiled(ctx.path);
       if (compiledPath === undefined) {
         // if there is no single matching path, return 404 (not found)

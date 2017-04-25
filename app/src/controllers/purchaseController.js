@@ -8,7 +8,7 @@ module.exports = function(rsRepository,
                           logger,
                           uuid) {
 
-  var purchases = async function (ctx) {
+  var purchase = async function (ctx) {
     logger.debug("arrived at sessionsPurchase.purchases");
     let payload = ctx.request.body;
     payload.totalHours = (payload.fullHourTenPack * 10) + payload.fullHour;
@@ -59,7 +59,7 @@ module.exports = function(rsRepository,
   };
 
   return {
-    purchases,
+    purchase,
     updatePurchase,
     cancelPurchase,
     fetchPurchase

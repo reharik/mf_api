@@ -474,18 +474,18 @@
                 }
             }
         },
-        "/purchases/purchases": {
+        "/purchase/purchase": {
             "post": {
-                "x-name": "/purchases/purchases",
+                "x-name": "/purchase/purchases",
                 "description": "purchase sessions for a client",
-                "operationId": "/purchases/purchases",
+                "operationId": "/purchase/purchases",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/purchases"
+                            "$ref": "#/definitions/purchase"
                         }
                     }
                 ],
@@ -505,18 +505,18 @@
                 }
             }
         },
-        "/purchases/updateSessionsPurchase": {
+        "/purchase/updatepurchase": {
             "post": {
-                "x-name": "/purchases/updateSessionsPurchase",
+                "x-name": "/purchase/updatePurchase",
                 "description": "update session purchase for client",
-                "operationId": "/purchases/updateSessionsPurchase",
+                "operationId": "/purchase/updatePurchase",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/updateSessionsPurchase"
+                            "$ref": "#/definitions/updatePurchase"
                         }
                     }
                 ],
@@ -536,18 +536,18 @@
                 }
             }
         },
-        "/purchases/cancelSessionsPurchase": {
+        "/purchase/cancelpurchase": {
             "post": {
-                "x-name": "/purchases/cancelSessionsPurchase",
+                "x-name": "/purchase/cancelPurchase",
                 "description": "cancel session purchase for client",
-                "operationId": "/purchases/cancelSessionsPurchase",
+                "operationId": "/purchase/cancelPurchase",
                 "parameters": [
                     {
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/cancelSessionsPurchase"
+                            "$ref": "#/definitions/cancelPurchase"
                         }
                     }
                 ],
@@ -567,11 +567,11 @@
                 }
             }
         },
-        "/purchases/fetchPurchase/{id}": {
+        "/purchase/fetchpurchase/{id}": {
             "get": {
                 "x-name": "trainer",
                 "description": "retrieve single trainer by id",
-                "operationId": "purchases/fetchPurchase/{id}",
+                "operationId": "purchase/fetchPurchase/{id}",
                 "parameters": [
                     {
                         "name": "id",
@@ -597,11 +597,20 @@
                 }
             }
         },
-        "/purchasesList/fetchPurchases": {
+        "/purchaselist/fetchpurchases/{id}": {
             "get": {
-                "x-name": "/purchasesList/fetchPurchases",
-                "description": "retrieve clients",
-                "operationId": "fetchClients",
+                "x-name": "/purchaseList/fetchPurchases",
+                "description": "retrieve clients purchases",
+                "operationId": "fetchClientsPurchases",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "The id of the client whose purchase we are getting",
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -1214,17 +1223,21 @@
                 "trainer"
             ]
         },
-        "sessionsPurchase": {
-            "title": "sessionsPurchase",
+        "purchase": {
+            "title": "purchase",
             "properties": {
                 "id": {
                     "type": "string",
                     "format": "uuid"
                 },
-                "fulHour": {
+                "clientId": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "fullHour": {
                     "type": "number"
                 },
-                "fulHourTenPack": {
+                "fullHourTenPack": {
                     "type": "number"
                 },
                 "halfHour": {
@@ -1239,22 +1252,32 @@
                 "pairTenPack": {
                     "type": "number"
                 },
-                "client": {
-                    "type": "string",
-                    "format": "uuid"
+                "fullHourTotal": {
+                    "type": "number"
+                },
+                "fullHourTenPackTotal": {
+                    "type": "number"
+                },
+                "halfHourTotal": {
+                    "type": "number"
+                },
+                "halfHourTenPackTotal": {
+                    "type": "number"
+                },
+                "pairTotal": {
+                    "type": "number"
+                },
+                "pairTenPackTotal": {
+                    "type": "number"
+                },
+                "purchaseTotal": {
+                    "type": "number"
                 },
                 "notes": {
                     "type": "string",
                     "x-input": "textArea"
                 }
-            },
-            "required": [
-                "appointmentType",
-                "date",
-                "startTime",
-                "endTime",
-                "trainer"
-            ]
+            }
         },
         "auth": {
             "title": "auth",
@@ -1605,6 +1628,70 @@
                 }
             }
         },
+        "purchasesResponse": {
+            "title": "purchasesResponse",
+            "properties": {
+                "trainers": {
+                    "type": "array",
+                    "items": {
+                        "title": "purchase",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "clientId": {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            "fullHour": {
+                                "type": "number"
+                            },
+                            "fullHourTenPack": {
+                                "type": "number"
+                            },
+                            "halfHour": {
+                                "type": "number"
+                            },
+                            "halfHourTenPack": {
+                                "type": "number"
+                            },
+                            "pair": {
+                                "type": "number"
+                            },
+                            "pairTenPack": {
+                                "type": "number"
+                            },
+                            "fullHourTotal": {
+                                "type": "number"
+                            },
+                            "fullHourTenPackTotal": {
+                                "type": "number"
+                            },
+                            "halfHourTotal": {
+                                "type": "number"
+                            },
+                            "halfHourTenPackTotal": {
+                                "type": "number"
+                            },
+                            "pairTotal": {
+                                "type": "number"
+                            },
+                            "pairTenPackTotal": {
+                                "type": "number"
+                            },
+                            "purchaseTotal": {
+                                "type": "number"
+                            },
+                            "notes": {
+                                "type": "string",
+                                "x-input": "textArea"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "updateTrainerInfo": {
             "title": "updateTrainerInfoRequest",
             "properties": {
@@ -1861,62 +1948,6 @@
                 },
                 "archived": {
                     "type": "boolean"
-                }
-            }
-        },
-        "purchase": {
-            "title": "purchase",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "clientId": {
-                    "type": "string",
-                    "format": "uuid"
-                },
-                "fullHour": {
-                    "type": "number"
-                },
-                "fullHourTenPack": {
-                    "type": "number"
-                },
-                "halfHour": {
-                    "type": "number"
-                },
-                "halfHourTenPack": {
-                    "type": "number"
-                },
-                "pair": {
-                    "type": "number"
-                },
-                "pairTenPack": {
-                    "type": "number"
-                },
-                "fullHourTotal": {
-                    "type": "number"
-                },
-                "fullHourTenPackTotal": {
-                    "type": "number"
-                },
-                "halfHourTotal": {
-                    "type": "number"
-                },
-                "halfHourTenPackTotal": {
-                    "type": "number"
-                },
-                "pairTotal": {
-                    "type": "number"
-                },
-                "pairTenPackTotal": {
-                    "type": "number"
-                },
-                "purchaseTotal": {
-                    "type": "number"
-                },
-                "notes": {
-                    "type": "string",
-                    "x-input": "textArea"
                 }
             }
         }

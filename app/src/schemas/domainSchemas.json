@@ -209,17 +209,21 @@
         "trainer"
       ]
     },
-    "sessionsPurchase": {
-      "title": "sessionsPurchase",
+    "purchase": {
+      "title": "purchase",
       "properties": {
         "id": {
           "type": "string",
           "format": "uuid"
         },
-        "fulHour": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "fullHour": {
           "type": "number"
         },
-        "fulHourTenPack": {
+        "fullHourTenPack": {
           "type": "number"
         },
         "halfHour": {
@@ -234,9 +238,26 @@
         "pairTenPack": {
           "type": "number"
         },
-        "client": {
-          "type": "string",
-          "format": "uuid"
+        "fullHourTotal": {
+          "type": "number"
+        },
+        "fullHourTenPackTotal": {
+          "type": "number"
+        },
+        "halfHourTotal": {
+          "type": "number"
+        },
+        "halfHourTenPackTotal": {
+          "type": "number"
+        },
+        "pairTotal": {
+          "type": "number"
+        },
+        "pairTenPackTotal": {
+          "type": "number"
+        },
+        "purchaseTotal": {
+          "type": "number"
         },
         "notes": {
           "type": "string",
@@ -244,11 +265,7 @@
         }
       },
       "required": [
-        "appointmentType",
-        "date",
-        "startTime",
-        "endTime",
-        "trainer"
+        "clientId"
       ]
     }
   }
