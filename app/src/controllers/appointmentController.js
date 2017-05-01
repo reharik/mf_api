@@ -12,7 +12,7 @@ module.exports = function(rsRepository,
     logger.debug("arrived at appointment.fetchAppointment");
     const appointments = await rsRepository.getById(ctx.params.id, 'appointment');
     ctx.status = 200;
-    ctx.body = {appointments};
+    ctx.body = appointments;
   };
 
   var fetchAppointments = async function (ctx) {
@@ -23,7 +23,7 @@ module.exports = function(rsRepository,
         ${ctx.state.user.role !== 'admin' ? ` AND "trainer" = '${ctx.state.user.id}'` : ``}`;
     const appointments = await rsRepository.query(sql);
     ctx.status = 200;
-    ctx.body = {appointments};
+    ctx.body = appointments;
   };
 
   var scheduleAppointment = async function (ctx) {

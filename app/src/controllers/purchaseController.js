@@ -11,10 +11,10 @@ module.exports = function(rsRepository,
   var purchase = async function (ctx) {
     logger.debug("arrived at sessionsPurchase.purchases");
     let payload = ctx.request.body;
-    payload.totalHours = (payload.fullHourTenPack * 10) + payload.fullHour;
-    payload.totalHalfHours = (payload.halfHourTenPack * 10) + payload.halfHour;
-    payload.totalpairs = (payload.pairTenPack * 10) + payload.pair;
-    await processMessage(ctx, 'purchases', payload);
+    payload.totalFullHours = (parseInt(payload.fullHourTenPack) * 10) + parseInt(payload.fullHour);
+    payload.totalHalfHours = (parseInt(payload.halfHourTenPack) * 10) + parseInt(payload.halfHour);
+    payload.totalPairs = (parseInt(payload.pairTenPack) * 10) + parseInt(payload.pair);
+    await processMessage(ctx, 'purchase', payload);
   };
 
   var updatePurchase = async function (ctx) {

@@ -7,9 +7,9 @@ module.exports = function purchasesRouter(koarouter, controllers) {
      * @swagger
      * /purchase/purchase:
      *   post:
-     *     x-name: /purchase/purchases
+     *     x-name: /purchase/purchase
      *     description: purchase sessions for a client
-     *     operationId: /purchase/purchases
+     *     operationId: /purchase/purchase
      *     parameters:
      *       - name: body
      *         in: body
