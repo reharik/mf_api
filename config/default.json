@@ -4,7 +4,7 @@
   "fontendUrl": "http://localhost:8080/app.bundle.js?9b3657d5912777bbf51",
   "app": {
     "title": "Method Fitness",
-    "port": 3000,
+    "port": 3666,
     "env": "Dev",
     "keys": [
       "methodFitness"

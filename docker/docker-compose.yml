@@ -1,11 +1,13 @@
 version: "2"
 services:
   api:
-    image: mf_api
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
     volumes:
       - ./../app:/home/current/app
     command: npm run docker #top -b #
     ports:
-      - 3000:3000
+      - 3666:3000
     env_file:
       - ./.env

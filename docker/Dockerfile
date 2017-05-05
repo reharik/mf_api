@@ -1,4 +1,4 @@
-FROM mf_node:latest
+FROM methodfit_node:latest
 
 MAINTAINER reharik@gmail.com
 
