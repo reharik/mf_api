@@ -19,7 +19,6 @@ module.exports = function(
         routes(app);
 
         //if (!module.parent) {
-
             app.listen(config.app.port);
             logger.info('Server started, listening on port: ' + config.app.port);
         //}

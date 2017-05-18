@@ -29,7 +29,7 @@ module.exports = function(koagenericsession,
     }
     app.use(koaErrorHandler());
 
-    app.use(koa2cors({origin: 'http://localhost:8666', credentials: true}));
+    app.use(koa2cors({origin: 'http://localhost:8080', credentials: true}));
     // app.use(koacors({origin:config.app.swagger_ui_url}));
 
     app.use(koabodyparser());

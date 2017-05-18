@@ -8,6 +8,6 @@ services:
       - ./../app:/home/current/app
     command: npm run docker #top -b #
     ports:
-      - 3666:3000
+      - 3000:3000
     env_file:
       - ./.env
